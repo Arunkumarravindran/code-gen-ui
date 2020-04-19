@@ -31,6 +31,21 @@
     height: 77%;
 
 }
+.removeIcon{
+    position: absolute;
+    right: 0%;
+    top: 38%;
+    color: red;
+    cursor: pointer;
+}
+
+.dependencyPanel{
+    height: 50px;
+
+}
+.dependencyPanel :hover{
+    background-color: rgb(224, 217, 217);
+}
 .projectCard{
     position: absolute;
     left: 1%;
@@ -76,7 +91,7 @@
     top: 85%;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: auto;
 }
 .dependencyBtn{
     position: absolute;

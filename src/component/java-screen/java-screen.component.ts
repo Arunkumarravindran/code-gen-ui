@@ -11,6 +11,7 @@ import { BootversionValue } from 'src/_model/bootversionValue';
 import { PackingValue } from 'src/_model/packagingValue';
 import { Value } from 'src/_model/value';
 import { Name } from 'src/_model/name';
+import { DependenciesValue } from 'src/_model/dependenciesValue';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class JavaScreenComponent implements OnInit {
   packaging: PackingValue[];
   javaVersion: JavaversionValue[];
   springVersion: BootversionValue[];
+  addDependencies : DependenciesValue[] = [];
   name : string;
   group : string;
   codeGenForm : FormGroup;
@@ -138,8 +140,17 @@ getClient(){
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      this.addDependencies = result.data;
+      console.log('The dialog was closed', this.addDependencies);
     });
 
-}
+
+
+  }
+
+
+  removeDepenency(index : number){
+    this.addDependencies.splice(index,1);
+  }
+
 }
