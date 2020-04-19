@@ -10,6 +10,7 @@ import { JavaversionValue } from 'src/_model/javaversionValue';
 import { BootversionValue } from 'src/_model/bootversionValue';
 import { PackingValue } from 'src/_model/packagingValue';
 import { Value } from 'src/_model/value';
+import { Name } from 'src/_model/name';
 
 
 @Component({
@@ -23,17 +24,13 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   springIndex = -1;
-  
-
-  
- 
   languages: LanguageValue[];
   projects: Value[];
   packaging: PackingValue[];
   javaVersion: JavaversionValue[];
   springVersion: BootversionValue[];
-  name = 'demo'
-  group = 'com.example'
+  name : string;
+  group : string;
   codeGenForm : FormGroup;
   constructor(private codegenService : CodegenService,public dialog: MatDialog) { }
 
@@ -105,19 +102,38 @@ javaVersionCheckboxChange(event: MatCheckboxChange, index: number) {
 
 
 getClient(){
-  this.codegenService.getClient().subscribe(response=>{
+  if(localStorage.getItem('responseBody') == null){
+
+    this.codegenService.getClient().subscribe(response=>{
+      console.log("response", response)
+      this.javaVersion = response.javaVersion.values;
+      this.languages = response.language.values;
+      this.packaging = response.packaging.values;
+      this.springVersion = response.bootVersion.values;
+      this.projects = response.type.values;
+      this.name = response.name.default;
+      this.group = response.groupId.default;
+    })
+  }
+  else{
+    let resp = localStorage.getItem('responseBody');
+    let response = JSON.parse(resp);
     this.javaVersion = response.javaVersion.values;
-    this.languages = response.language.values;
-    this.packaging = response.packaging.values;
-    this.springVersion = response.bootVersion.values;
-    this.projects = response.type.values;
-  })
+      this.languages = response.language.values;
+      this.packaging = response.packaging.values;
+      this.springVersion = response.bootVersion.values;
+      this.projects = response.type.values;
+      this.name = response.name.default;
+      this.group = response.groupId.default;
+  }
+  
 }
 
 
   openDependency() {
     const dialogRef = this.dialog.open(DependencyScreenComponent, {
       width: '50%',
+      height: '500px'
    
     });
 

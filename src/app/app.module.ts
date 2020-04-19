@@ -15,12 +15,20 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
 import { HttpClientModule } from "@angular/common/http";
+import {MatRadioModule} from '@angular/material/radio';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {DependencySearchPipe} from 'src/_pipe/dependencySearch.pipe'
+import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
 
 @NgModule({
    declarations: [
       AppComponent,
       JavaScreenComponent,
-      DependencyScreenComponent
+      DepenencyDescPipe,
+      DependencyScreenComponent,
+      DependencySearchPipe
+     
    ],
    entryComponents:[
     DependencyScreenComponent
@@ -39,7 +47,10 @@ import { HttpClientModule } from "@angular/common/http";
       MatFormFieldModule,
       MatInputModule,
       MatButtonModule,
-      HttpClientModule
+      HttpClientModule,
+      MatRadioModule,
+      MatTreeModule,
+      MatExpansionModule
    ],
    providers: [],
    bootstrap: [

@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { ResponseDto } from 'src/_model/responseDto';
-
+import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
 export class CodegenService { 
 
   client_Url = "http://localhost:8080/metadata/client";
+  demo  = "http://localhost:5000/response"
 
   constructor(private http : HttpClient) { }
 
@@ -38,7 +39,12 @@ export class CodegenService {
 
   getClient():Observable<ResponseDto>
   {
-    return this.http.get<ResponseDto>(this.client_Url);
-  }
+    console.log("Inside Client Call")
+    return this.http.get<ResponseDto>(this.demo).pipe(map(response=>{
+      localStorage.setItem('responseBody',JSON.stringify(response))
+             return response;
+        
+    }))
 
+}
 }
