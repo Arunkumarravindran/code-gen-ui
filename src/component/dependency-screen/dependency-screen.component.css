@@ -5,6 +5,14 @@
     top: 0%;
 
 }
+
+.closeIcon{
+    position: fixed;
+    right: 26%;
+    top: 12%;
+    color: red;
+    cursor: pointer;
+}
 ::ng-deep .mat-expansion-panel-header{
     height: 30px !important;
 }

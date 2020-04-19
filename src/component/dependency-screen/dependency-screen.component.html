@@ -1,4 +1,6 @@
+ 
 <mat-form-field class="searchBar" appearance="outline">
+  <mat-icon class="closeIcon"  (click)= "closeModal()">cancel</mat-icon>
   <input matInput placeholder="Web, Security, JPA, Actuator, Dev Tools.."  [(ngModel)] = "searchValue">
 </mat-form-field>
 <mat-accordion *ngFor = "let dependency of dependencies | dependencySearch : searchValue"   >
@@ -8,18 +10,14 @@
        {{dependency.name}}
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <!-- <div class="dependencyPanel" *ngFor = "let depend of dependency.values  | dependencySearch : searchValue">
-      <h3 style="font-size: 12px; font-weight: bold;">{{depend.name}}</h3>
-      <p  style="font-size: 10px;">{{depend.description}}</p>
-    </div> -->
-    <mat-card class="dependencyPanel" *ngFor = "let depend of dependency.values | depenencyDesc : searchValue">
+    <mat-card class="dependencyPanel" *ngFor = "let depend of dependency.values | depenencyDesc : searchValue" (click)="addDependency(depend)">
       <mat-card-header>
         <mat-card-title style="font-size: 14px;font-weight: bold;">{{depend.name}}</mat-card-title>
         <mat-card-subtitle style="font-size: 11px;color: black;;">{{depend.description}}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>
   </mat-expansion-panel>
-  
+ 
 </mat-accordion>
 
 
