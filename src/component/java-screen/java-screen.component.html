@@ -10,26 +10,40 @@
       <p class="projectTxt">PROJECT</p>
       <hr style="background-color: rgb(194, 189, 189);">
       <ng-container  *ngFor="let project of projects; let i = index">
-        <mat-checkbox formControlName="project"  color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="projectIndex === i" (change)="projectCheckboxChange($event, i)">{{project.viewValue}}</mat-checkbox>
+        <mat-checkbox formControlName="project"  color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="projectIndex === i" (change)="projectCheckboxChange($event, i)">{{project.name}}</mat-checkbox>
     </ng-container>
-
+    <!-- <mat-radio-group>
+      <mat-radio-button formControlName="project" color = "primary"style="margin-left: 30px; font-size: 12px;" class="example-radio-button" *ngFor="let project of projects" [value] ="project" >
+        {{project.name}}
+      </mat-radio-button>
+    </mat-radio-group> -->
     </mat-card>
     <mat-card class="lanuageCard">
       <p class="projectTxt">LANGUAGE</p>
       <hr style="background-color: rgb(194, 189, 189);">
 
       <ng-container  *ngFor="let language of languages; let i = index">
-        <mat-checkbox formControlName="language" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="languageIndex === i" (change)="languageCheckboxChange($event, i)">{{language.viewValue}}</mat-checkbox>
+        <mat-checkbox formControlName="language" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="languageIndex === i" (change)="languageCheckboxChange($event, i)">{{language.name}}</mat-checkbox>
     </ng-container>
+
+    <!-- <mat-radio-group>
+      <mat-radio-button formControlName="language" color = "primary"style="margin-left: 30px; font-size: 12px;" class="example-radio-button" *ngFor="let language of languages" [value] ="language" >
+        {{language.name}}
+      </mat-radio-button>
+    </mat-radio-group> -->
      
     </mat-card>
     <mat-card class="springCard">
       <p class="projectTxt">SPRING BOOT</p>
       <hr style="background-color: rgb(194, 189, 189);">
       <ng-container  *ngFor="let springversion of springVersion; let i = index">
-        <mat-checkbox  formControlName="bootVersion" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="springIndex === i" (change)="springVersionCheckboxChange($event, i)">{{springversion.viewValue}}</mat-checkbox>
+        <mat-checkbox  formControlName="bootVersion" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="springIndex === i" (change)="springVersionCheckboxChange($event, i)">{{springversion.name}}</mat-checkbox>
     </ng-container>
-    
+    <!-- <mat-radio-group>
+      <mat-radio-button formControlName="bootVersion" color = "primary"style="margin-left: 30px; font-size: 12px;" class="example-radio-button" *ngFor="let springversion of springVersion" [value] ="springversion">
+        {{springversion.name}}
+      </mat-radio-button>
+    </mat-radio-group> -->
     </mat-card>
     <mat-card class="metaDataCard">
       <p class="projectTxt">PROJECT METADATA</p>
@@ -60,13 +74,22 @@
         <br>
         <span style="font-size: 12px;">Packaging</span>
         <ng-container   *ngFor="let pack of packaging; let i = index">
-          <mat-checkbox formControlName="packaging" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="packIndex === i" (change)="packagingCheckboxChange($event, i)">{{pack.viewValue}}</mat-checkbox>
+          <mat-checkbox formControlName="packaging" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="packIndex === i" (change)="packagingCheckboxChange($event, i)">{{pack.name}}</mat-checkbox>
       </ng-container>
+      <!-- <mat-radio-group>
+  <mat-radio-button formControlName="packaging" color = "primary"style="margin-left: 30px; font-size: 12px;" class="example-radio-button" *ngFor="let pack of packaging" [value] ="pack">
+    {{pack.name}}
+  </mat-radio-button>
+</mat-radio-group> -->
                 <span style="margin-left: 60px;font-size: 12px;">Java</span>
         <ng-container  *ngFor="let javaversion of javaVersion; let j = index">
-          <mat-checkbox formControlName="java" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="javaIndex === j" (change)="javaVersionCheckboxChange($event, j)">{{javaversion.viewValue}}</mat-checkbox>
+          <mat-checkbox formControlName="java" color = "primary"style="margin-left: 30px; font-size: 12px;" [checked]="javaIndex === j" (change)="javaVersionCheckboxChange($event, j)">{{javaversion.name}}</mat-checkbox>
       </ng-container>
-      
+      <!-- <mat-radio-group>
+        <mat-radio-button formControlName="java" color = "primary"style="margin-left: 30px; font-size: 12px;" class="example-radio-button" *ngFor="let javaversion of javaVersion" [value] ="javaversion">
+          {{javaversion.name}}
+        </mat-radio-button>
+      </mat-radio-group> -->
     </mat-card>
     <mat-card class="dependencyCard">
       <p class="projectTxt">DEPENDENCIES</p>

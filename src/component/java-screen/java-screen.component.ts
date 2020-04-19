@@ -5,6 +5,12 @@ import * as fileSaver from 'file-saver';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import{DependencyScreenComponent} from 'src/component/dependency-screen/dependency-screen.component'
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { LanguageValue } from 'src/_model/languageValue';
+import { JavaversionValue } from 'src/_model/javaversionValue';
+import { BootversionValue } from 'src/_model/bootversionValue';
+import { PackingValue } from 'src/_model/packagingValue';
+import { Value } from 'src/_model/value';
+import { Name } from 'src/_model/name';
 
 
 @Component({
@@ -18,46 +24,19 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   springIndex = -1;
-  
-
-  
- 
-  languages: any[] = [
-    {value: 'java', viewValue: 'Java'},
-    {value: 'kotlin', viewValue: 'Kotlin'},
-    {value: 'groovy', viewValue: 'Groovy'}
-  ];
- projects: any[] = [
-    {value: 'maven', viewValue: 'Maven Project'},
-    {value: 'gradle', viewValue: 'Gradle'}
-  ];
-
-  packaging: any[] = [
-    {value: 'jar', viewValue: 'JAR'},
-    {value: 'war', viewValue: 'WAR'}
-  ];
-
-  javaVersion: any[] = [
-    {value: '14', viewValue: '14'},
-    {value: '11', viewValue: '11'},
-    {value: '8', viewValue: '8'}
-  ];
-
-  springVersion: any[] = [
-    {value: '2.3.0 M4', viewValue: '2.3.0 M4'},
-    {value: '2.3.0 (SNAPSHOT)', viewValue: '2.3.0 (SNAPSHOT)'},
-    {value: '2.2.7 (SNAPSHOT)', viewValue: '2.2.7 (SNAPSHOT)'},
-    {value: '2.2.6', viewValue: '2.2.6'},
-    {value: '2.1.14 (SNAPSHOT)', viewValue: '2.1.14 (SNAPSHOT)'},
-    {value: '2.1.13', viewValue: '2.1.13'}
-  ];
-  name = 'demo'
-  group = 'com.example'
+  languages: LanguageValue[];
+  projects: Value[];
+  packaging: PackingValue[];
+  javaVersion: JavaversionValue[];
+  springVersion: BootversionValue[];
+  name : string;
+  group : string;
   codeGenForm : FormGroup;
   constructor(private codegenService : CodegenService,public dialog: MatDialog) { }
 
 
   ngOnInit() {
+    this.getClient();
     this.codeGenForm = new FormGroup({
       project: new FormControl('', [
         Validators.required
@@ -122,10 +101,39 @@ javaVersionCheckboxChange(event: MatCheckboxChange, index: number) {
 }
 
 
+getClient(){
+  if(localStorage.getItem('responseBody') == null){
+
+    this.codegenService.getClient().subscribe(response=>{
+      console.log("response", response)
+      this.javaVersion = response.javaVersion.values;
+      this.languages = response.language.values;
+      this.packaging = response.packaging.values;
+      this.springVersion = response.bootVersion.values;
+      this.projects = response.type.values;
+      this.name = response.name.default;
+      this.group = response.groupId.default;
+    })
+  }
+  else{
+    let resp = localStorage.getItem('responseBody');
+    let response = JSON.parse(resp);
+    this.javaVersion = response.javaVersion.values;
+      this.languages = response.language.values;
+      this.packaging = response.packaging.values;
+      this.springVersion = response.bootVersion.values;
+      this.projects = response.type.values;
+      this.name = response.name.default;
+      this.group = response.groupId.default;
+  }
+  
+}
+
 
   openDependency() {
     const dialogRef = this.dialog.open(DependencyScreenComponent, {
       width: '50%',
+      height: '500px'
    
     });
 
