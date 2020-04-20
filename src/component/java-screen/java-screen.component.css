@@ -131,6 +131,8 @@
     border-radius: 50% !important;
   }
 
- 
-
+  ::ng-deep .mat-checkbox-background svg {
+    display: none;
+    
+  }
   
