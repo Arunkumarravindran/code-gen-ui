@@ -2,7 +2,7 @@
   <mat-icon class="menuIcon">menu</mat-icon>
     <p class="toolBarTxt">Custom Code Generator</p>
  
-  <mat-card class="contentCard">
+  <mat-card class="contentCard"  >
 
     <form [formGroup]="codeGenForm">
     <mat-card class="projectCard">
@@ -86,7 +86,7 @@
       <mat-card class="dependencyPanel"  *ngFor = "let depend of addDependencies ; let i = index">
         <mat-icon class="removeIcon"  (click)= "removeDepenency(i)">close</mat-icon>
       <mat-card-header>
-        <mat-card-title style="font-size: 14px;font-weight: bold;">{{depend.name}}</mat-card-title>
+        <mat-card-title style="font-size: 14px;font-weight: bold;margin-top: -10px;">{{depend.name}}</mat-card-title>
         <mat-card-subtitle style="font-size: 11px;color: black;;">{{depend.description}}</mat-card-subtitle>
       </mat-card-header>
     </mat-card>

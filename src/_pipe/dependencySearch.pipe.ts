@@ -19,7 +19,7 @@ export class DependencySearchPipe implements PipeTransform {
 console.log('serchtext',searchText)
 
     return items.filter(it => {
-      console.log('items',it.name)
+      console.log('items',)
       return (it.name.search(new RegExp(searchText, "i")) != -1)
   
     });

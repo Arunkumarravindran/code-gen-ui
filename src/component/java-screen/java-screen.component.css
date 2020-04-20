@@ -20,7 +20,7 @@
     top: 92%;
     left: -16%;
     background-color: rgb(12,131,177);
-    width: 130%;
+    width: 132%;
 }
 
 .contentCard{
@@ -30,11 +30,15 @@
     top: 9%;
     background-color: rgb(245,245,245);
     width: 76%;
-    height: 77%;
+    height:auto;
+   
+    
+
 
 }
 .removeIcon{
     position: absolute;
+    margin-top: -10px;
     right: 0%;
     top: 38%;
     color: red;
@@ -43,6 +47,7 @@
 
 .dependencyPanel{
     height: 50px;
+    margin-bottom: 10px;
 
 }
 .dependencyPanel :hover{
@@ -50,36 +55,40 @@
 }
 .projectCard{
     border-radius: 0px;
-    position: absolute;
+    position: relative;
     left: 1%;
     top: 1%;
+    margin-top: -10px;
     background-color: rgb(255,255,255);
     width: 95%;
     height: 9%;
 }
 .lanuageCard{
     border-radius: 0px;
-    position: absolute;
+    position: relative;
     left: 1%;
     top: 17%;
+    margin-top: 4px;
     background-color: rgb(255,255,255);
     width: 95%;
     height: 9%;
 }
 .springCard{
     border-radius: 0px;
-    position: absolute;
+    position: relative;
     left: 1%;
     top: 33%;
+    margin-top: 4px;
     background-color: rgb(255,255,255);
     width: 95%;
     height: 9%;
 }
 .metaDataCard{
     border-radius: 0px;
-    position: absolute;
+    position: relative;
     left: 1%;
     top: 49%;
+    margin-top: 4px;
     background-color: rgb(255,255,255);
     width: 95%;
     height: 32%;
@@ -93,8 +102,9 @@
 }
 .dependencyCard{
     border-radius: 0px;
-    position: absolute;
+    position: relative;
     left: 1%;
+    margin-top: 4px;
     top: 88%;
     background-color: rgb(255,255,255);
     width: 95%;
