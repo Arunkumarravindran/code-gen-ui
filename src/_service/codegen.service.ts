@@ -21,8 +21,8 @@ export class CodegenService {
 
   getParams(codeGen):HttpParams{
     let params = new HttpParams()
-    .set('type', codeGen.project)
-    .set('language', codeGen.language)
+    .set('type', codeGen.projectName)
+    .set('language', codeGen.languageType)
     .set('bootVersion', codeGen.bootVersion)
     .set('baseDir', codeGen.artifact)
     .set('groupId', codeGen.group)
@@ -40,7 +40,7 @@ export class CodegenService {
   getClient():Observable<ResponseDto>
   {
     console.log("Inside Client Call")
-    return this.http.get<ResponseDto>(this.demo).pipe(map(response=>{
+    return this.http.get<ResponseDto>(this.client_Url).pipe(map(response=>{
       localStorage.setItem('responseBody',JSON.stringify(response))
              return response;
         
