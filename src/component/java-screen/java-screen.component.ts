@@ -12,6 +12,7 @@ import { PackingValue } from 'src/_model/packagingValue';
 import { Value } from 'src/_model/value';
 import { Name } from 'src/_model/name';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
+import { ProjectValue } from 'src/_model/projectValue';
 
 
 @Component({
@@ -26,7 +27,7 @@ export class JavaScreenComponent implements OnInit {
   javaIndex = -1;
   springIndex = -1;
   languages: LanguageValue[];
-  projects: Value[];
+  projects: ProjectValue[];
   packaging: PackingValue[];
   javaVersion: JavaversionValue[];
   springVersion: BootversionValue[];
@@ -40,43 +41,47 @@ export class JavaScreenComponent implements OnInit {
   ngOnInit() {
     this.getClient();
     this.codeGenForm = new FormGroup({
-      project: new FormControl('', [
+      projectName: new FormControl('maven-project', [
         Validators.required
       ]),
-      language: new FormControl('', [
+      languageType: new FormControl('java', [
         Validators.required
       ]),
-      bootVersion: new FormControl('', [
+      bootVersion: new FormControl('2.2.6.RELEASE', [
         Validators.required
       ]),
-      // group: new FormControl('com.example', [
-      //   Validators.required
-      // ]),
-      // artifact: new FormControl('demo', [
-      //   Validators.required,
-      // ]),
-      // name: new FormControl('demo', [
-      //   Validators.required
-      // ]),
+      group: new FormControl('', [
+        Validators.required
+      ]),
+      artifact: new FormControl('', [
+        Validators.required,
+      ]),
+      name: new FormControl('', [
+        Validators.required
+      ]),
       description: new FormControl('Demo project for Spring Boot', [
         Validators.required
       ]),
       packageName: new FormControl('com.example.demo', [
         Validators.required
       ]),
-      packaging: new FormControl('', [
+      packaging: new FormControl('jar', [
         Validators.required
       ]),
-      java: new FormControl('', [
+      java: new FormControl('1.8', [
         Validators.required,
       ]),
-      dependencies: new FormControl('web', [
+      dependencies: new FormControl('', [
         Validators.required,
       ])
     });
   }
 
   generateProject(){
+    this.codeGenForm.value.group = this.group;
+    this.codeGenForm.value.artifact = this.name;
+    this.codeGenForm.value.name = this.name;
+    console.log(this.codeGenForm.value)
     this.codegenService.getResponse(this.codeGenForm.value).subscribe(response =>{
       let blob:any = new Blob([response], { type: 'application/zip' });
 
@@ -84,22 +89,27 @@ export class JavaScreenComponent implements OnInit {
     }), error => console.log('Error downloading the file' + error),
     () => console.info('File downloaded successfully');
   }
-  languageCheckboxChange(event: MatCheckboxChange, index: number) {
+languageCheckboxChange(event: MatCheckboxChange, index: number, id:string) {
     this.languageIndex = event.checked ? index : -1;
+    this.codeGenForm.value.languageType = id;
 }
-packagingCheckboxChange(event: MatCheckboxChange, index: number) {
+packagingCheckboxChange(event: MatCheckboxChange, index: number, id:string) {
   this.packIndex = event.checked ? index : -1;
+  this.codeGenForm.value.packaging = id;
 }
-projectCheckboxChange(event: MatCheckboxChange, index: number) {
+projectCheckboxChange(event: MatCheckboxChange, index: number, id:string) {
   this.projectIndex = event.checked ? index : -1;
+  this.codeGenForm.value.projectName = id;
 }
 
-springVersionCheckboxChange(event: MatCheckboxChange, index: number) {
+springVersionCheckboxChange(event: MatCheckboxChange, index: number, id:string) {
   this.springIndex = event.checked ? index : -1;
+  this.codeGenForm.value.bootVersion = id;
 }
 
-javaVersionCheckboxChange(event: MatCheckboxChange, index: number) {
+javaVersionCheckboxChange(event: MatCheckboxChange, index: number, id:string) {
   this.javaIndex = event.checked ? index : -1;
+  this.codeGenForm.value.java = id;
 }
 
 
@@ -112,7 +122,9 @@ getClient(){
       this.languages = response.language.values;
       this.packaging = response.packaging.values;
       this.springVersion = response.bootVersion.values;
-      this.projects = response.type.values;
+      response.type.values.map(data=>{
+        this.projects = data.values;
+      })
       this.name = response.name.default;
       this.group = response.groupId.default;
     })
@@ -138,16 +150,17 @@ getClient(){
       height: '500px'
    
     });
-
     dialogRef.afterClosed().subscribe(result => {
       if(this.addDependencies.map(data=>{
         console.log(data.id == result.data.id)
            return data.id == result.data.id
       })){
         this.addDependencies.push( result.data);
+        this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
         console.log('The dialog was closed', this.addDependencies);
-      }
       
+      }
+       
     });
 
   }
