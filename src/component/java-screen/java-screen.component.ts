@@ -26,6 +26,7 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   springIndex = -1;
+  indexCheck :boolean;
   languages: LanguageValue[];
   projects: ProjectValue[];
   packaging: PackingValue[];
@@ -151,10 +152,16 @@ getClient(){
    
     });
     dialogRef.afterClosed().subscribe(result => {
-      if(this.addDependencies.map(data=>{
+      let value = this.addDependencies.map(data=>{
         console.log(data.id == result.data.id)
-           return data.id == result.data.id
-      })){
+           if(data.id == result.data.id) {
+this.indexCheck = true;
+      }
+      else{
+        this.indexCheck = false;
+      }});
+      
+      if(!this.indexCheck){
         this.addDependencies.push( result.data);
         this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
         console.log('The dialog was closed', this.addDependencies);

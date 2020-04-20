@@ -1,6 +1,5 @@
  
 <mat-form-field class="searchBar" appearance="outline">
-  <mat-icon class="closeIcon"  (click)= "closeModal()">cancel</mat-icon>
   <input matInput placeholder="Web, Security, JPA, Actuator, Dev Tools.."  [(ngModel)] = "searchValue">
 </mat-form-field>
 <mat-accordion *ngFor = "let dependency of dependencies | dependencySearch : searchValue"   >

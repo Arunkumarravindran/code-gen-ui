@@ -32,9 +32,7 @@ this.dependencies.pop()
 this.dialogRef.close({event:'close',data:data}); 
 
   }
+
   
-  closeModal(){
-    this.dialogRef.close({event:'close',data:this.addDependencies}); 
-  }
   
 }
