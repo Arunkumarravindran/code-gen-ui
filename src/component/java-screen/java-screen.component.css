@@ -17,12 +17,14 @@
 
 .footer{
     position: absolute;
-    bottom:0%;
-    left: 0%;
+    top: 92%;
+    left: -16%;
     background-color: rgb(12,131,177);
+    width: 130%;
 }
 
 .contentCard{
+    border-radius: 0px;
     position: absolute;
     left: 11%;
     top: 9%;
@@ -47,33 +49,37 @@
     background-color: rgb(224, 217, 217);
 }
 .projectCard{
+    border-radius: 0px;
     position: absolute;
     left: 1%;
     top: 1%;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: 9%;
 }
 .lanuageCard{
+    border-radius: 0px;
     position: absolute;
     left: 1%;
-    top: 16%;
+    top: 17%;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: 9%;
 }
 .springCard{
+    border-radius: 0px;
     position: absolute;
     left: 1%;
-    top: 31%;
+    top: 33%;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: 9%;
 }
 .metaDataCard{
+    border-radius: 0px;
     position: absolute;
     left: 1%;
-    top: 46%;
+    top: 49%;
     background-color: rgb(255,255,255);
     width: 95%;
     height: 32%;
@@ -86,9 +92,10 @@
     font-weight: bold;
 }
 .dependencyCard{
+    border-radius: 0px;
     position: absolute;
     left: 1%;
-    top: 85%;
+    top: 88%;
     background-color: rgb(255,255,255);
     width: 95%;
     height: auto;
@@ -131,6 +138,8 @@
     border-radius: 50% !important;
   }
 
- 
-
+  ::ng-deep .mat-checkbox-background svg {
+    display: none;
+    
+  }
   

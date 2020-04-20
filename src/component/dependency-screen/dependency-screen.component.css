@@ -22,6 +22,8 @@
 
 .dependencyPanel{
     height: 50px;
+    transition: none !important;
+    box-shadow: none !important;
 
 }
 .dependencyPanel :hover{

@@ -12,6 +12,7 @@ import { PackingValue } from 'src/_model/packagingValue';
 import { Value } from 'src/_model/value';
 import { Name } from 'src/_model/name';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
+import { ProjectValue } from 'src/_model/projectValue';
 
 
 @Component({
@@ -25,8 +26,9 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   springIndex = -1;
+  indexCheck :boolean;
   languages: LanguageValue[];
-  projects: Value[];
+  projects: ProjectValue[];
   packaging: PackingValue[];
   javaVersion: JavaversionValue[];
   springVersion: BootversionValue[];
@@ -121,7 +123,9 @@ getClient(){
       this.languages = response.language.values;
       this.packaging = response.packaging.values;
       this.springVersion = response.bootVersion.values;
-      this.projects = response.type.values;
+      response.type.values.map(data=>{
+        this.projects = data.values;
+      })
       this.name = response.name.default;
       this.group = response.groupId.default;
     })
@@ -148,13 +152,25 @@ getClient(){
    
     });
     dialogRef.afterClosed().subscribe(result => {
-      this.addDependencies = result.data;
-      this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
-      console.log('The dialog was closed', this.addDependencies);
+      let value = this.addDependencies.map(data=>{
+        console.log(data.id == result.data.id)
+           if(data.id == result.data.id) {
+this.indexCheck = true;
+      }
+      else{
+        this.indexCheck = false;
+      }});
+      
+      if(!this.indexCheck){
+        this.addDependencies.push( result.data);
+        this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
+        console.log('The dialog was closed', this.addDependencies);
+      
+      }
+       
     });
 
   }
-
 
   removeDepenency(index : number){
     this.addDependencies.splice(index,1);
