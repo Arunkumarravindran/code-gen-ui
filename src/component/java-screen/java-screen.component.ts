@@ -140,14 +140,17 @@ getClient(){
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.addDependencies = result.data;
-      console.log('The dialog was closed', this.addDependencies);
+      if(this.addDependencies.map(data=>{
+        console.log(data.id == result.data.id)
+           return data.id == result.data.id
+      })){
+        this.addDependencies.push( result.data);
+        console.log('The dialog was closed', this.addDependencies);
+      }
+      
     });
 
-
-
   }
-
 
   removeDepenency(index : number){
     this.addDependencies.splice(index,1);

@@ -10,7 +10,7 @@
        {{dependency.name}}
       </mat-panel-title>
     </mat-expansion-panel-header>
-    <mat-card class="dependencyPanel" *ngFor = "let depend of dependency.values | depenencyDesc : searchValue" (click)="addDependency(depend)">
+    <mat-card  class="dependencyPanel" *ngFor = "let depend of dependency.values | depenencyDesc : searchValue; let i  = index ;" (click)="addDependency(depend,i)">
       <mat-card-header>
         <mat-card-title style="font-size: 14px;font-weight: bold;">{{depend.name}}</mat-card-title>
         <mat-card-subtitle style="font-size: 11px;color: black;;">{{depend.description}}</mat-card-subtitle>

@@ -110,7 +110,7 @@
       <p class="projectTxt">DEPENDENCIES</p>
       <button mat-raised-button class="dependencyBtn"  (click) = 'openDependency()'>ADD DEPENDENCIES</button>
       <hr style="background-color: rgb(194, 189, 189); margin-top: 22px;">
-      <mat-card class="dependencyPanel"  *ngFor = "let depend of addDependencies; let i = index">
+      <mat-card class="dependencyPanel"  *ngFor = "let depend of addDependencies ; let i = index">
         <mat-icon class="removeIcon"  (click)= "removeDepenency(i)">close</mat-icon>
       <mat-card-header>
         <mat-card-title style="font-size: 14px;font-weight: bold;">{{depend.name}}</mat-card-title>
@@ -123,8 +123,8 @@
   
 
 
-  <mat-toolbar class="footer">
+  <!-- <mat-toolbar class="footer">
 
    <button mat-button class="generateBtn" (click)="generateProject()">GENERATE</button>
    <button mat-button class="exploreBtn">EXPLORE</button>
-    </mat-toolbar>
+    </mat-toolbar> -->
