@@ -13,13 +13,13 @@ constructor(public snackBar: MatSnackBar,
     if(statusCode){
       this.zone.run(() => {
         this.snackBar.open(this.statusMessage, action, { duration, verticalPosition: 'top',
-        panelClass: ['mat-primary'] })
+        panelClass: ['snackbar'] })
       })
     }
     else{
       this.zone.run(() => {
         this.snackBar.open(this.statusMessage, action, { duration, verticalPosition: 'top',
-        panelClass: ['mat-primary'] })
+        panelClass: ['snackbar'] })
       })
     }
   
