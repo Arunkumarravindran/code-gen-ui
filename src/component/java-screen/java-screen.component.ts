@@ -40,6 +40,7 @@ export class JavaScreenComponent implements OnInit {
 
 
   ngOnInit() {
+    this.codegenService.handleError
     this.getClient();
     this.codeGenForm = new FormGroup({
       projectName: new FormControl('maven-project', [
@@ -77,7 +78,7 @@ export class JavaScreenComponent implements OnInit {
       ])
     });
   }
-
+  
   generateProject(){
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
@@ -177,5 +178,6 @@ this.indexCheck = true;
   removeDepenency(index : number){
     this.addDependencies.splice(index,1);
   }
+  
 
 }
