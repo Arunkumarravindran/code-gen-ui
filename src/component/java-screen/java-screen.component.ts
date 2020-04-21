@@ -38,6 +38,7 @@ export class JavaScreenComponent implements OnInit {
 
 
   ngOnInit() {
+    this.codegenService.handleError
     this.getClient();
     this.codeGenForm = new FormGroup({
       project: new FormControl('', [
@@ -75,7 +76,7 @@ export class JavaScreenComponent implements OnInit {
       ])
     });
   }
-
+  
   generateProject(){
     this.codegenService.getResponse(this.codeGenForm.value).subscribe(response =>{
       let blob:any = new Blob([response], { type: 'application/zip' });
@@ -152,5 +153,6 @@ getClient(){
   removeDepenency(index : number){
     this.addDependencies.splice(index,1);
   }
+  
 
 }

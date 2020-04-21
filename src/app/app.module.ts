@@ -20,18 +20,21 @@ import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DependencySearchPipe} from 'src/_pipe/dependencySearch.pipe'
 import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
-
+import { FirstComponent } from 'src/component/first/first.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 @NgModule({
    declarations: [
       AppComponent,
       JavaScreenComponent,
       DepenencyDescPipe,
       DependencyScreenComponent,
-      DependencySearchPipe
-     
+      DependencySearchPipe,
+      FirstComponent
+
    ],
    entryComponents:[
     DependencyScreenComponent
+    
    ],
    imports: [
       BrowserModule,
@@ -50,7 +53,8 @@ import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
       HttpClientModule,
       MatRadioModule,
       MatTreeModule,
-      MatExpansionModule
+      MatExpansionModule,
+      MatSnackBarModule
    ],
    providers: [],
    bootstrap: [
