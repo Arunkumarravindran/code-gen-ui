@@ -34,6 +34,9 @@ this.dialogRef.close({event:'close',data:data});
 
   }
 
-  
+  clearInput(){
+    this.searchValue = null;
+  }
+
   
 }
