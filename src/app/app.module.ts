@@ -19,14 +19,15 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DependencySearchPipe} from 'src/_pipe/dependencySearch.pipe'
-import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
 import { FirstComponent } from 'src/component/first/first.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+
 @NgModule({
    declarations: [
       AppComponent,
       JavaScreenComponent,
-      DepenencyDescPipe,
       DependencyScreenComponent,
       DependencySearchPipe,
       FirstComponent
@@ -38,6 +39,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
    ],
    imports: [
       BrowserModule,
+      MatListModule,
       AppRoutingModule,
       BrowserAnimationsModule,
       FormsModule,
@@ -54,8 +56,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
       MatRadioModule,
       MatTreeModule,
       MatExpansionModule,
-      MatSnackBarModule
-   ],
+      MatSnackBarModule,
+      MatDividerModule
+ ],
    providers: [],
    bootstrap: [
       AppComponent

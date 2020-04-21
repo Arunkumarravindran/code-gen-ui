@@ -17,22 +17,27 @@
 
 .footer{
     position: absolute;
-    bottom:0%;
+    top: 98%;
     left: 0%;
     background-color: rgb(12,131,177);
 }
 
 .contentCard{
+    border-radius: 0px;
     position: absolute;
     left: 11%;
     top: 9%;
     background-color: rgb(245,245,245);
     width: 76%;
-    height: 77%;
+    height:auto;
+   
+    
+
 
 }
 .removeIcon{
     position: absolute;
+    margin-top: -10px;
     right: 0%;
     top: 38%;
     color: red;
@@ -41,39 +46,48 @@
 
 .dependencyPanel{
     height: 50px;
+    margin-bottom: 10px;
 
 }
 .dependencyPanel :hover{
     background-color: rgb(224, 217, 217);
 }
 .projectCard{
-    position: absolute;
+    border-radius: 0px;
+    position: relative;
     left: 1%;
     top: 1%;
+    margin-top: -10px;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: 9%;
 }
 .lanuageCard{
-    position: absolute;
+    border-radius: 0px;
+    position: relative;
     left: 1%;
-    top: 16%;
+    top: 17%;
+    margin-top: 4px;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: 9%;
 }
 .springCard{
-    position: absolute;
+    border-radius: 0px;
+    position: relative;
     left: 1%;
-    top: 31%;
+    top: 33%;
+    margin-top: 4px;
     background-color: rgb(255,255,255);
     width: 95%;
-    height: 8%;
+    height: 9%;
 }
 .metaDataCard{
-    position: absolute;
+    border-radius: 0px;
+    position: relative;
     left: 1%;
-    top: 46%;
+    top: 49%;
+    margin-top: 4px;
     background-color: rgb(255,255,255);
     width: 95%;
     height: 32%;
@@ -86,9 +100,11 @@
     font-weight: bold;
 }
 .dependencyCard{
-    position: absolute;
+    border-radius: 0px;
+    position: relative;
     left: 1%;
-    top: 85%;
+    margin-top: 4px;
+    top: 88%;
     background-color: rgb(255,255,255);
     width: 95%;
     height: auto;
@@ -131,6 +147,8 @@
     border-radius: 50% !important;
   }
 
- 
-
+  ::ng-deep .mat-checkbox-background svg {
+    display: none;
+    
+  }
   

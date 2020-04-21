@@ -1,12 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { stringify } from 'querystring';
+import { DependenciesValue } from 'src/_model/dependenciesValue';
 
 @Pipe({
   name: 'dependencySearch'
 })
 export class DependencySearchPipe implements PipeTransform {
-  names : string[];
-  descriptions : string[];
+ 
+  depName: any;
+  depDescription: any;
+
   transform(items: any[], searchText: string): any[] {
 
     if (!items) {
@@ -19,9 +22,9 @@ export class DependencySearchPipe implements PipeTransform {
 console.log('serchtext',searchText)
 
     return items.filter(it => {
-      console.log('items',it.name)
-      return (it.name.search(new RegExp(searchText, "i")) != -1)
-  
+
+      return ( it.name.search(new RegExp(searchText, "i")) != -1 ||
+      it.description.search(new RegExp(searchText, "i")) != -1 )
     });
   }
 }

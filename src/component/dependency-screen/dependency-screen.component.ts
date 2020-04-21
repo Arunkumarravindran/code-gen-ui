@@ -22,18 +22,18 @@ export class DependencyScreenComponent implements OnInit {
   ngOnInit() {
 
     let response = localStorage.getItem('responseBody');
-    let parsedResponse = JSON.parse(response);
+    let parsedResponse = JSON.parse(response)
     this.dependencies = parsedResponse.dependencies.values;
   
-  }
-
-  addDependency(data){
-this.addDependencies.push(data)
-
-  }
   
-  closeModal(){
-    this.dialogRef.close({event:'close',data:this.addDependencies}); 
   }
+
+  addDependency(data,i){
+this.dependencies.pop()
+this.dialogRef.close({event:'close',data:data}); 
+
+  }
+
+  
   
 }

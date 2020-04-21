@@ -28,9 +28,10 @@ export class CodegenService {
   }
 
   getParams(codeGen):HttpParams{
+
     let params = new HttpParams()
-    .set('type', codeGen.project)
-    .set('language', codeGen.language)
+    .set('type', codeGen.projectName)
+    .set('language', codeGen.languageType)
     .set('bootVersion', codeGen.bootVersion)
     .set('baseDir', codeGen.artifact)
     .set('groupId', codeGen.group)
