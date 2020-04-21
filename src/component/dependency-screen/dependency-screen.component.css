@@ -21,11 +21,27 @@
 }
 
 .dependencyPanel{
-    height: 50px;
+    height: 40px;
+    margin: auto;
     transition: none !important;
     box-shadow: none !important;
 
 }
-.dependencyPanel :hover{
+.dependencyPanel  :hover{
     background-color: rgb(224, 217, 217);
+}
+.sideTxt{
+
+    display: inline-block;
+    position: absolute;
+    top: 13px;
+    left: 63%;
+    background:rgb(0,120,215);
+    color: #fff;
+    font-size: 13px;
+    padding: 4px 0.6rem 1px;
+    line-height: 18px;
+    margin-left: 0.6rem;
+    text-transform: uppercase;
+  
 }
