@@ -82,6 +82,7 @@ export class JavaScreenComponent implements OnInit {
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
     this.codeGenForm.value.name = this.name;
+    this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
     console.log(this.codeGenForm.value)
     this.codegenService.getResponse(this.codeGenForm.value).subscribe(response =>{
       let blob:any = new Blob([response], { type: 'application/zip' });
@@ -137,7 +138,9 @@ getClient(){
       this.languages = response.language.values;
       this.packaging = response.packaging.values;
       this.springVersion = response.bootVersion.values;
-      this.projects = response.type.values;
+      response.type.values.map(data=>{
+        this.projects = data.values;
+      })
       this.name = response.name.default;
       this.group = response.groupId.default;
   }
@@ -163,7 +166,6 @@ this.indexCheck = true;
       
       if(!this.indexCheck){
         this.addDependencies.push( result.data);
-        this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
         console.log('The dialog was closed', this.addDependencies);
       
       }
