@@ -22,8 +22,9 @@ export class DependencyScreenComponent implements OnInit {
   ngOnInit() {
 
     let response = localStorage.getItem('responseBody');
-    let parsedResponse = JSON.parse(response);
+    let parsedResponse = JSON.parse(response)
     this.dependencies = parsedResponse.dependencies.values;
+  
   
   }
 

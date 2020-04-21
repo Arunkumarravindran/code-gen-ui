@@ -151,7 +151,7 @@ getClient(){
   openDependency() {
     const dialogRef = this.dialog.open(DependencyScreenComponent, {
       width: '50%',
-      height: '500px'
+      height: '600px'
    
     });
     dialogRef.afterClosed().subscribe(result => {

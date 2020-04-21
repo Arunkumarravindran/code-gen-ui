@@ -19,13 +19,13 @@ import {MatRadioModule} from '@angular/material/radio';
 import {MatTreeModule} from '@angular/material/tree';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {DependencySearchPipe} from 'src/_pipe/dependencySearch.pipe'
-import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
    declarations: [
       AppComponent,
       JavaScreenComponent,
-      DepenencyDescPipe,
       DependencyScreenComponent,
       DependencySearchPipe
      
@@ -35,6 +35,7 @@ import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
    ],
    imports: [
       BrowserModule,
+      MatListModule,
       AppRoutingModule,
       BrowserAnimationsModule,
       FormsModule,
@@ -50,7 +51,8 @@ import { DepenencyDescPipe } from 'src/_pipe/depenencyDesc.pipe';
       HttpClientModule,
       MatRadioModule,
       MatTreeModule,
-      MatExpansionModule
+      MatExpansionModule,
+      MatDividerModule
    ],
    providers: [],
    bootstrap: [
