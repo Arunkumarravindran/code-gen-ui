@@ -7,9 +7,9 @@
 }
 
 .closeIcon{
-    position: fixed;
-    right: 28%;
-    top: 63px;
+    position: absolute;
+    right: 0%;
+    top: -5px;
     color: red;
     cursor: pointer;
 }
