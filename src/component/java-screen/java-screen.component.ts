@@ -124,8 +124,8 @@ getClient(){
       this.languages = response.language.values;
       this.packaging = response.packaging.values;
       this.springVersion = response.bootVersion.values;
-      response.type.values.map(data=>{
-        this.projects = data.values;
+      this.projects = response.type.values.filter(data =>{
+       return data.name.search(new RegExp('Project', "i")) != -1
       })
       this.name = response.name.default;
       this.group = response.groupId.default;
@@ -138,9 +138,9 @@ getClient(){
       this.languages = response.language.values;
       this.packaging = response.packaging.values;
       this.springVersion = response.bootVersion.values;
-      response.type.values.map(data=>{
-        this.projects = data.values;
-      })
+      this.projects = response.type.values.filter(data =>{
+        return data.name.search(new RegExp('Project', "i")) != -1
+       })
       this.name = response.name.default;
       this.group = response.groupId.default;
   }
