@@ -5,7 +5,7 @@ import { ResponseDto } from 'src/_model/responseDto';
 import { map} from 'rxjs/operators';
 import {  catchError } from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
-
+import { Router } from '@angular/router';
 import { ErrorService } from './error.service';
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,11 @@ export class CodegenService {
   client_Url = "http://localhost:8080/metadata/client";
   demo  = "http://localhost:5000/response"
 
-  constructor(private http : HttpClient,public snackBar: MatSnackBar,private zone: NgZone,private errorService:ErrorService ) { }
+  constructor(private http : HttpClient,
+    public snackBar: MatSnackBar,
+    private zone: NgZone,
+    private errorService:ErrorService,
+    private router: Router ) { }
   
  
 
@@ -50,7 +54,7 @@ export class CodegenService {
   {
     console.log("Inside Client Call")
     return this.http.get<ResponseDto>(this.client_Url).pipe(map(response=>{
-      localStorage.setItem('responseBody',JSON.stringify(response)),(catchError(this.handleError))
+      localStorage.setItem('responseBody',JSON.stringify(response)),(catchError(this.handleError_Client))
     
              return response;
         
@@ -62,6 +66,12 @@ handleError=(error:HttpErrorResponse)=> {
   
 
     console.log('server side',error.status)
+    this.errorService.open(error.status)
+      return throwError(error);
+  }
+  handleError_Client=(error:HttpErrorResponse)=> {
+    console.log('server side',error.status)
+    this.router.navigate(['/first'])  
     this.errorService.open(error.status)
       return throwError(error);
   }

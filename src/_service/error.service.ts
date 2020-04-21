@@ -16,6 +16,12 @@ constructor(public snackBar: MatSnackBar,
         panelClass: ['mat-primary'] })
       })
     }
+    else{
+      this.zone.run(() => {
+        this.snackBar.open(this.statusMessage, action, { duration, verticalPosition: 'top',
+        panelClass: ['mat-primary'] })
+      })
+    }
   
 }
 
