@@ -8,16 +8,10 @@
 
 .closeIcon{
     position: fixed;
-    right: 26%;
-    top: 12%;
+    right: 28%;
+    top: 63px;
     color: red;
     cursor: pointer;
-}
-::ng-deep .mat-expansion-panel-header{
-    height: 30px !important;
-}
-::ng-deep .mat-expansion-panel .mat-expansion-panel-header.cdk-keyboard-focused:not([aria-disabled=true]), .mat-expansion-panel .mat-expansion-panel-header.cdk-program-focused:not([aria-disabled=true]), .mat-expansion-panel:not(.mat-expanded) .mat-expansion-panel-header:hover:not([aria-disabled=true]) {
-   background-color:  rgb(0,120,215)
 }
 
 .dependencyPanel{
@@ -44,4 +38,14 @@
     margin-left: 0.6rem;
     text-transform: uppercase;
   
+}
+.headerTxt{
+    display: inline-block;
+    background:rgb(0,120,215);
+    color: #fff;
+    font-size: 13px;
+    padding: 4px 0.6rem 1px;
+    line-height: 18px;
+    margin-left: 0.6rem;
+    text-transform: uppercase;
 }
