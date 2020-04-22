@@ -13,6 +13,7 @@ import { Value } from 'src/_model/value';
 import { Name } from 'src/_model/name';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
 import { ProjectValue } from 'src/_model/projectValue';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -36,7 +37,7 @@ export class JavaScreenComponent implements OnInit {
   name : string;
   group : string;
   codeGenForm : FormGroup;
-  constructor(private codegenService : CodegenService,public dialog: MatDialog) { }
+  constructor(private codegenService : CodegenService,public dialog: MatDialog, private router :Router) { }
 
 
   ngOnInit() {
@@ -179,5 +180,7 @@ this.indexCheck = true;
     this.addDependencies.splice(index,1);
   }
   
-
+  redirectHome(){
+    this.router.navigate(['/homeScreen'])
+  }
 }
