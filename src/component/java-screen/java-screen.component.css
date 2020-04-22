@@ -7,6 +7,7 @@
     position: absolute;
     left: 11%;
     top: 4%;
+    cursor: pointer;
 }
 .toolBarTxt{
     color: white;
@@ -24,6 +25,7 @@
     background-color: rgb(12,131,177);
     width: 100%;
 }
+
 
 .contentCard{
     border-radius: 0px;
