@@ -15,8 +15,7 @@
 }
 
 .dependencyPanel{
-    height: 40px;
-    margin: auto;
+    height: 45px;
     transition: none !important;
     box-shadow: none !important;
 

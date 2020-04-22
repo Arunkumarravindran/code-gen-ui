@@ -83,6 +83,7 @@
       <p class="projectTxt">DEPENDENCIES</p>
       <button mat-raised-button class="dependencyBtn"  (click) = 'openDependency()'>ADD DEPENDENCIES</button>
       <hr style="background-color: rgb(194, 189, 189); margin-top: 22px;">
+      <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54);">No Dependency selected</p>
       <mat-card class="dependencyPanel"  *ngFor = "let depend of addDependencies ; let i = index">
         <mat-icon class="removeIcon"  (click)= "removeDepenency(i)">close</mat-icon>
       <mat-card-header>
