@@ -21,18 +21,20 @@
 
   }
 
+
   .headingIcon{
     position: absolute;
-    top: 344px;
-    right: 60%;
+    top: -15px;
+    right: 100%;
     width: 80px;
   }
   .headingTxt{
     position: absolute;
-    top: 39%;
-    right: 32%;
+    top: 45%;
+    right: 34%;
+    
   }
-  
+
 
 .dotNetImg
 { 
