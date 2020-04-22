@@ -27,8 +27,15 @@ export class CodegenService {
 
   getResponse(codeGen):Observable<any>{
     let params = this.getParams(codeGen);
+    console.log('Params -> '+params.toString())
     return this.http.get('http://localhost:8080/starter.zip',
     {params, responseType: 'arraybuffer' as 'json'}).pipe(catchError(this.handleError))
+  }
+
+  getFileName(codeGen):Observable<any>{
+    let params = this.getParams(codeGen);
+    return this.http.get('http://localhost:8080/starter.zip',
+    {params, responseType: 'arraybuffer' as 'json', observe: 'response'}).pipe(catchError(this.handleError))
   }
 
   getParams(codeGen):HttpParams{
@@ -46,7 +53,6 @@ export class CodegenService {
     .set('packaging', codeGen.packaging)
     .set('javaVersion', codeGen.java)
     .set('dependencies', codeGen.dependencies)
-    console.log('Params -> '+params.toString())
     return params;
   }
 
