@@ -18,9 +18,13 @@
 .footer{
     position: absolute;
     top: 693px;
+    left: -16%;
+    top: 98%;
     left: 0%;
     background-color: rgb(12,131,177);
+    width: 100%;
 }
+
 
 .contentCard{
     border-radius: 0px;
