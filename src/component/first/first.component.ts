@@ -8,12 +8,12 @@ import { Router } from '@angular/router';
 })
 export class FirstComponent implements OnInit {
 
-  constructor(private rout:Router) { }
+  constructor(private router:Router) { }
 
   ngOnInit() {
   }
-  onchange()
+  redirectJava()
   {
-    this.rout.navigate(['/javamain'])
+    this.router.navigate(['/javaMain'])
   }
 }

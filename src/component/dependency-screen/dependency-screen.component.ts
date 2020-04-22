@@ -28,8 +28,7 @@ export class DependencyScreenComponent implements OnInit {
   
   }
 
-  addDependency(data,i){
-this.dependencies.pop()
+  addDependency(data){
 this.dialogRef.close({event:'close',data:data}); 
 
   }

@@ -3,9 +3,9 @@
   <input #ser matInput placeholder="Web, Security, JPA, Actuator, Dev Tools.." [(ngModel)] = "searchValue">
   <mat-icon class="closeIcon" (click) = "clearInput()">close</mat-icon>
 </mat-form-field>
-<a  *ngFor = "let dependency of dependencies " >
+<a class="dependencyPanel" *ngFor = "let dependency of dependencies " >
     <p  *ngIf ="searchValue == null "  class="headerTxt">{{dependency.name}}</p>
-    <mat-card  class="dependencyPanel" *ngFor = "let depend of dependency.values | dependencySearch : searchValue let i  = index ;" (click)="addDependency(depend,i)">
+    <mat-card  class="dependencyPanel" *ngFor = "let depend of dependency.values | dependencySearch : searchValue let i  = index ;" (click)="addDependency(depend)">
         <p style="font-size: 14px;font-weight: bold;">{{depend.name}}</p><span class="sideTxt"  *ngIf ="searchValue != null"  >{{dependency.name}}</span>
         <p style="font-size: 11px;color: black;;">{{depend.description}}</p>
     </mat-card>    

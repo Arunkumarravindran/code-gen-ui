@@ -4,12 +4,12 @@ import{JavaScreenComponent} from 'src/component/java-screen/java-screen.componen
 
 import { FirstComponent } from 'src/component/first/first.component';
 const routes: Routes = [{
-  path:'javamain',
+  path:'javaMain',
   component: JavaScreenComponent
 },
-{path:'first',
+{path:'homeScreen',
 component: FirstComponent},
-{path :'',redirectTo:'/first',pathMatch:'full'}];
+{path :'',redirectTo:'homeScreen',pathMatch:'full'}];
 
 @NgModule({
    imports: [
