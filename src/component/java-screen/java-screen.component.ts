@@ -9,11 +9,12 @@ import { LanguageValue } from 'src/_model/languageValue';
 import { JavaversionValue } from 'src/_model/javaversionValue';
 import { BootversionValue } from 'src/_model/bootversionValue';
 import { PackingValue } from 'src/_model/packagingValue';
-import { Value } from 'src/_model/value';
-import { Name } from 'src/_model/name';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
 import { ProjectValue } from 'src/_model/projectValue';
 import { Router } from '@angular/router';
+import * as JSZip from 'jszip';
+import * as load from 'lodash';
+import { Files } from 'src/_model/files';
 
 
 @Component({
@@ -189,4 +190,114 @@ this.indexCheck = true;
   redirectHome(){
     this.router.navigate(['/homeScreen'])
   }
+  exploreProject(){
+    this.codeGenForm.value.group = this.group;
+    this.codeGenForm.value.artifact = this.name;
+    this.codeGenForm.value.name = this.name;
+    this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
+    console.log(this.codeGenForm.value)
+    this.codegenService.getResponse(this.codeGenForm.value).subscribe(async response => {
+      let blob:any = new Blob([response], { type: 'application/zip' });
+     var zip = new JSZip();
+        let zipResp = await zip.loadAsync(blob).then((zip) => { return zip; });
+        let file:Files = zipResp;
+        let path = `${this.findRoot(file)}/`
+        console.log('Path Resp -> '+ path)
+        const result = await this.createTree(file, path, path, zip).catch(() => {
+          throw Error(`Could not read the ZIP project.`)
+        })
+        console.log('Result Obtained -> '+ JSON.stringify(result['tree']))
+    })
+    }
+  
+  findRoot (zip:Files) {
+      const root = Object.keys(zip.files).filter(filename => {
+        const pathArray = filename.split('/')
+        if (zip.files[filename].dir && pathArray.length === 2) {
+          return true
+        }
+        return false
+      })[0]
+      return root.substring(0, root.length - 1)
+    }
+    getLanguage(file) {
+      const FILE_EXTENSION = {
+        js: 'javascript',
+        md: 'markdown',
+        kt: 'kotlin',
+        kts: 'kotlin',
+        gradle: 'groovy',
+        gitignore: 'git',
+        java: 'java',
+        xml: 'xml',
+        properties: 'properties',
+        groovy: 'groovy',
+      }
+      if (!file.includes(`.`)) {
+        return null
+      }
+      const extension = file.split(`.`).pop()
+      return load.get(FILE_EXTENSION, extension, null)
+    }
+    createTree(files, path:string, fileName:string, zip:JSZip) {
+      console.log('Inside Create tree')
+          return new Promise(resolve => {
+            const recursive = (pfiles, ppath, pfileName, pzip, pdepth) => {
+              const type = pfiles.files[ppath].dir ? 'folder' : 'file'
+              
+              const item = {
+                type,
+                filename: pfileName,
+                path: `/${ppath}`,
+                hidden: pdepth === 1 && type === 'folder' ? true : null,
+                children: [],
+                language: '',
+                content: []
+              }
+              if (type === 'folder') {
+                console.log('Inside If folder')
+                const children = []
+                pzip.folder(ppath).forEach((relativePath, file) => {
+                  const pathArray = relativePath.split('/')
+                  if (pathArray.length === 1 || (file.dir && pathArray.length === 2)) {
+                    children.push(
+                      recursive(
+                        pfiles,
+                        ppath + relativePath,
+                        relativePath,
+                        pzip,
+                        pdepth + 1
+                      )
+                    )
+                  }
+                })
+                item.children = children.sort((a, b) => (a.path > b.path ? 1 : -1))
+                item.filename = pfileName.substring(0, pfileName.length - 1)
+              } else {
+                console.log('Inside Else File')
+                item.language = this.getLanguage(item.filename)
+                if (item.language) {
+              pfiles.files[ppath].async('string').then(content => {
+                item.content = content
+              })
+            }
+              }
+              return item
+            }
+            const tree = recursive(files, path, fileName, zip, 0)
+            const selected = tree.children.find(
+              item =>
+                ['pom.xml', 'build.gradle', 'build.gradle.kts'].indexOf(item.filename) >
+                -1
+            )
+            if (selected) {
+              files.files[selected.path.substring(1)].async('string').then(content => {
+                selected.content = content
+                resolve({ tree, selected })
+              })
+            } else {
+              resolve({ tree, selected: null })
+            }
+          })
+      }
 }
