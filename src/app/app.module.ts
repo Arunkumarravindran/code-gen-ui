@@ -23,19 +23,23 @@ import { FirstComponent } from 'src/component/first/first.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
-
+import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/fileExplorer-Screen.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { ApPrismModule } from '@angular-package/prism';
+import { HighlightService } from 'src/_service/highlight.service';
+import { HighlightJsModule } from 'ngx-highlight-js';
+import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
 @NgModule({
    declarations: [
       AppComponent,
       JavaScreenComponent,
       DependencyScreenComponent,
       DependencySearchPipe,
-      FirstComponent
-
-   ],
-   entryComponents:[
-    DependencyScreenComponent
-    
+      FirstComponent,
+      FileExplorerScreenComponent
+      ],
+   entryComponents: [
+      DependencyScreenComponent
    ],
    imports: [
       BrowserModule,
@@ -45,11 +49,14 @@ import {MatDividerModule} from '@angular/material/divider';
       FormsModule,
       ReactiveFormsModule,
       MatToolbarModule,
+      MatSidenavModule,
       MatIconModule,
       MatCardModule,
       MatDialogModule,
+      HighlightModule,
       MatCheckboxModule,
       MatFormFieldModule,
+      HighlightJsModule,
       MatInputModule,
       MatButtonModule,
       HttpClientModule,
@@ -57,11 +64,25 @@ import {MatDividerModule} from '@angular/material/divider';
       MatTreeModule,
       MatExpansionModule,
       MatSnackBarModule,
-      MatDividerModule
- ],
-   providers: [],
+      MatDividerModule,
+      ApPrismModule
+   ],
+   providers: [HighlightService,{
+      provide: HIGHLIGHT_OPTIONS,
+      useValue: {
+        languages: getHighlightLanguages()
+      }
+    }],
    bootstrap: [
       AppComponent
    ]
 })
 export class AppModule { }
+export function getHighlightLanguages() {
+   return {
+     typescript: () => import('highlight.js/lib/languages/typescript'),
+     css: () => import('highlight.js/lib/languages/css'),
+     xml: () => import('highlight.js/lib/languages/xml'),
+     java: () => import('highlight.js/lib/languages/java')
+   };
+ }

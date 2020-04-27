@@ -1,0 +1,64 @@
+<mat-toolbar class="toolBar">
+  <mat-icon class="menuIcon" (click) ="redirectHome()">menu</mat-icon>
+    <p class="toolBarTxt">Custom Code Generator</p>
+ 
+  <mat-card class="contentCard"  >
+    <mat-sidenav-container class="sideNav">
+      <mat-sidenav-content>
+        <h5>FileName.zip</h5>
+        <hr>
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
+            <button mat-icon-button disabled></button>
+            <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+              {{ node.type === 'file' ? 'description' : 'folder' }}
+            </mat-icon>
+            {{node.fileName}}
+          </mat-tree-node>
+        
+          <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'toggle ' + node.fileName">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+              {{ node.type ==='file' ? 'description' : 'folder' }}
+            </mat-icon>
+            {{node.fileName}}
+          </mat-tree-node>
+        </mat-tree>
+        
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+    <div class="downloadBtn">
+     
+     <button class="copyBtn" mat-button>DOWNLOAD</button>
+      <span style="margin-left: 10px;"></span>
+     <button class="copyBtn" mat-button>COPY</button>
+    </div>
+    <mat-card class="filesCard">
+
+      <!-- <pre style="font-size: 13.5px;"> {{selectedContent}}</pre> -->
+
+      <!-- <pre  highlight-js [lang]="'xml'">
+        {{selectedContent}}
+      </pre> -->
+
+      <pre><code [highlight]>
+
+        {{selectedContent}}
+      </code></pre>
+    </mat-card>
+  <mat-toolbar class="footer">
+
+    <button mat-button class="generateBtn" >GENERATE</button>
+    <button mat-button class="exploreBtn">EXPLORE</button>
+   
+     </mat-toolbar>
+  </mat-card>
+  
+
+
+  

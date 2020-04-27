@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
-
+import { JSZipObject } from 'jszip';
 
 @Component({
   selector: 'app-java-screen',
@@ -209,7 +209,21 @@ this.indexCheck = true;
         console.log('Result Obtained -> '+ JSON.stringify(result['tree']))
     })
     }
-  
+    // exploreDemoProject(){
+    
+    //     this.codegenService.getDemoResponse().subscribe( async (response ) =>{
+    //     console.log("resp",response);
+    //    var zip = new JSZip();
+    //       let file:Files = response;
+    //       let path = `${this.findRoot(file)}/`
+
+    //       console.log('Path Resp -> '+ path)
+    //       const result = await this.createTree(file, path, path, zip).catch(() => {
+    //         throw Error(`Could not read the ZIP project.`)
+    //       })
+    //       console.log('Result Obtained -> '+ JSON.stringify(result))
+    //   })
+    //   }
   findRoot (zip:Files) {
       const root = Object.keys(zip.files).filter(filename => {
         const pathArray = filename.split('/')
