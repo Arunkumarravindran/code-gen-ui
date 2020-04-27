@@ -186,12 +186,13 @@ this.indexCheck = true;
 
   }
 
-  openExplore() {
+  openExplore(result) {
     const dialogRef = this.dialog.open(FileExplorerScreenComponent, {
       width: 'auto',
       height: 'auto'
    
     });
+    dialogRef.componentInstance.exploreResult = result;
     dialogRef.afterClosed().subscribe(result => {
       if(result.data == "download"){
        this.generateProject();
@@ -222,7 +223,8 @@ this.indexCheck = true;
         const result = await this.createTree(file, path, path, zip).catch(() => {
           throw Error(`Could not read the ZIP project.`)
         })
-        console.log('Result Obtained -> '+ JSON.stringify(result['tree']))
+        this.openExplore(JSON.stringify(result));
+        //console.log('Result Obtained -> '+ JSON.stringify(result['tree']))
     })
     }
     // exploreDemoProject(){
