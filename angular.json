@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "custom-code-generator"
+  "defaultProject": "custom-code-generator",
+  "cli": {
+    "analytics": false
+  }
 }

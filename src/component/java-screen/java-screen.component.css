@@ -140,6 +140,15 @@
     color: white;
     font-size: 14px;
 }
+.exploreDemoBtn{
+    position: absolute;
+    left: 58%;
+    top: 20%;
+    background-color: rgb(0,120,215);
+    border-color: white;
+    color: white;
+    font-size: 14px;
+}
 ::ng-deep .mat-form-field-flex > .mat-form-field-infix { padding: 0.2em 0px !important;}
 ::ng-deep .mat-form-field-label-wrapper { top: -1.5em; }
 

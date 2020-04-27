@@ -1,0 +1,137 @@
+.toolBar{
+    height: 15%;
+    background-color: rgb(12,131,177);
+}
+.menuIcon{
+    color: white;
+    position: absolute;
+    left: 11%;
+    top: 4%;
+    cursor: pointer;
+}
+.toolBarTxt{
+    color: white;
+    position: absolute;
+    left: 14%;
+    top:0%;
+}
+.footer{
+    position: absolute;
+    top: 693px;
+    left: -16%;
+    top: 98%;
+    left: 0%;
+    background-color: rgb(12,131,177);
+    width: 100%;
+}
+.contentCard{
+    border-radius: 0px;
+    position: absolute;
+    left: 11%;
+    top: 9%;
+    background-color: rgb(245,245,245);
+    width: 82%;
+    height:auto;
+}
+.sideNav {
+    width: 280px;
+    height: 494px;
+    margin-left: -8px;
+    
+    background-color: rgb(255,255,255);
+color: black;
+
+  }
+  .type-icon {
+    color: #000000;
+    margin-right: 5px;
+  }
+  
+  ::ng-deep .mat-tree-node{
+    font-size: 14px;
+    padding-left: 15px !important;
+  }
+  ::ng-deep .mat-icon-button{
+    width: 30px !important;
+  }
+  .filesCard{
+    border-radius: 0px;
+    position: absolute;
+    left: 26%;
+    top: 10%;
+    margin-top: 4px;
+    background-color: rgb(255,255,255);
+    width: 71%;
+    height: 82%;
+    overflow-y: auto;
+}
+.downloadBtn{
+    position: absolute;
+    top: 2%;
+    right: 1%;
+}
+.generateBtn{
+  position: absolute;
+  left: 38%;
+  top: 20%;
+  background-color: rgb(0,120,215);
+  border-color: white;
+  color: white;
+  font-size: 14px;
+}
+.exploreBtn{
+  position: absolute;
+  left: 60%;
+  top: 20%;
+  background-color: rgb(0,120,215);
+  border-color: white;
+  color: white;
+  font-size: 14px;
+}
+.copyBtn{
+    background-color: rgb(255,255,255);
+     color:black;
+     border-color: #e7e7e7;
+}
+::ng-deep .hljs {
+  position: absolute;
+  width: 72.3%;
+    top: 8%;
+    left: 26%;
+    display: block;
+    color: #abb2bf;
+    background: rgb(255,255,255);
+    height: 94%;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.expandIcon{
+  position: absolute;
+    right: 20px;
+    top: 65px;
+}
+
+/* scrollbar */
+
+/* width */
+::-webkit-scrollbar{
+    width: 5px !important;
+    height: 8px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(178,178,178);
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+  

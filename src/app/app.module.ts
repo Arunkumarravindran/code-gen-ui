@@ -23,19 +23,22 @@ import { FirstComponent } from 'src/component/first/first.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
-
+import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/fileExplorer-Screen.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { HighlightJsModule } from 'ngx-highlight-js';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
    declarations: [
       AppComponent,
       JavaScreenComponent,
       DependencyScreenComponent,
       DependencySearchPipe,
-      FirstComponent
-
-   ],
-   entryComponents:[
-    DependencyScreenComponent
-    
+      FirstComponent,
+      FileExplorerScreenComponent
+      ],
+   entryComponents: [
+      DependencyScreenComponent,
+      FileExplorerScreenComponent
    ],
    imports: [
       BrowserModule,
@@ -45,11 +48,14 @@ import {MatDividerModule} from '@angular/material/divider';
       FormsModule,
       ReactiveFormsModule,
       MatToolbarModule,
+      MatSidenavModule,
       MatIconModule,
       MatCardModule,
+      MatTooltipModule,
       MatDialogModule,
       MatCheckboxModule,
       MatFormFieldModule,
+      HighlightJsModule,
       MatInputModule,
       MatButtonModule,
       HttpClientModule,
@@ -57,8 +63,8 @@ import {MatDividerModule} from '@angular/material/divider';
       MatTreeModule,
       MatExpansionModule,
       MatSnackBarModule,
-      MatDividerModule
- ],
+      MatDividerModule,
+   ],
    providers: [],
    bootstrap: [
       AppComponent
