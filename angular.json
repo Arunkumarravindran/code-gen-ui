@@ -25,9 +25,7 @@
             ],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.css",
-              "C:/Users/''''MR.AK''''/Desktop/Code-Gen/code-gen-ui/node_modules/highlight.js/styles/github.css"
-           
+              "src/styles.css"
             ],
             "scripts": []
           },
@@ -126,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "custom-code-generator"
+  "defaultProject": "custom-code-generator",
+  "cli": {
+    "analytics": false
+  }
 }

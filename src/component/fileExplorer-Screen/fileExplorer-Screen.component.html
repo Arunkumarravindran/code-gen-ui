@@ -1,31 +1,41 @@
-<mat-toolbar class="toolBar">
+<!-- <mat-toolbar class="toolBar">
   <mat-icon class="menuIcon" (click) ="redirectHome()">menu</mat-icon>
     <p class="toolBarTxt">Custom Code Generator</p>
- 
+    </mat-toolbar> -->
+    <div>
   <mat-card class="contentCard"  >
     <mat-sidenav-container class="sideNav">
       <mat-sidenav-content>
-        <h5>FileName.zip</h5>
+        <h5 style="text-align: center;">{{fileName}}.zip</h5>
         <hr>
-        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <!-- <img (click)="tree.treeControl.collapseAll()"src="https://img.icons8.com/officexs/16/000000/collapse.png"/> -->
+        <!-- <img  (click)="tree.treeControl.expandAll()"src="https://img.icons8.com/officexs/16/000000/expand.png"/> -->
+        <img class="expandIcon"   matTooltip="Expand All" [matTooltipPosition]="toolPosition" *ngIf = "folderExpand" (click)="tree.treeControl.expandAll();expandFolder()" src="https://img.icons8.com/material/24/000000/doctors-folder.png"/>
+        <img class="expandIcon"  matTooltip="Collapse All"  [matTooltipPosition]="toolPosition" *ngIf = "folderCollapse" (click)="tree.treeControl.collapseAll();collapseFolder()" src="https://img.icons8.com/material/24/000000/math-folder.png"/>
+        <!-- <button (click)="tree.treeControl.collapseAll()">collapseAll</button> -->
+        <!-- <img (click)="tree.treeControl.collapseAll()" src="https://img.icons8.com/android/24/000000/collapse.png"/> -->
+        <!-- <img (click)="tree.treeControl.expandAll()" src="https://img.icons8.com/android/24/000000/expand.png"/> -->
+        <!-- <button (click)="tree.treeControl.expandAll()">expandAll</button> -->
+        <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
             <button mat-icon-button disabled></button>
             <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
               {{ node.type === 'file' ? 'description' : 'folder' }}
             </mat-icon>
-            {{node.fileName}}
+           <span  (click)= "selectedFile(node)"> {{node.fileName}}</span>
           </mat-tree-node>
         
-          <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+          <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding >
             <button mat-icon-button matTreeNodeToggle
-                    [attr.aria-label]="'toggle ' + node.fileName">
-              <mat-icon class="mat-icon-rtl-mirror">
+                    [attr.aria-label]="'toggle ' + node.fileName"
+                      (click)="changeState(node)">
+              <mat-icon class="mat-icon-rtl-mirror" >
                 {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
               </mat-icon>
             </button>
             <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
               {{ node.type ==='file' ? 'description' : 'folder' }}
-            </mat-icon>
+            </mat-icon >
             {{node.fileName}}
           </mat-tree-node>
         </mat-tree>
@@ -34,31 +44,25 @@
     </mat-sidenav-container>
     <div class="downloadBtn">
      
-     <button class="copyBtn" mat-button>DOWNLOAD</button>
-      <span style="margin-left: 10px;"></span>
-     <button class="copyBtn" mat-button>COPY</button>
+     <button class="copyBtn" mat-button (click)="downloadAfterCls()">DOWNLOAD</button>
+      <!-- <span style="margin-left: 10px;"></span>
+     <button class="copyBtn" mat-button>COPY</button> -->
     </div>
-    <mat-card class="filesCard">
+  
 
-      <!-- <pre style="font-size: 13.5px;"> {{selectedContent}}</pre> -->
-
-      <!-- <pre  highlight-js [lang]="'xml'">
+       <pre  highlight-js [lang]="selectedLang">
         {{selectedContent}}
-      </pre> -->
+      </pre> 
 
-      <pre><code [highlight]>
-
-        {{selectedContent}}
-      </code></pre>
-    </mat-card>
+   
   <mat-toolbar class="footer">
 
-    <button mat-button class="generateBtn" >GENERATE</button>
-    <button mat-button class="exploreBtn">EXPLORE</button>
+    <button mat-button class="generateBtn" (click)="downloadAfterCls()">DOWNLOAD</button>
+    <button mat-button class="exploreBtn" (click)="closeExplore()">CLOSE</button>
    
      </mat-toolbar>
   </mat-card>
   
-
+</div>
 
   

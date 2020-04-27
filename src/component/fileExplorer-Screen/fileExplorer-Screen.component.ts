@@ -1,11 +1,10 @@
-import { Component, OnInit, Inject, AfterViewChecked, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewChecked, ElementRef, AfterViewInit, Optional, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FlatTreeControl } from '@angular/cdk/tree';
-import { MatTreeFlattener, MatTreeFlatDataSource } from '@angular/material';
+import { MatTreeFlattener, MatTreeFlatDataSource, MatDialogRef, MAT_DIALOG_DATA, TooltipPosition } from '@angular/material';
 import { ParentTree } from 'src/_model/parentTree';
 import { CodegenService } from 'src/_service/codegen.service';
 import { of as observableOf } from 'rxjs';
-import { HighlightService } from 'src/_service/highlight.service';
 export interface FlatTreeNode {
   fileName: string;
   type: string;
@@ -23,11 +22,11 @@ export interface FlatTreeNode {
 export class FileExplorerScreenComponent implements OnInit {
 
   selectedContent :any;
- 
-
-
-  
-
+  selectedLang: string;
+  fileName :string;
+  folderExpand =  true;
+  folderCollapse = false;
+  toolPosition: TooltipPosition = 'left';
   treeControl: FlatTreeControl<FlatTreeNode>;
 
   /** The TreeFlattener is used to generate the flat list of items from hierarchical data. */
@@ -36,10 +35,12 @@ export class FileExplorerScreenComponent implements OnInit {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<ParentTree, FlatTreeNode>;
 
-  constructor(private data : CodegenService, private router: Router)  {
+  constructor(private codeGenService : CodegenService, private router: Router,
+    public dialogRef: MatDialogRef<FileExplorerScreenComponent>,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any)  {
     
   }
-  
+
   ngOnInit() {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
@@ -49,8 +50,12 @@ export class FileExplorerScreenComponent implements OnInit {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.data.getDemoResponse().subscribe(data=>{
+    this.codeGenService.getDemoResponse().subscribe(data=>{
       this.selectedContent = data.selected.content
+      this.selectedLang = data.selected.language
+      this.fileName = data.tree.filename;
+      console.log("selected Language",this.selectedLang);
+      
       console.log("data",data.tree)
      let parent : ParentTree[] = [];
       parent.push(data.tree)
@@ -66,6 +71,8 @@ export class FileExplorerScreenComponent implements OnInit {
       path: node.path,
       hidden: node.hidden,
       type: node.type,
+      language: node.language,
+      content : node.content,
       level: level,
       expandable: !!node.children && node.children.length > 0
     };
@@ -94,5 +101,29 @@ export class FileExplorerScreenComponent implements OnInit {
 
   redirectHome(){
     this.router.navigate(['/homeScreen'])
+  }
+  selectedFile(data){
+console.log("sected file",data);
+this.selectedContent = data.content
+      this.selectedLang = data.language
+
+  }
+  changeState(node) {
+    node.expanded = !node.expanded;
+    console.log(node);
+  }
+  expandFolder(){
+this.folderExpand = false;
+this.folderCollapse= true;
+  }
+  collapseFolder(){
+    this.folderExpand = true;
+    this.folderCollapse= false;
+  }
+  closeExplore(){
+    this.dialogRef.close(); 
+  }
+  downloadAfterCls(){
+    this.dialogRef.close({event:'close',data:"download"})
   }
 }

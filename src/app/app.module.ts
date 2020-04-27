@@ -25,10 +25,8 @@ import {MatListModule} from '@angular/material/list';
 import {MatDividerModule} from '@angular/material/divider';
 import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/fileExplorer-Screen.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import { ApPrismModule } from '@angular-package/prism';
-import { HighlightService } from 'src/_service/highlight.service';
 import { HighlightJsModule } from 'ngx-highlight-js';
-import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
+import {MatTooltipModule} from '@angular/material/tooltip';
 @NgModule({
    declarations: [
       AppComponent,
@@ -39,7 +37,8 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
       FileExplorerScreenComponent
       ],
    entryComponents: [
-      DependencyScreenComponent
+      DependencyScreenComponent,
+      FileExplorerScreenComponent
    ],
    imports: [
       BrowserModule,
@@ -52,8 +51,8 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
       MatSidenavModule,
       MatIconModule,
       MatCardModule,
+      MatTooltipModule,
       MatDialogModule,
-      HighlightModule,
       MatCheckboxModule,
       MatFormFieldModule,
       HighlightJsModule,
@@ -65,24 +64,10 @@ import { HighlightModule, HIGHLIGHT_OPTIONS } from 'ngx-highlightjs';
       MatExpansionModule,
       MatSnackBarModule,
       MatDividerModule,
-      ApPrismModule
    ],
-   providers: [HighlightService,{
-      provide: HIGHLIGHT_OPTIONS,
-      useValue: {
-        languages: getHighlightLanguages()
-      }
-    }],
+   providers: [],
    bootstrap: [
       AppComponent
    ]
 })
 export class AppModule { }
-export function getHighlightLanguages() {
-   return {
-     typescript: () => import('highlight.js/lib/languages/typescript'),
-     css: () => import('highlight.js/lib/languages/css'),
-     xml: () => import('highlight.js/lib/languages/xml'),
-     java: () => import('highlight.js/lib/languages/java')
-   };
- }

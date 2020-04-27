@@ -5,5 +5,7 @@ export class ParentTree {
     filename: string;
     path: string;
     hidden: string;
+    language: string;
+    content: string;
     children?: ChildTree[];
 }

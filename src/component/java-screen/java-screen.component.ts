@@ -16,6 +16,7 @@ import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
 import { JSZipObject } from 'jszip';
+import { FileExplorerScreenComponent } from '../fileExplorer-Screen/fileExplorer-Screen.component';
 
 @Component({
   selector: 'app-java-screen',
@@ -82,6 +83,8 @@ export class JavaScreenComponent implements OnInit {
   }
   
   generateProject(){
+    console.log("inside generate project");
+    
     let fileName:string
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
@@ -174,13 +177,26 @@ this.indexCheck = true;
       }});
       
       if(!this.indexCheck){
-        this.addDependencies.push( result.data);
+        this.addDependencies.push(result.data);
         console.log('The dialog was closed', this.addDependencies);
       
       }
        
     });
 
+  }
+
+  openExplore() {
+    const dialogRef = this.dialog.open(FileExplorerScreenComponent, {
+      width: 'auto',
+      height: 'auto'
+   
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if(result.data == "download"){
+       this.generateProject();
+      }
+    })
   }
 
   removeDepenency(index : number){
