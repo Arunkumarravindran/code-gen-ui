@@ -5,6 +5,7 @@ import { MatTreeFlattener, MatTreeFlatDataSource, MatDialogRef, MAT_DIALOG_DATA,
 import { ParentTree } from 'src/_model/parentTree';
 import { CodegenService } from 'src/_service/codegen.service';
 import { of as observableOf } from 'rxjs';
+import { MainTree } from 'src/_model/mainTree';
 export interface FlatTreeNode {
   fileName: string;
   type: string;
@@ -21,6 +22,7 @@ export interface FlatTreeNode {
 })
 export class FileExplorerScreenComponent implements OnInit {
 
+  exploreResult:string;
   selectedContent :any;
   selectedLang: string;
   fileName :string;
@@ -50,9 +52,11 @@ export class FileExplorerScreenComponent implements OnInit {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-    this.codeGenService.getDemoResponse().subscribe(data=>{
-      this.selectedContent = data.selected.content
-      this.selectedLang = data.selected.language
+   // this.codeGenService.getDemoResponse().subscribe(data=>{
+     let data:MainTree = JSON.parse(this.exploreResult);
+     console.log('resulttt -> '+JSON.stringify(data))
+      this.selectedContent = data.selected.content;
+      this.selectedLang = data.selected.language;
       this.fileName = data.tree.filename;
       console.log("selected Language",this.selectedLang);
       
@@ -60,7 +64,7 @@ export class FileExplorerScreenComponent implements OnInit {
      let parent : ParentTree[] = [];
       parent.push(data.tree)
       this.dataSource.data = parent;
-    })
+   // })
    
   }
 
@@ -105,6 +109,7 @@ export class FileExplorerScreenComponent implements OnInit {
   selectedFile(data){
 console.log("sected file",data);
 this.selectedContent = data.content
+console.log('selected content -> '+this.selectedContent)
       this.selectedLang = data.language
 
   }
@@ -121,7 +126,7 @@ this.folderCollapse= true;
     this.folderCollapse= false;
   }
   closeExplore(){
-    this.dialogRef.close(); 
+    this.dialogRef.close({event:'close',data:""}); 
   }
   downloadAfterCls(){
     this.dialogRef.close({event:'close',data:"download"})

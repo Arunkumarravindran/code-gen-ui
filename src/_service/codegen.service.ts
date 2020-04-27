@@ -1,4 +1,4 @@
-import { Injectable , NgZone} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams,HttpErrorResponse } from '@angular/common/http';
 import { ResponseDto } from 'src/_model/responseDto';
@@ -25,7 +25,6 @@ export class CodegenService {
 
   constructor(private http : HttpClient,
     public snackBar: MatSnackBar,
-    private zone: NgZone,
     private errorService:ErrorService,
     private router: Router ) { }
   
@@ -40,12 +39,12 @@ export class CodegenService {
   }
   getDemoResponse(): Observable<MainTree>{
    
-    return  this.http.get<MainTree>(this.testDownload_Url);
+    return  this.http.get<MainTree>(this.download_Url);
   }
 
   getFileName(codeGen):Observable<any>{
     let params = this.getParams(codeGen);
-    return this.http.get(this.testDownload_Url,
+    return this.http.get(this.download_Url,
     {params, responseType: 'arraybuffer' as 'json', observe: 'response'}).pipe(catchError(this.handleError))
   }
 
@@ -86,7 +85,8 @@ handleError=(error:HttpErrorResponse)=> {
     this.errorService.open(error.status)
       return throwError(error);
   }
-  handleError_Client=(error:HttpErrorResponse)=> {
+
+handleError_Client=(error:HttpErrorResponse)=> {
     console.log('server side',error.status)
     this.router.navigate(['/first'])  
     this.errorService.open(error.status)
