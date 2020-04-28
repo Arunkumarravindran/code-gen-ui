@@ -11,7 +11,7 @@
             <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
               {{ node.type === 'file' ? 'description' : 'folder' }}
             </mat-icon>
-           <span  (click)= "selectedFile(node)"> {{node.fileName}}</span>
+           <span class = "selectedFile" (click)= "selectedFile(node)"> {{node.fileName}}</span>
           </mat-tree-node>
         
           <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="4">
@@ -25,20 +25,24 @@
             <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
               {{ node.type ==='file' ? 'description' : 'folder' }}
             </mat-icon >
-            {{node.fileName}}
+            <span class = "selectedFile">{{node.fileName}}</span> 
           </mat-tree-node>
         </mat-tree>
         
       </mat-sidenav-content>
     </mat-sidenav-container>
-    
+   
     <div class="downloadBtn">
-     
-     <button class="copyBtn" mat-button (click)="downloadAfterCls()">DOWNLOAD</button>
+      <p class = "selectFiletxt" >{{selectedFileName}}</p>
+     <button class="dwBtn" mat-button (click)="downloadAfterCls()">DOWNLOAD</button>
        <span style="margin-left: 10px;"></span>
      <button class="copyBtn" mat-button (click)="copyInputMessage(selectedContent)">COPY</button>
+     <mat-icon style="position: absolute;
+     cursor: pointer;
+     right: 5px;
+     top: 26%"  (click)="closeExplore()"> close</mat-icon>
     </div>
-  
+
 
        <pre  highlight-js [lang]="selectedLang" >
         {{selectedContent}}

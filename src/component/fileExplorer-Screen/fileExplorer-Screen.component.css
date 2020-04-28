@@ -53,24 +53,30 @@ color: black;
     cursor: pointer !important;
 
   }
-  ::ng-deep .mat-icon-button{
-    width: 30px !important;
+  ::ng-deep .mat-tree-node  :hover{
+    background-color: rgb(242,242,242);
   }
+
+  ::ng-deep .mat-tree-node  .selectedFile :focus{
+    background-color: rgb(238, 24, 24) !important;
+  }
+
   .filesCard{
-    border-radius: 0px;
-    position: absolute;
-    left: 26%;
-    top: 10%;
-    margin-top: 4px;
-    background-color: rgb(255,255,255);
-    width: 71%;
-    height: 82%;
-    overflow-y: auto;
+    position: relative;
+    top: 3%;
+    width: 111%;
+    z-index: 1;
+    display: block;
+    height: 100%;
+    overflow: auto;
 }
 .downloadBtn{
-    position: absolute;
-    top: 2%;
-    right: 1%;
+  position: fixed;
+  width: 62.4%;
+  height: 56px;
+  background-color: rgb(255,255,255);
+  top: 75px;
+  left: 444px;
 }
 .generateBtn{
   position: absolute;
@@ -91,22 +97,42 @@ color: black;
   font-size: 14px;
 }
 .copyBtn{
-    background-color: rgb(255,255,255);
-     color:black;
-     border-color: #e7e7e7;
+  position: absolute;
+  top: 14%;
+  right: 8%;
+  background-color: rgb(255,255,255);
+  color: black;
+  border-color: #e7e7e7;
+}
+.dwBtn{
+  position: absolute;
+  top: 14%;
+  right: 18%;
+  background-color: rgb(255,255,255);
+  color: black;
+  border-color: #e7e7e7;
 }
 ::ng-deep .hljs {
   position: absolute;
   width: 72.3%;
-    top: 8%;
+    top: 12%;
     left: 26%;
     display: block;
-    color: #abb2bf;
+    color: rgb(57,58,52);
     background: rgb(255,255,255);
-    height: 94%;
+    height: 81%;
     font-size: 13px;
 }
-
+.selectFiletxt{
+  margin-left: 21px;
+  font-weight: bold;
+  font-size: 14px;
+  margin-top: 18px;
+}
+::ng-deep selectFileIcon{
+  margin-left: 12px;
+  margin-top: 19px;
+}
 .expandIcon{
   position: absolute;
     right: 20px;
