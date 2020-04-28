@@ -6,6 +6,7 @@ import { ParentTree } from 'src/_model/parentTree';
 import { CodegenService } from 'src/_service/codegen.service';
 import { of as observableOf } from 'rxjs';
 import { MainTree } from 'src/_model/mainTree';
+import {ChangeDetectorRef } from '@angular/core';
 export interface FlatTreeNode {
   fileName: string;
   type: string;
@@ -20,14 +21,15 @@ export interface FlatTreeNode {
   templateUrl: './fileExplorer-Screen.component.html',
   styleUrls: ['./fileExplorer-Screen.component.css']
 })
-export class FileExplorerScreenComponent implements OnInit {
+export class FileExplorerScreenComponent implements OnInit,AfterViewInit {
 
   exploreResult:string;
   selectedContent :any;
-  selectedLang: string;
+  selectedLang: string = "xml";
   fileName :string;
-  folderExpand =  true;
-  folderCollapse = false;
+  selectedFileName: string;
+  folderExpand =  false;
+  folderCollapse = true;
   toolPosition: TooltipPosition = 'left';
   treeControl: FlatTreeControl<FlatTreeNode>;
 
@@ -37,9 +39,24 @@ export class FileExplorerScreenComponent implements OnInit {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<ParentTree, FlatTreeNode>;
 
-  constructor(private codeGenService : CodegenService, private router: Router,
+  constructor(private codeGenService : CodegenService, 
+    private changeRef: ChangeDetectorRef,private router: Router,
     public dialogRef: MatDialogRef<FileExplorerScreenComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any)  {
+    
+  }
+  
+  @ViewChild('tree',null) tree;
+
+  ngAfterViewInit() {
+    this.tree.treeControl.expandAll();
+    let data:MainTree = JSON.parse(this.exploreResult);
+      this.selectedContent = data.selected.content;
+      this.selectedLang = data.selected.language;
+      this.fileName = data.tree.filename;
+      this.selectedFileName = data.selected.filename;
+      console.log("selected Language",this.selectedLang);
+      this.changeRef.detectChanges();
     
   }
 
@@ -52,19 +69,10 @@ export class FileExplorerScreenComponent implements OnInit {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-   // this.codeGenService.getDemoResponse().subscribe(data=>{
-     let data:MainTree = JSON.parse(this.exploreResult);
-     console.log('resulttt -> '+JSON.stringify(data))
-      this.selectedContent = data.selected.content;
-      this.selectedLang = data.selected.language;
-      this.fileName = data.tree.filename;
-      console.log("selected Language",this.selectedLang);
-      
-      console.log("data",data.tree)
+   let data:MainTree = JSON.parse(this.exploreResult);
      let parent : ParentTree[] = [];
       parent.push(data.tree)
       this.dataSource.data = parent;
-   // })
    
   }
 
@@ -109,6 +117,7 @@ export class FileExplorerScreenComponent implements OnInit {
   selectedFile(data){
 console.log("sected file",data);
 this.selectedContent = data.content
+this.selectedFileName = data.fileName;
 console.log('selected content -> '+this.selectedContent)
       this.selectedLang = data.language
 
