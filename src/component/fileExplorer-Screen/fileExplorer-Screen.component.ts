@@ -6,7 +6,8 @@ import { ParentTree } from 'src/_model/parentTree';
 import { CodegenService } from 'src/_service/codegen.service';
 import { of as observableOf } from 'rxjs';
 import { MainTree } from 'src/_model/mainTree';
-import {ChangeDetectorRef } from '@angular/core';
+import { ChangeDetectorRef } from '@angular/core';
+import * as fileSaver from 'file-saver';
 export interface FlatTreeNode {
   fileName: string;
   type: string;
@@ -21,14 +22,14 @@ export interface FlatTreeNode {
   templateUrl: './fileExplorer-Screen.component.html',
   styleUrls: ['./fileExplorer-Screen.component.css']
 })
-export class FileExplorerScreenComponent implements OnInit,AfterViewInit {
+export class FileExplorerScreenComponent implements OnInit, AfterViewInit {
 
-  exploreResult:string;
-  selectedContent :any;
+  exploreResult: string;
+  selectedContent: any;
   selectedLang: string = "xml";
-  fileName :string;
+  fileName: string;
   selectedFileName: string;
-  folderExpand =  false;
+  folderExpand = false;
   folderCollapse = true;
   toolPosition: TooltipPosition = 'left';
   treeControl: FlatTreeControl<FlatTreeNode>;
@@ -39,25 +40,25 @@ export class FileExplorerScreenComponent implements OnInit,AfterViewInit {
   /** The MatTreeFlatDataSource connects the control and flattener to provide data. */
   dataSource: MatTreeFlatDataSource<ParentTree, FlatTreeNode>;
 
-  constructor(private codeGenService : CodegenService, 
-    private changeRef: ChangeDetectorRef,private router: Router,
+  constructor(private codeGenService: CodegenService,
+    private changeRef: ChangeDetectorRef, private router: Router,
     public dialogRef: MatDialogRef<FileExplorerScreenComponent>,
-    @Optional() @Inject(MAT_DIALOG_DATA) public data: any)  {
-    
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: any) {
+
   }
-  
-  @ViewChild('tree',null) tree;
+
+  @ViewChild('tree', null) tree;
 
   ngAfterViewInit() {
     this.tree.treeControl.expandAll();
-    let data:MainTree = JSON.parse(this.exploreResult);
-      this.selectedContent = data.selected.content;
-      this.selectedLang = data.selected.language;
-      this.fileName = data.tree.filename;
-      this.selectedFileName = data.selected.filename;
-      console.log("selected Language",this.selectedLang);
-      this.changeRef.detectChanges();
-    
+    let data: MainTree = JSON.parse(this.exploreResult);
+    this.selectedContent = data.selected.content;
+    this.selectedLang = data.selected.language;
+    this.fileName = data.tree.filename;
+    this.selectedFileName = data.selected.filename;
+    console.log("selected Language", this.selectedLang);
+    this.changeRef.detectChanges();
+
   }
 
   ngOnInit() {
@@ -69,11 +70,11 @@ export class FileExplorerScreenComponent implements OnInit,AfterViewInit {
 
     this.treeControl = new FlatTreeControl(this.getLevel, this.isExpandable);
     this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
-   let data:MainTree = JSON.parse(this.exploreResult);
-     let parent : ParentTree[] = [];
-      parent.push(data.tree)
-      this.dataSource.data = parent;
-   
+    let data: MainTree = JSON.parse(this.exploreResult);
+    let parent: ParentTree[] = [];
+    parent.push(data.tree)
+    this.dataSource.data = parent;
+
   }
 
   /** Transform the data to something the tree can read. */
@@ -84,7 +85,7 @@ export class FileExplorerScreenComponent implements OnInit,AfterViewInit {
       hidden: node.hidden,
       type: node.type,
       language: node.language,
-      content : node.content,
+      content: node.content,
       level: level,
       expandable: !!node.children && node.children.length > 0
     };
@@ -109,38 +110,44 @@ export class FileExplorerScreenComponent implements OnInit,AfterViewInit {
   getChildren(node: ParentTree) {
     return observableOf(node.children);
   }
+  downloadFile(data) {
+    console.log("dataaaaa=>", data);
 
+    let blob: any = new Blob([data], { type: 'application/' + this.selectedLang });
 
-  redirectHome(){
+    fileSaver.saveAs(blob, this.selectedFileName);
+  }
+
+  redirectHome() {
     this.router.navigate(['/homeScreen'])
   }
-  selectedFile(data){
-console.log("sected file",data);
-this.selectedContent = data.content
-this.selectedFileName = data.fileName;
-console.log('selected content -> '+this.selectedContent)
-      this.selectedLang = data.language
+  selectedFile(data) {
+    console.log("sected file", data);
+    this.selectedContent = data.content
+    this.selectedFileName = data.fileName;
+    console.log('selected content -> ' + this.selectedContent)
+    this.selectedLang = data.language
 
   }
   changeState(node) {
     node.expanded = !node.expanded;
     console.log(node);
   }
-  expandFolder(){
-this.folderExpand = false;
-this.folderCollapse= true;
+  expandFolder() {
+    this.folderExpand = false;
+    this.folderCollapse = true;
   }
-  collapseFolder(){
+  collapseFolder() {
     this.folderExpand = true;
-    this.folderCollapse= false;
+    this.folderCollapse = false;
   }
-  closeExplore(){
-    this.dialogRef.close({event:'close',data:""}); 
+  closeExplore() {
+    this.dialogRef.close({ event: 'close', data: "" });
   }
-  downloadAfterCls(){
-    this.dialogRef.close({event:'close',data:"download"})
+  downloadAfterCls() {
+    this.dialogRef.close({ event: 'close', data: "download" })
   }
-  copyInputMessage(item){
+  copyInputMessage(item) {
     document.addEventListener('copy', (e: ClipboardEvent) => {
       e.clipboardData.setData('text/plain', (item));
       e.preventDefault();

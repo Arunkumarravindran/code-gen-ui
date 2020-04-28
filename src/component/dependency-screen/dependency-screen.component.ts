@@ -3,7 +3,7 @@ import { CodegenService } from 'src/_service/codegen.service';
 import { Dependencies } from 'src/_model/dependencies';
 import { Value } from 'src/_model/value';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
-import {  Inject, Optional } from '@angular/core'; 
+import { Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -12,10 +12,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./dependency-screen.component.css']
 })
 export class DependencyScreenComponent implements OnInit {
-  dependencies : Value[];
-  addDependencies : DependenciesValue[] = [];
-  searchValue:string;
-  constructor(private codegenService : CodegenService,
+  dependencies: Value[];
+  addDependencies: DependenciesValue[] = [];
+  searchValue: string;
+  constructor(private codegenService: CodegenService,
     public dialogRef: MatDialogRef<DependencyScreenComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { }
 
@@ -24,18 +24,18 @@ export class DependencyScreenComponent implements OnInit {
     let response = localStorage.getItem('responseBody');
     let parsedResponse = JSON.parse(response)
     this.dependencies = parsedResponse.dependencies.values;
-  
-  
-  }
 
-  addDependency(data){
-this.dialogRef.close({event:'close',data:data}); 
 
   }
 
-  clearInput(){
+  addDependency(data) {
+    this.dialogRef.close({ event: 'close', data: data });
+
+  }
+
+  clearInput() {
     this.searchValue = null;
   }
 
-  
+
 }

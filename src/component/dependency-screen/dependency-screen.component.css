@@ -1,12 +1,10 @@
-.searchBar{
-   
+.searchBar {
     left: 0%;
     width: 100%;
     top: 0%;
-
 }
 
-.closeIcon{
+.closeIcon {
     position: absolute;
     right: 0%;
     top: -5px;
@@ -14,33 +12,33 @@
     cursor: pointer;
 }
 
-.dependencyPanel{
+.dependencyPanel {
     height: 45px;
     transition: none !important;
     box-shadow: none !important;
-
 }
-.dependencyPanel  :hover{
+
+.dependencyPanel :hover {
     background-color: rgb(224, 217, 217);
 }
-.sideTxt{
 
+.sideTxt {
     display: inline-block;
     position: absolute;
     top: 13px;
     left: 63%;
-    background:rgb(0,120,215);
+    background: rgb(0, 120, 215);
     color: #fff;
     font-size: 13px;
     padding: 4px 0.6rem 1px;
     line-height: 18px;
     margin-left: 0.6rem;
     text-transform: uppercase;
-  
 }
-.headerTxt{
+
+.headerTxt {
     display: inline-block;
-    background:rgb(0,120,215);
+    background: rgb(0, 120, 215);
     color: #fff;
     font-size: 13px;
     padding: 4px 0.6rem 1px;
