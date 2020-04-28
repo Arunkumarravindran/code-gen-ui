@@ -28,13 +28,13 @@ export class CodegenService {
   getResponse(codeGen): Observable<any> {
     let params = this.getParams(codeGen);
     console.log('Params -> ' + params.toString())
-    return this.http.get(this.testDownload_Url,
+    return this.http.get(this.download_Url,
       { params, responseType: 'arraybuffer' as 'json' }).pipe(catchError(this.handleError))
   }
 
   getFileName(codeGen): Observable<any> {
     let params = this.getParams(codeGen);
-    return this.http.get(this.testDownload_Url,
+    return this.http.get(this.download_Url,
       { params, responseType: 'arraybuffer' as 'json', observe: 'response' }).pipe(catchError(this.handleError))
   }
 
@@ -58,7 +58,7 @@ export class CodegenService {
 
   getClient(): Observable<ResponseDto> {
     console.log("Inside Client Call")
-    return this.http.get<ResponseDto>(this.testClient_Url).pipe(map(response => {
+    return this.http.get<ResponseDto>(this.client_Url).pipe(map(response => {
       localStorage.setItem('responseBody', JSON.stringify(response)), (catchError(this.handleError_Client))
 
       return response;
@@ -68,8 +68,6 @@ export class CodegenService {
   }
 
   handleError = (error: HttpErrorResponse) => {
-
-
     console.log('server side', error.status)
     this.errorService.open(error.status)
     return throwError(error);

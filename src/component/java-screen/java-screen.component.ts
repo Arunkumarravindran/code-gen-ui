@@ -15,7 +15,6 @@ import { Router } from '@angular/router';
 import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
-import { JSZipObject } from 'jszip';
 import { FileExplorerScreenComponent } from '../fileExplorer-Screen/fileExplorer-Screen.component';
 
 @Component({
@@ -67,7 +66,7 @@ export class JavaScreenComponent implements OnInit {
       description: new FormControl('Demo project for Spring Boot', [
         Validators.required
       ]),
-      packageName: new FormControl('com.example.demo', [
+      packageName: new FormControl('', [
         Validators.required
       ]),
       packaging: new FormControl('jar', [
@@ -89,6 +88,7 @@ export class JavaScreenComponent implements OnInit {
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
     this.codeGenForm.value.name = this.name;
+    this.codeGenForm.value.packageName = this.group + '.' + this.name;
     this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
     console.log(this.codeGenForm.value)
     this.codegenService.getFileName(this.codeGenForm.value).subscribe(res => {
@@ -100,8 +100,10 @@ export class JavaScreenComponent implements OnInit {
       let blob: any = new Blob([response], { type: 'application/zip' });
 
       fileSaver.saveAs(blob, fileName);
-    }), error => console.log('Error downloading the file' + error),
-      () => console.info('File downloaded successfully');
+    },
+    (error) => {
+     console.log('Error downloading the file ' +error)
+    })
   }
   languageCheckboxChange(event: MatCheckboxChange, index: number, id: string) {
     this.languageIndex = event.checked ? index : -1;
@@ -212,6 +214,7 @@ export class JavaScreenComponent implements OnInit {
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
     this.codeGenForm.value.name = this.name;
+    this.codeGenForm.value.packageName = this.group + '.' + this.name;
     this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
     console.log(this.codeGenForm.value)
     this.codegenService.getResponse(this.codeGenForm.value).subscribe(async response => {
