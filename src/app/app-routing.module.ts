@@ -4,15 +4,25 @@ import{JavaScreenComponent} from 'src/component/java-screen/java-screen.componen
 
 import { FirstComponent } from 'src/component/first/first.component';
 import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/fileExplorer-Screen.component';
-const routes: Routes = [{
-  path:'javaMain',
-  component: JavaScreenComponent
-},
-{path:'homeScreen',
-component: FirstComponent},
-{path:'explore',
-component: FileExplorerScreenComponent},
-{path :'',redirectTo:'homeScreen',pathMatch:'full'}];
+const routes: Routes = [
+   {
+      path:'javaMain',
+      component: JavaScreenComponent
+   },
+   {
+      path:'homeScreen',
+      component: FirstComponent
+   },
+   {
+      path:'explore',
+      component: FileExplorerScreenComponent
+   },
+   {
+      path :'**',
+      redirectTo:'homeScreen',
+      pathMatch:'full'
+   }
+];
 
 @NgModule({
    imports: [
