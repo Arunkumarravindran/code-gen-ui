@@ -31,8 +31,16 @@
         
       </mat-sidenav-content>
     </mat-sidenav-container>
+    
+    <div class="downloadBtn">
+     
+     <button class="copyBtn" mat-button (click)="downloadAfterCls()">DOWNLOAD</button>
+       <span style="margin-left: 10px;"></span>
+     <button class="copyBtn" mat-button (click)="copyInputMessage(selectedContent)">COPY</button>
+    </div>
+  
 
-       <pre  highlight-js [lang]="selectedLang">
+       <pre  highlight-js [lang]="selectedLang" >
         {{selectedContent}}
       </pre>
    
