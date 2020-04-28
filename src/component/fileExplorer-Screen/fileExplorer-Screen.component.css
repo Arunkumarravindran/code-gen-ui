@@ -1,164 +1,180 @@
-.toolBar{
-    height: 15%;
-    background-color: rgb(12,131,177);
+.toolBar {
+  height: 15%;
+  background-color: rgb(12, 131, 177);
 }
-.menuIcon{
-    color: white;
-    position: absolute;
-    left: 11%;
-    top: 4%;
-    cursor: pointer;
+
+.menuIcon {
+  color: white;
+  position: absolute;
+  left: 11%;
+  top: 4%;
+  cursor: pointer;
 }
-.toolBarTxt{
-    color: white;
-    position: absolute;
-    left: 14%;
-    top:0%;
+
+.toolBarTxt {
+  color: white;
+  position: absolute;
+  left: 14%;
+  top: 0%;
 }
-.footer{
-    position: absolute;
-    top: 693px;
-    left: -16%;
-    top: 98%;
-    left: 0%;
-    background-color: rgb(12,131,177);
-    width: 100%;
+
+.footer {
+  position: absolute;
+  top: 693px;
+  left: -16%;
+  top: 98%;
+  left: 0%;
+  background-color: rgb(12, 131, 177);
+  width: 100%;
 }
-.contentCard{
-    border-radius: 0px;
-    position: absolute;
-    left: 11%;
-    top: 9%;
-    background-color: rgb(245,245,245);
-    width: 82%;
-    height:auto;
+
+.contentCard {
+  border-radius: 0px;
+  position: absolute;
+  left: 11%;
+  top: 9%;
+  background-color: rgb(245, 245, 245);
+  width: 82%;
+  height: auto;
 }
+
 .sideNav {
-    width: 280px;
-    height: 494px;
-    margin-left: -8px;
-    
-    background-color: rgb(255,255,255);
-color: black;
-
-  }
-  .type-icon {
-    color: #000000;
-    margin-right: 5px;
-  }
-  
-  ::ng-deep .mat-tree-node{
-    font-size: 14px;
-    /* padding-left: 30px !important; */
-    cursor: pointer !important;
-
-  }
-  ::ng-deep .mat-tree-node  :hover{
-    background-color: rgb(242,242,242);
-  }
-
-  ::ng-deep .mat-tree-node  .selectedFile :focus{
-    background-color: rgb(238, 24, 24) !important;
-  }
-
-  .filesCard{
-    position: relative;
-    top: 3%;
-    width: 111%;
-    z-index: 1;
-    display: block;
-    height: 100%;
-    overflow: auto;
+  width: 280px;
+  height: 494px;
+  margin-left: -8px;
+  background-color: rgb(255, 255, 255);
+  color: black;
 }
-.downloadBtn{
+
+.type-icon {
+  color: #000000;
+  margin-right: 5px;
+}
+
+::ng-deep .mat-tree-node {
+  font-size: 14px;
+  /* padding-left: 30px !important; */
+  cursor: pointer !important;
+}
+
+::ng-deep .mat-tree-node :hover {
+  background-color: rgb(242, 242, 242);
+}
+
+::ng-deep .mat-tree-node .selectedFile :focus {
+  background-color: rgb(238, 24, 24) !important;
+}
+
+.filesCard {
+  position: relative;
+  top: 3%;
+  width: 111%;
+  z-index: 1;
+  display: block;
+  height: 100%;
+  overflow: auto;
+}
+
+.downloadBtn {
   position: fixed;
   width: 62.4%;
   height: 56px;
-  background-color: rgb(255,255,255);
+  background-color: rgb(255, 255, 255);
   top: 75px;
   left: 444px;
 }
-.generateBtn{
+
+.generateBtn {
   position: absolute;
   left: 38%;
   top: 20%;
-  background-color: rgb(0,120,215);
+  background-color: rgb(0, 120, 215);
   border-color: white;
   color: white;
   font-size: 14px;
 }
-.exploreBtn{
+
+.exploreBtn {
   position: absolute;
   left: 60%;
   top: 20%;
-  background-color: rgb(0,120,215);
+  background-color: rgb(0, 120, 215);
   border-color: white;
   color: white;
   font-size: 14px;
 }
-.copyBtn{
+
+.copyBtn {
   position: absolute;
   top: 14%;
   right: 8%;
-  background-color: rgb(255,255,255);
+  background-color: rgb(255, 255, 255);
   color: black;
   border-color: #e7e7e7;
 }
-.dwBtn{
+
+.dwBtn {
   position: absolute;
   top: 14%;
   right: 18%;
-  background-color: rgb(255,255,255);
+  background-color: rgb(255, 255, 255);
   color: black;
   border-color: #e7e7e7;
 }
+
 ::ng-deep .hljs {
   position: absolute;
   width: 72.3%;
-    top: 12%;
-    left: 26%;
-    display: block;
-    color: rgb(57,58,52);
-    background: rgb(255,255,255);
-    height: 81%;
-    font-size: 13px;
+  top: 12%;
+  left: 26%;
+  display: block;
+  color: rgb(57, 58, 52);
+  background: rgb(255, 255, 255);
+  height: 81%;
+  font-size: 13px;
 }
-.selectFiletxt{
+
+.selectFiletxt {
   margin-left: 21px;
   font-weight: bold;
   font-size: 14px;
   margin-top: 18px;
 }
-::ng-deep selectFileIcon{
+
+::ng-deep selectFileIcon {
   margin-left: 12px;
   margin-top: 19px;
 }
-.expandIcon{
+
+.expandIcon {
   position: absolute;
-    right: 20px;
-    top: 65px;
+  right: 20px;
+  top: 65px;
 }
 
 /* scrollbar */
 
 /* width */
-::-webkit-scrollbar{
-    width: 5px !important;
-    height: 8px;
-  }
-  
-  /* Track */
-  ::-webkit-scrollbar-track {
-    background: #f1f1f1; 
-  }
-   
-  /* Handle */
-  ::-webkit-scrollbar-thumb {
-    background: rgb(178,178,178);
-  }
-  
-  /* Handle on hover */
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
-  
+
+::-webkit-scrollbar {
+  width: 5px !important;
+  height: 8px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(178, 178, 178);
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

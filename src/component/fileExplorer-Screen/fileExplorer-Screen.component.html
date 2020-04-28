@@ -1,59 +1,58 @@
-<mat-card class="contentCard"  >
-    <mat-sidenav-container class="sideNav">
-      <mat-sidenav-content>
-        <h5 style="text-align: center;">{{fileName}}.zip</h5>
-        <hr>
-        <img class="expandIcon"   matTooltip="Expand All" [matTooltipPosition]="toolPosition" *ngIf = "folderExpand" (click)="tree.treeControl.expandAll();expandFolder()" src="https://img.icons8.com/material/24/000000/doctors-folder.png"/>
-        <img class="expandIcon"  matTooltip="Collapse All"  [matTooltipPosition]="toolPosition" *ngIf = "folderCollapse" (click)="tree.treeControl.collapseAll();collapseFolder()" src="https://img.icons8.com/material/24/000000/math-folder.png"/>
-        <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
-          <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding matTreeNodePaddingIndent="4">
-            <button mat-icon-button disabled></button>
-            <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
-              {{ node.type === 'file' ? 'description' : 'folder' }}
+<mat-card class="contentCard">
+  <mat-sidenav-container class="sideNav">
+    <mat-sidenav-content>
+      <h5 style="text-align: center;">{{fileName}}.zip</h5>
+      <hr>
+      <img class="expandIcon" matTooltip="Expand All" [matTooltipPosition]="toolPosition" *ngIf="folderExpand"
+        (click)="tree.treeControl.expandAll();expandFolder()"
+        src="https://img.icons8.com/material/24/000000/doctors-folder.png" />
+      <img class="expandIcon" matTooltip="Collapse All" [matTooltipPosition]="toolPosition" *ngIf="folderCollapse"
+        (click)="tree.treeControl.collapseAll();collapseFolder()"
+        src="https://img.icons8.com/material/24/000000/math-folder.png" />
+      <mat-tree #tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding matTreeNodePaddingIndent="4">
+          <button mat-icon-button disabled></button>
+          <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+            {{ node.type === 'file' ? 'description' : 'folder' }}
+          </mat-icon>
+          <span class="selectedFile" (click)="selectedFile(node)"> {{node.fileName}}</span>
+        </mat-tree-node>
+
+        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="4">
+          <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.fileName"
+            (click)="changeState(node)">
+            <mat-icon class="mat-icon-rtl-mirror">
+              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
             </mat-icon>
-           <span class = "selectedFile" (click)= "selectedFile(node)"> {{node.fileName}}</span>
-          </mat-tree-node>
-        
-          <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding matTreeNodePaddingIndent="4">
-            <button mat-icon-button matTreeNodeToggle
-                    [attr.aria-label]="'toggle ' + node.fileName"
-                      (click)="changeState(node)">
-              <mat-icon class="mat-icon-rtl-mirror" >
-                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
-              </mat-icon>
-            </button>
-            <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
-              {{ node.type ==='file' ? 'description' : 'folder' }}
-            </mat-icon >
-            <span class = "selectedFile">{{node.fileName}}</span> 
-          </mat-tree-node>
-        </mat-tree>
-        
-      </mat-sidenav-content>
-    </mat-sidenav-container>
-   
-    <div class="downloadBtn">
-      <p class = "selectFiletxt" >{{selectedFileName}}</p>
-     <button class="dwBtn" mat-button (click)="downloadAfterCls()">DOWNLOAD</button>
-       <span style="margin-left: 10px;"></span>
-     <button class="copyBtn" mat-button (click)="copyInputMessage(selectedContent)">COPY</button>
-     <mat-icon style="position: absolute;
+          </button>
+          <mat-icon class="type-icon" [attr.aria-label]="node.type + 'icon'">
+            {{ node.type ==='file' ? 'description' : 'folder' }}
+          </mat-icon>
+          <span class="selectedFile">{{node.fileName}}</span>
+        </mat-tree-node>
+      </mat-tree>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+
+  <div class="downloadBtn">
+    <p class="selectFiletxt">{{selectedFileName}}</p>
+    <button class="dwBtn" mat-button (click)="downloadFile(selectedContent)">DOWNLOAD FILE</button>
+    <span style="margin-left: 10px;"></span>
+    <button class="copyBtn" mat-button (click)="copyInputMessage(selectedContent)">COPY</button>
+    <mat-icon style="position: absolute;
      cursor: pointer;
      right: 5px;
-     top: 26%"  (click)="closeExplore()"> close</mat-icon>
-    </div>
-
-
-       <pre  highlight-js [lang]="selectedLang" >
+     top: 26%" (click)="closeExplore()"> close</mat-icon>
+  </div>
+  <pre highlight-js [lang]="selectedLang">
         {{selectedContent}}
       </pre>
-   
+
   <mat-toolbar class="footer">
 
-    <button mat-button class="generateBtn" (click)="downloadAfterCls()">DOWNLOAD</button>
+    <button mat-button class="generateBtn" (click)="downloadAfterCls()">DOWNLOAD ZIP</button>
     <button mat-button class="exploreBtn" (click)="closeExplore()">CLOSE</button>
-   
-     </mat-toolbar>
-  </mat-card>
 
-  
+  </mat-toolbar>
+</mat-card>
