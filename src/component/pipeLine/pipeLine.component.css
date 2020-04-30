@@ -1,0 +1,40 @@
+.contentCard {
+    border-radius: 0px;
+    position: absolute;
+    left: 11%;
+    top: 9%;
+    background-color: rgb(245, 245, 245);
+    width: 76%;
+    height: auto;
+}
+
+.dbIconsCard{
+    width: 84%;
+    left: 0%;
+    bottom: 25.2%;
+    border-radius: 0px;
+    height: 41%;
+}
+.hibernetCard{
+    margin-top: 46%;
+    margin-right: 28%;
+    /* top: 42.2%; */
+    border-radius: 0px;
+    height: auto;
+
+}
+.dotNetImg
+{ 
+    font-size: 20px;
+    cursor: pointer;
+    top: 15%;
+    position: absolute;
+    width: 95px;
+    transform: translateY(-50%);
+    left: 3%;
+}
+
+.mat-grid-tile {
+    border: solid 2px rgb(189, 184, 184);
+    background-color: white;
+}

@@ -1,0 +1,25 @@
+
+<mat-card class="contentCard">
+
+  <mat-grid-list cols="4" rowHeight="480px">
+    <mat-grid-tile  [colspan]="3"  [rowspan]="1"  >
+      
+      <app-java-screen *ngIf = "java"></app-java-screen>
+      <app-first *ngIf = "other"></app-first>
+      </mat-grid-tile>
+      <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
+    <mat-grid-tile [colspan]="1" [rowspan]="1" >
+      <button (click) = "changeScreenagin()"></button>
+      <img src="../../assets/images/ezgif.com-gif-maker (1).jpg" (click) = "changeScreen()" class="dotNetImg">
+<mat-divider></mat-divider>
+<div class="hibernetCard">
+  
+</div>
+    </mat-grid-tile>
+  </mat-grid-list>
+
+    <!-- <mat-card class="dbIconsCard"> -->
+
+</mat-card>
+
