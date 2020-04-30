@@ -16,6 +16,8 @@
     height: 45px;
     transition: none !important;
     box-shadow: none !important;
+    border-bottom: 1px solid grey;
+    
 }
 
 .dependencyPanel :hover {
@@ -31,13 +33,14 @@
     color: #fff;
     font-size: 13px;
     padding: 4px 0.6rem 1px;
-    line-height: 18px;
+    line-height: 8px;
     margin-left: 0.6rem;
     text-transform: uppercase;
+    border-bottom: 5px solid red;
 }
 
 .headerTxt {
-    display: inline-block;
+
     background: rgb(0, 120, 215);
     color: #fff;
     font-size: 13px;
