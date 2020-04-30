@@ -66,7 +66,7 @@ export class JavaScreenComponent implements OnInit {
       description: new FormControl('Demo project for Spring Boot', [
         Validators.required
       ]),
-      packageName: new FormControl('', [
+      packageName: new FormControl('com.example.demo', [
         Validators.required
       ]),
       packaging: new FormControl('jar', [
