@@ -1,93 +1,103 @@
 <mat-toolbar class="toolBar">
   <mat-icon class="menuIcon" (click)="redirectHome()">menu</mat-icon>
-  <p class="toolBarTxt">Custom Code Generator</p>
-
+  <p class="toolBarTxt"> Step 1-Select Metadata</p>
+  <p class="first">Custom Code Generator</p>
   <mat-card class="contentCard">
 
     <form [formGroup]="codeGenForm">
+      <mat-card class="metaDataTxt">
+        <p style="margin-top: -10px;">Metadata</p>
+        </mat-card>
       <mat-card class="projectCard">
 
         <p class="projectTxt">PROJECT</p>
-        <hr style="background-color: rgb(194, 189, 189);">
+      
         <mat-radio-group formControlName="projectName">
-          <mat-radio-button #pro color="primary" style="margin-left: 30px; font-size: 12px;"
+          <mat-radio-button #pro color="primary" style="margin-left: 65px; font-size: 12px;;margin-top: -10px "
             class="example-radio-button" *ngFor="let project of projects" [value]="project.id">
-            <p *ngIf="pro.checked == true" style="color :blue">{{project.name}}</p>
+            
+            <p *ngIf="pro.checked == true" style="color :rgb(0,120,215)">{{project.name}}</p>
             <p *ngIf="pro.checked == false" style="color :black">{{project.name}}</p>
+          
           </mat-radio-button>
         </mat-radio-group>
       </mat-card>
       <mat-card class="lanuageCard">
         <p class="projectTxt">LANGUAGE</p>
-        <hr style="background-color: rgb(194, 189, 189);">
+      
         <mat-radio-group formControlName="languageType">
-          <mat-radio-button #langu color="primary" style="margin-left: 30px; font-size: 12px;"
+          <mat-radio-button #langu color="primary" style="margin-left: 65px; font-size: 12px;margin-top: -10px"
             class="example-radio-button" *ngFor="let language of languages" [value]="language.id">
-            <p *ngIf="langu.checked == true" style="color :blue">{{language.name}}</p>
+            <p *ngIf="langu.checked == true" style="color :rgb(0,120,215)">{{language.name}}</p>
             <p *ngIf="langu.checked == false" style="color :black">{{language.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
 
       </mat-card>
       <mat-card class="springCard">
-        <p class="projectTxt">SPRING BOOT</p>
-        <hr style="background-color: rgb(194, 189, 189);">
+        <p class="springBootTxt">SPRING BOOT</p>
+      
         <mat-radio-group formControlName="bootVersion">
-          <mat-radio-button #boot color="primary" style="margin-left: 30px; font-size: 12px; "
+          <mat-radio-button #boot color="primary" style="margin-left: 65px; font-size: 12px; margin-top: -10px ;line-height: normal;"
             class="example-radio-button" *ngFor="let springversion of springVersion" [value]="springversion.id">
-            <p *ngIf="boot.checked == true" style="color :blue">{{springversion.name}}</p>
+            <p *ngIf="boot.checked == true" style="color :rgb(0,120,215)">{{springversion.name}}</p>
             <p *ngIf="boot.checked == false" style="color :black">{{springversion.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
       </mat-card>
       <mat-card class="metaDataCard">
-        <p class="projectTxt">PROJECT METADATA</p>
+        <p class="projrctMetaDataText">PROJECT METADATA</p>
         <hr style="background-color: rgb(194, 189, 189);">
 
-        <mat-form-field style=" font-size: 16px;width: 25%;" appearance="outline">
+        <mat-form-field style=" font-size: 16px;width: 45%;" appearance="outline">
           <mat-label>Group</mat-label>
           <input matInput [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <mat-form-field style="margin-left: 50px; font-size: 16px;width: 25%;" appearance="outline">
+        <mat-form-field style="margin-left: 60px; font-size: 16px;width: 45%;" appearance="outline">
           <mat-label>Artifact</mat-label>
           <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <mat-form-field style="margin-left: 50px; font-size: 16px; width: 25%;" appearance="outline">
+        <br>
+        <mat-form-field style="margin-left: 13px; font-size: 16px; width: 45%;right:15px" appearance="outline">
           <mat-label>Name</mat-label>
           <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <br>
-        <mat-form-field style=" font-size: 16px;width: 25%;" appearance="outline">
+        
+        <mat-form-field style="margin-left: 45px; font-size: 16px;width: 45%;" appearance="outline">
           <mat-label>Description</mat-label>
           <input matInput formControlName="description">
         </mat-form-field>
-
-        <mat-form-field style="margin-left: 50px; font-size: 16px;width: 25%;" appearance="outline">
+       <br>
+        <mat-form-field style="margin-left: 0px; font-size: 16px;width: 45%;" appearance="outline">
           <mat-label>Package Name</mat-label>
           <input matInput formControlName="packageName" value="{{group}}.{{name}}">
         </mat-form-field>
         <br>
-        <span style="font-size: 12px;">Packaging</span>
+        <span style="font-size: 12px; margin-top: 10px">Packaging</span>
         <mat-radio-group formControlName="packaging">
-          <mat-radio-button #pac color="primary" style="margin-left: 30px; font-size: 11px;"
+          <mat-radio-button #pac color="primary" style="margin-left: 20px; font-size: 11px;line-height: normal;"
             class="example-radio-button" *ngFor="let pack of packaging" [value]="pack.id">
-            <p *ngIf="pac.checked == true" style="color :blue">{{pack.name}}</p>
+            <p *ngIf="pac.checked == true" style="color :rgb(0,120,215)">{{pack.name}}</p>
             <p *ngIf="pac.checked == false" style="color :black">{{pack.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
-        <span style="margin-left: 60px;font-size: 12px;">Java</span>
+        
+        <span style="margin-left: 85px;font-size: 12px; margin-top: -10px;">Java</span>
         <mat-radio-group formControlName="java">
-          <mat-radio-button #jav color="primary" style="margin-left: 30px; font-size: 12px;"
+          <mat-radio-button #jav color="primary" style="margin-left: 30px; font-size: 12px;line-height: 1.0;"
             class="example-radio-button" *ngFor="let javaversion of javaVersion" [value]="javaversion.id">
-            <p *ngIf="jav.checked == true" style="color :blue">{{javaversion.name}}</p>
+            <p *ngIf="jav.checked == true" style="color :rgb(0,120,215)">{{javaversion.name}}</p>
             <p *ngIf="jav.checked == false" style="color :black">{{javaversion.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
       </mat-card>
+     <p style="margin-top: -10px;">
+  
       <mat-card class="dependencyCard">
-        <p class="projectTxt">DEPENDENCIES</p>
+        <p class="dependenceTxt"  style="margin-left:10px;">Dependencies</p>
         <button mat-raised-button class="dependencyBtn" (click)='openDependency()'>ADD DEPENDENCIES</button>
-        <hr style="background-color: rgb(194, 189, 189); margin-top: 22px;">
+      </mat-card>
+        <mat-card class="addedDepencyCard" >
         <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54);">No
           Dependency selected</p>
         <mat-card class="dependencyPanel" *ngFor="let depend of addDependencies ; let i = index">
@@ -100,6 +110,7 @@
         </mat-card>
 
       </mat-card>
+    
     </form>
     <mat-toolbar class="footer">
 
