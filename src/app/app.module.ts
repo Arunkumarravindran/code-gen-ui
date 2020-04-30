@@ -10,6 +10,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -27,6 +28,12 @@ import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/f
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { HighlightJsModule } from 'ngx-highlight-js';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DataBaseComponent } from 'src/component/dataBase/dataBase.component';
+import { GoCdScreenComponent } from 'src/component/pipeLine/goCd-Screen/goCd-Screen.component';
+import { JenkinsScreenComponent } from 'src/component/pipeLine/jenkins-Screen/jenkins-Screen.component';
+import { PipeLineComponent } from 'src/component/pipeLine/pipeLine.component';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRippleModule} from '@angular/material/core';
 @NgModule({
    declarations: [
       AppComponent,
@@ -34,7 +41,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
       DependencyScreenComponent,
       DependencySearchPipe,
       FirstComponent,
-      FileExplorerScreenComponent
+      FileExplorerScreenComponent,
+      DataBaseComponent,
+      GoCdScreenComponent,
+      JenkinsScreenComponent,
+      PipeLineComponent
    ],
    entryComponents: [
       DependencyScreenComponent,
@@ -43,10 +54,13 @@ import { MatTooltipModule } from '@angular/material/tooltip';
    imports: [
       BrowserModule,
       MatListModule,
+      MatRippleModule,
       AppRoutingModule,
       BrowserAnimationsModule,
       FormsModule,
+      MatGridListModule,
       ReactiveFormsModule,
+      MatSelectModule,
       MatToolbarModule,
       MatSidenavModule,
       MatIconModule,

@@ -1,0 +1,121 @@
+.contentCard {
+    border-radius: 0px;
+    position: absolute;
+    left: 11%;
+    top: 9%;
+    background-color: rgb(245, 245, 245);
+    width: 76%;
+    height: auto;
+
+}
+
+
+.iconsCard{
+    position: absolute;
+    width: 86%;
+    top: 12%;
+    height: auto;  
+    border-radius: 0px;
+}
+.iconTitleCard{
+    left: 2%;
+    position: absolute;
+    top: 1%;
+    width: 86%;
+    height: 2%;
+    border-radius: 0px;
+}
+.hibernetCard{
+    position: absolute;
+    top: 39%;
+    width: 86%;
+    height: 79px;
+    border-radius: 0px;
+    height: 2%;
+
+}
+
+.hibernetRadioCard{
+    position: absolute;
+    top: 49%;
+    width: 86%;
+    height: 79px;
+    border-radius: 0px;
+    height: 7%
+}
+.dotNetImg
+{ 
+    font-size: 20px;
+    cursor: pointer;
+    top: 15%;
+    position: absolute;
+    width: 95px;
+    transform: translateY(-50%);
+    left: 3%;
+}
+
+.mat-grid-tile {
+    background-color: white;
+}
+
+.dbDetailsCard {
+    border-radius: 0px;
+    position: absolute;
+    left: 1%;
+    top: -2%;
+    margin-top: 66px;
+    background-color: rgb(255, 255, 255);
+    width: 94%;
+    height: 392px;
+}
+.dbtitleCard{
+    position: absolute;
+    left: 1%;
+    width: 94%;
+    top: 1%;
+    height: 2%;
+    border-radius: 0px;
+    background-color: rgb(255,255,255);
+}
+
+::ng-deep .mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    font-size: 14px;
+    width: 260px !important;
+    height: 25px;
+}
+
+.icon {
+    float: left;
+    min-height: 89px;
+    max-width: 20px;
+    min-width: 89px;
+    display: inline;
+    border: 2px #eee solid;
+    border-radius: 10px;
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+
+
+.icon img{
+    width: 96px;
+    border-radius: 14px;
+}
+.icon:nth-child(3n+1) {
+    clear:left;
+}
+img :focus{
+    background-color: crimson;
+}
+*[tabindex]:focus {
+    background-color:  rgb(246,251,252);
+    border-radius: 10px;
+}
+
+
+

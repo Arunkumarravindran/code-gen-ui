@@ -4,6 +4,9 @@ import{JavaScreenComponent} from 'src/component/java-screen/java-screen.componen
 
 import { FirstComponent } from 'src/component/first/first.component';
 import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/fileExplorer-Screen.component';
+import { DataBaseComponent } from 'src/component/dataBase/dataBase.component';
+import { GoCdScreenComponent } from 'src/component/pipeLine/goCd-Screen/goCd-Screen.component';
+import { PipeLineComponent } from 'src/component/pipeLine/pipeLine.component';
 const routes: Routes = [
    {
       path:'javaMain',
@@ -17,6 +20,18 @@ const routes: Routes = [
       path:'explore',
       component: FileExplorerScreenComponent
    },
+   { 
+      path:'dataBase/goCd',
+      component: GoCdScreenComponent
+     },
+     { 
+      path:'dataBase',
+      component: DataBaseComponent
+     },
+     { 
+      path:'pipeLine',
+      component: PipeLineComponent
+     },
    {
       path :'**',
       redirectTo:'homeScreen',

@@ -30,6 +30,16 @@
 
 }
 
+::ng-deep .mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    font-size: 14px;
+    width: 235px !important;
+    height: 20px;
+}
+
 :host ::ng-deep.contentCard {
     border-radius: 0px;
     position: absolute;
@@ -198,7 +208,7 @@
 .projrctMetaDataText{
     position: absolute;
     top: 0%;
-    left: 1%;
+    left: 3%;
     font-size: 11px;
     font-weight: bold;
 }
