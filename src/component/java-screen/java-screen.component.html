@@ -2,6 +2,10 @@
   <mat-icon class="menuIcon" (click)="redirectHome()">menu</mat-icon>
   <p class="toolBarTxt"> Step 1-Select Metadata</p>
   <p class="first">Custom Code Generator</p>
+  <button mat-button (click)= "next()">NEXT</button> 
+
+
+<a *ngIf="mainScreen">
   <mat-card class="contentCard">
 
     <form [formGroup]="codeGenForm">
@@ -49,26 +53,26 @@
         <p class="projrctMetaDataText">PROJECT METADATA</p>
         <hr style="background-color: rgb(194, 189, 189);">
 
-        <mat-form-field style=" font-size: 16px;width: 45%;" appearance="outline">
+        <mat-form-field style=" margin-left: 20px;font-size: 16px;" appearance="outline">
           <mat-label>Group</mat-label>
           <input matInput [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <mat-form-field style="margin-left: 60px; font-size: 16px;width: 45%;" appearance="outline">
+        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Artifact</mat-label>
           <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <br>
-        <mat-form-field style="margin-left: 13px; font-size: 16px; width: 45%;right:15px" appearance="outline">
+        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Name</mat-label>
           <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         
-        <mat-form-field style="margin-left: 45px; font-size: 16px;width: 45%;" appearance="outline">
+        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Description</mat-label>
           <input matInput formControlName="description">
         </mat-form-field>
        <br>
-        <mat-form-field style="margin-left: 0px; font-size: 16px;width: 45%;" appearance="outline">
+        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Package Name</mat-label>
           <input matInput formControlName="packageName" value="{{group}}.{{name}}">
         </mat-form-field>
@@ -119,3 +123,8 @@
       <!-- <button mat-button class="exploreDemoBtn" (click)="openExplore()">EXPLORE</button> -->
     </mat-toolbar>
   </mat-card>
+</a>
+<a *ngIf="dbScreen">
+<app-dataBase></app-dataBase>
+</a>
+  

@@ -1,8 +1,8 @@
 .contentCard {
     border-radius: 0px;
-    position: relative;
+    position: absolute;
     left: 11%;
-    top: 84px;
+    top: 9%;
     background-color: rgb(245, 245, 245);
     width: 76%;
     height: auto;
@@ -84,8 +84,8 @@
     flex: auto;
     min-width: 0;
     font-size: 14px;
-    width: 270px !important;
-    height: 8px;
+    width: 260px !important;
+    height: 25px;
 }
 
 .icon {

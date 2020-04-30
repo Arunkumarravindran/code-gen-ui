@@ -28,6 +28,8 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   springIndex = -1;
+  mainScreen = true;
+  dbScreen = false;
   indexCheck: boolean;
   languages: LanguageValue[];
   projects: ProjectValue[];
@@ -239,6 +241,10 @@ export class JavaScreenComponent implements OnInit {
       return false
     })[0]
     return root.substring(0, root.length - 1)
+  }
+  next(){
+    this.mainScreen = false;
+    this.dbScreen = true;
   }
   getLanguage(file) {
     const FILE_EXTENSION = {
