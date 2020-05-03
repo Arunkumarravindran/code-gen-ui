@@ -2,16 +2,26 @@
   <input #ser matInput placeholder="Web, Security, JPA, Actuator, Dev Tools.." [(ngModel)]="searchValue">
   <mat-icon class="closeIcon" (click)="clearInput()">close</mat-icon>
 </mat-form-field>
-<a class="dependencyPanel" *ngFor="let dependency of dependencies ">
-  <p *ngIf="searchValue == null " class="headerTxt">{{dependency.name}}</p>
-  
+<span class="dependencyPanel" *ngFor="let dependency of dependencies ">
+
+  <div *ngIf="searchValue == null " class="headerTxt">
+    <p style="margin-top: 2px;
+    margin-left: 7px;
+    font-size: 13px;
+    font-weight: 500;">{{dependency.name}}</p>
+  </div>
+
   <mat-card class="dependencyPanel"
     *ngFor="let depend of dependency.values | dependencySearch : searchValue let i  = index ;"
     (click)="addDependency(depend)">
-    
-    <p style="font-size: 14px;font-weight: bold;">{{depend.name}}</p><span class="sideTxt"
+
+    <p style="font-size: 13px;
+    font-weight: bold;
+    margin-top: -5px;
+    color: rgb(64, 61, 61);">{{depend.name}}</p><span class="sideTxt"
       *ngIf="searchValue != null">{{dependency.name}}</span>
-      
-    <p style="font-size: 11px;color: black;;">{{depend.description}}</p>
+
+    <p style=" font-size: 12px; color:rgb(109, 102, 102)">{{depend.description}}</p>
   </mat-card>
-</a>
+
+</span>

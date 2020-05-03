@@ -16,18 +16,59 @@ import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
 import { FileExplorerScreenComponent } from '../fileExplorer-Screen/fileExplorer-Screen.component';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition
+} from "@angular/animations";
 @Component({
   selector: 'app-java-screen',
   templateUrl: './java-screen.component.html',
-  styleUrls: ['./java-screen.component.css']
+  styleUrls: ['./java-screen.component.css'],
+  animations:[
+    trigger("EnterLeave", [
+    state("flyIn", style({ transform: "translateX(0)" })),
+    transition(":enter", [
+      style({ transform: "translateX(-100%)" }),
+      animate("0.5s 300ms ease-in")
+    ]),
+    transition(":leave", [
+      animate("0.3s ease-out", style({ transform: "translateX(100%)" }))
+    ])
+  ]),
+trigger("fadeInOut", [
+  state(
+    "void",
+    style({
+      opacity: 0
+    })
+  ),
+  transition("void <=> *", animate(500))
+]),
+trigger('displayState', [
+    state('inactive', style({
+      transform: 'scaleY(0)'
+    })),
+    state('active',   style({
+      transform: 'scaleY(1)'
+    })),
+    transition('inactive => active', animate('500ms ease-in')),
+    transition('active => inactive', animate('500ms ease-out'))
+  ])
+  ]
 })
 export class JavaScreenComponent implements OnInit {
   languageIndex = -1;
   projectIndex = -1;
   packIndex = -1;
   javaIndex = -1;
+  hideBootVersion = true;
+  finalScreen = 3;
   springIndex = -1;
+  current = 1;
+  prev = 0;
   mainScreen = true;
   dbScreen = false;
   indexCheck: boolean;
@@ -107,30 +148,7 @@ export class JavaScreenComponent implements OnInit {
      console.log('Error downloading the file ' +error)
     })
   }
-  languageCheckboxChange(event: MatCheckboxChange, index: number, id: string) {
-    this.languageIndex = event.checked ? index : -1;
-    this.codeGenForm.value.languageType = id;
-  }
-  packagingCheckboxChange(event: MatCheckboxChange, index: number, id: string) {
-    this.packIndex = event.checked ? index : -1;
-    this.codeGenForm.value.packaging = id;
-  }
-  projectCheckboxChange(event: MatCheckboxChange, index: number, id: string) {
-    this.projectIndex = event.checked ? index : -1;
-    this.codeGenForm.value.projectName = id;
-  }
-
-  springVersionCheckboxChange(event: MatCheckboxChange, index: number, id: string) {
-    this.springIndex = event.checked ? index : -1;
-    this.codeGenForm.value.bootVersion = id;
-  }
-
-  javaVersionCheckboxChange(event: MatCheckboxChange, index: number, id: string) {
-    this.javaIndex = event.checked ? index : -1;
-    this.codeGenForm.value.java = id;
-  }
-
-
+  
   getClient() {
     if (localStorage.getItem('responseBody') == null) {
 
@@ -166,14 +184,14 @@ export class JavaScreenComponent implements OnInit {
 
   openDependency() {
     const dialogRef = this.dialog.open(DependencyScreenComponent, {
-      width: '50%',
+      width: '45%',
       height: '600px'
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      let value = this.addDependencies.map(data => {
+      let value = this.addDependencies.filter(data => {
         console.log(data.id == result.data.id)
-        if (data.id == result.data.id) {
+        if (data.id.includes(result.data.id)) {
           this.indexCheck = true;
         }
         else {
@@ -245,6 +263,10 @@ export class JavaScreenComponent implements OnInit {
   next(){
     this.mainScreen = false;
     this.dbScreen = true;
+  }
+  previous(){
+    this.mainScreen = true;
+    this.dbScreen = false;
   }
   getLanguage(file) {
     const FILE_EXTENSION = {
@@ -325,5 +347,27 @@ export class JavaScreenComponent implements OnInit {
         resolve({ tree, selected: null })
       }
     })
+  }
+
+  onPrev() {
+    this.prev = this.current--;
+  }
+
+  onNext() {
+    this.prev = this.current++;
+  }
+  onskip(){
+    this.prev = this.current++;
+  }
+  isLeftTransition(idx: number): boolean {
+    return this.current === idx ? this.prev > this.current : this.prev < this.current;
+  }
+  getCheckedLanguage(language:string){
+console.log("language checked ==>",language);
+if(language == "java"){
+  this.hideBootVersion = true;
+}else{
+  this.hideBootVersion = false;
+}
   }
 }

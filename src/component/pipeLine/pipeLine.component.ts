@@ -14,18 +14,10 @@ other =false;
   }
 
 
-  changeScreen(){
-    if(this.java == true){
-    this.java = false;
-    this.other = true;
-    }
-    else{
-      this.java = true;
-      this.other = false;
-    }
-  }
-  changeScreenagin(){
-  
-  }
+  getPipe(){
 
+  }
+  getCloud(){
+    
+  }
 }

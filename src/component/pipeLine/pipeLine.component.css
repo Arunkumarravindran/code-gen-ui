@@ -5,36 +5,132 @@
     top: 9%;
     background-color: rgb(245, 245, 245);
     width: 76%;
-    height: auto;
-}
-
-.dbIconsCard{
-    width: 84%;
-    left: 0%;
-    bottom: 25.2%;
-    border-radius: 0px;
-    height: 41%;
-}
-.hibernetCard{
-    margin-top: 46%;
-    margin-right: 28%;
-    /* top: 42.2%; */
-    border-radius: 0px;
-    height: auto;
+    height: 502px;
 
 }
-.dotNetImg
-{ 
-    font-size: 20px;
-    cursor: pointer;
-    top: 15%;
+.headings{
+    font-size: 13px;
+    margin-top: -2px;
+    color: rgb(83,164,228)
+}
+
+.pipeIconsCard{
     position: absolute;
-    width: 95px;
-    transform: translateY(-50%);
-    left: 3%;
+    width: 86%;
+    top: 12%;
+    height: auto;  
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 
+
+.cloudIconsCard{
+    position: absolute;
+    width: 86%;
+    top: 48%;
+    height: auto;  
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.pipeTitleCard{
+    left: 2%;
+    position: absolute;
+    top: 1%;
+    width: 86%;
+    height: 2%;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.cloudTitleCard{
+    left: 2%;
+    position: absolute;
+    top: 37%;
+    width: 86%;
+    height: 2%;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
 .mat-grid-tile {
-    border: solid 2px rgb(189, 184, 184);
     background-color: white;
+}
+
+.dbDetailsCard {
+    border-radius: 0px;
+    position: absolute;
+    left: 1%;
+    top: -2%;
+    margin-top: 66px;
+    background-color: rgb(255, 255, 255);
+    width: 94%;
+    height: 392px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.pipeTitleCard{
+    position: absolute;
+    left: 1%;
+    width: 94%;
+    top: 1%;
+    height: 2%;
+    border-radius: 0px;
+    background-color: rgb(255,255,255);
+    transition: none !important;
+    box-shadow: none !important;
+}
+
+/* ::ng-deep .mat-form-field-infix {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    font-size: 14px;
+    width: 235px !important;
+    height: 25px;
+} */
+
+/* HIDE RADIO */
+[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+  }
+  
+  /* CHECKED STYLES */
+  [type=radio]:checked + img {
+    display: inline-block;
+    box-shadow: 0 0 0 2px #88b8ff;
+    border-radius: 10px;
+    background-color:  rgb(246,251,252);
+  }
+
+.icon {
+    float: left;
+    min-height: 75px;
+    max-width: 20px;
+    min-width: 75px;
+    display: inline;
+    border: 2px #eee solid;
+    border-radius: 10px;
+    margin-left: 17px;
+    cursor: pointer;
+}
+
+
+
+.icon img{
+    width: 96px;
+    border-radius: 14px;
+}
+.icon:nth-child(3n+1) {
+    clear:left;
 }

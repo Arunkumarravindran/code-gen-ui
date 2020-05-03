@@ -1,130 +1,147 @@
 <mat-toolbar class="toolBar">
   <mat-icon class="menuIcon" (click)="redirectHome()">menu</mat-icon>
-  <p class="toolBarTxt"> Step 1-Select Metadata</p>
+  <p *ngIf ="current==1"  class="toolBarTxt"> Step  {{current}} - Select Metadata</p>
+  <p *ngIf ="current==2"  class="toolBarTxt"> Step  {{current}} - Select Database</p>
+  <p *ngIf ="current==3"  class="toolBarTxt"> Step  {{current}} - Select PipeLine</p>
   <p class="first">Custom Code Generator</p>
-  <button mat-button (click)= "next()">NEXT</button> 
+</mat-toolbar>
 
 
-<a *ngIf="mainScreen">
+   <a *ngIf="current == 1">
+<app-pageSlider [isIn]="current === 1" [left]="isLeftTransition(0)">
   <mat-card class="contentCard">
 
     <form [formGroup]="codeGenForm">
       <mat-card class="metaDataTxt">
-        <p style="margin-top: -10px;">Metadata</p>
+        <p class="dependenceTxt"  style="margin-left:10px; margin-top: 10px;">Metadata</p>
         </mat-card>
       <mat-card class="projectCard">
 
         <p class="projectTxt">PROJECT</p>
-      
+      <span style="margin-left: 55px;"></span>
         <mat-radio-group formControlName="projectName">
-          <mat-radio-button #pro color="primary" style="margin-left: 65px; font-size: 12px;;margin-top: -10px "
-            class="example-radio-button" *ngFor="let project of projects" [value]="project.id">
+          <mat-radio-button #pro color="primary" style="margin-left: 30px; font-size: 12px;;margin-top: -10px "
+             *ngFor="let project of projects" [value]="project.id">
             
-            <p *ngIf="pro.checked == true" style="color :rgb(0,120,215)">{{project.name}}</p>
+            <p *ngIf="pro.checked == true" style="color:rgb(67,156,225)">{{project.name}}</p>
             <p *ngIf="pro.checked == false" style="color :black">{{project.name}}</p>
           
           </mat-radio-button>
         </mat-radio-group>
       </mat-card>
-      <mat-card class="lanuageCard">
+      <mat-card class="lanuageCard" >
         <p class="projectTxt">LANGUAGE</p>
-      
+        <span style="margin-left: 55px;"></span>
         <mat-radio-group formControlName="languageType">
-          <mat-radio-button #langu color="primary" style="margin-left: 65px; font-size: 12px;margin-top: -10px"
-            class="example-radio-button" *ngFor="let language of languages" [value]="language.id">
-            <p *ngIf="langu.checked == true" style="color :rgb(0,120,215)">{{language.name}}</p>
+          <mat-radio-button #langu color="primary"  (change)="getCheckedLanguage(langu.value)" style="margin-left: 30px; font-size: 12px;margin-top: -10px"
+             *ngFor="let language of languages" [value]="language.id">
+            <p *ngIf="langu.checked == true" style="color:rgb(67,156,225)">{{language.name}}</p>
             <p *ngIf="langu.checked == false" style="color :black">{{language.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
 
       </mat-card>
-      <mat-card class="springCard">
+      <mat-card class="springCard"  *ngIf= hideBootVersion  >
         <p class="springBootTxt">SPRING BOOT</p>
-      
+        <div style="margin-left: 55px;">
         <mat-radio-group formControlName="bootVersion">
-          <mat-radio-button #boot color="primary" style="margin-left: 65px; font-size: 12px; margin-top: -10px ;line-height: normal;"
-            class="example-radio-button" *ngFor="let springversion of springVersion" [value]="springversion.id">
-            <p *ngIf="boot.checked == true" style="color :rgb(0,120,215)">{{springversion.name}}</p>
+          <mat-radio-button #boot color="primary" style="margin-left: 30px; font-size: 11px; margin-top: -10px ;"
+             *ngFor="let springversion of springVersion" [value]="springversion.id">
+            <p *ngIf="boot.checked == true" style="color:rgb(67,156,225)">{{springversion.name}}</p>
             <p *ngIf="boot.checked == false" style="color :black">{{springversion.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
+      </div>
       </mat-card>
       <mat-card class="metaDataCard">
         <p class="projrctMetaDataText">PROJECT METADATA</p>
-        <hr style="background-color: rgb(194, 189, 189);">
+        <hr style="border-top: 2px rgb(241, 237, 237);">
 
-        <mat-form-field style=" margin-left: 20px;font-size: 16px;" appearance="outline">
+        <mat-form-field style=" margin-left: 10px;font-size: 16px;" appearance="outline">
           <mat-label>Group</mat-label>
           <input matInput [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
-        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+        <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Artifact</mat-label>
           <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <br>
-        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+        <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Name</mat-label>
           <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         
-        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+        <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Description</mat-label>
           <input matInput formControlName="description">
         </mat-form-field>
        <br>
-        <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+        <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Package Name</mat-label>
           <input matInput formControlName="packageName" value="{{group}}.{{name}}">
         </mat-form-field>
         <br>
-        <span style="font-size: 12px; margin-top: 10px">Packaging</span>
+        <a *ngIf= hideBootVersion>
+        <span style="font-size: 12px; margin-top: 10px; font-weight: 400;">Packaging</span>
         <mat-radio-group formControlName="packaging">
           <mat-radio-button #pac color="primary" style="margin-left: 20px; font-size: 11px;line-height: normal;"
-            class="example-radio-button" *ngFor="let pack of packaging" [value]="pack.id">
-            <p *ngIf="pac.checked == true" style="color :rgb(0,120,215)">{{pack.name}}</p>
+             *ngFor="let pack of packaging" [value]="pack.id">
+            <p *ngIf="pac.checked == true" style="color:rgb(67,156,225)">{{pack.name}}</p>
             <p *ngIf="pac.checked == false" style="color :black">{{pack.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
         
-        <span style="margin-left: 85px;font-size: 12px; margin-top: -10px;">Java</span>
+        <span style="margin-left: 85px;font-size: 12px; margin-top: -6px; font-weight: 400;">Java</span>
         <mat-radio-group formControlName="java">
           <mat-radio-button #jav color="primary" style="margin-left: 30px; font-size: 12px;line-height: 1.0;"
-            class="example-radio-button" *ngFor="let javaversion of javaVersion" [value]="javaversion.id">
-            <p *ngIf="jav.checked == true" style="color :rgb(0,120,215)">{{javaversion.name}}</p>
+             *ngFor="let javaversion of javaVersion" [value]="javaversion.id">
+            <p *ngIf="jav.checked == true" style="color:rgb(67,156,225)">{{javaversion.name}}</p>
             <p *ngIf="jav.checked == false" style="color :black">{{javaversion.name}}</p>
           </mat-radio-button>
         </mat-radio-group>
+      </a>
       </mat-card>
      <p style="margin-top: -10px;">
   
       <mat-card class="dependencyCard">
-        <p class="dependenceTxt"  style="margin-left:10px;">Dependencies</p>
+        <p class="dependenceTxt"  style="margin-left:10px; margin-top: 10px;">Dependencies</p>
         <button mat-raised-button class="dependencyBtn" (click)='openDependency()'>ADD DEPENDENCIES</button>
       </mat-card>
         <mat-card class="addedDepencyCard" >
-        <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54);">No
+        <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54); text-align: center;">No
           Dependency selected</p>
-        <mat-card class="dependencyPanel" *ngFor="let depend of addDependencies ; let i = index">
+        <mat-card class="dependencyPanel" *ngFor="let depend of addDependencies ; let i = index"  [@fadeInOut]>
           <mat-icon class="removeIcon" (click)="removeDepenency(i)">close</mat-icon>
           <mat-card-header>
-            <mat-card-title style="font-size: 14px;font-weight: bold;margin-top: -10px;">{{depend.name}}
+            <mat-card-title style="font-size: 12px;font-weight: 600;margin-top: -9px;margin-left: -24px;">{{depend.name}}
             </mat-card-title>
-            <mat-card-subtitle style="font-size: 11px;color: black;;">{{depend.description}}</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 11px;color: black;margin-left: -24px;">{{depend.description}}</mat-card-subtitle>
           </mat-card-header>
         </mat-card>
 
       </mat-card>
     
     </form>
-    <mat-toolbar class="footer">
-
-      <button mat-button class="generateBtn" (click)="generateProject()">GENERATE</button>
-      <button mat-button class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
-      <!-- <button mat-button class="exploreDemoBtn" (click)="openExplore()">EXPLORE</button> -->
-    </mat-toolbar>
   </mat-card>
+</app-pageSlider>
 </a>
-<a *ngIf="dbScreen">
-<app-dataBase></app-dataBase>
+<a *ngIf="current == 2">
+<app-pageSlider [isIn]="current === 2" [left]="isLeftTransition(1)">
+  <app-dataBase></app-dataBase>
+</app-pageSlider>
 </a>
-  
+<a *ngIf="current == 3">
+  <app-pageSlider [isIn]="current === 3" [left]="isLeftTransition(1)">
+    <app-pipeLine></app-pipeLine>
+  </app-pageSlider>
+  </a>
+
+<mat-toolbar class="footer">
+
+  <button mat-button class="generateBtn" (click)="generateProject()">GENERATE</button>
+  <button mat-button class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
+  <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
+  <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>
+  <button *ngIf="current == 2" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
+
+</mat-toolbar>

@@ -3,31 +3,31 @@
   <mat-grid-list cols="6" rowHeight="480px" >
     <mat-grid-tile [colspan]="4" [rowspan]="1" [style.background]="'#F5F5F5'">
       <mat-card class="dbtitleCard"> 
-        <h5 style="color: rgb(0,120,215);"> Database Details</h5>
+        <h5 class="headings"> Database Details</h5>
       </mat-card>
       
        <mat-card class="dbDetailsCard">
        <form>
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Host</mat-label>
-          <input matInput placeholder="database host" >
+          <input  class="dbFormFields" matInput placeholder="database host" >
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Name</mat-label>
-          <input matInput placeholder="database name"  >
+          <input matInput  class="dbFormFields"  placeholder="database name"  >
         </mat-form-field>
         <br>
-        <mat-form-field style=" margin-left: 20px ;font-size: 16px;" appearance="outline">
+        <mat-form-field  style=" margin-left: 20px ;font-size: 16px;" appearance="outline">
           <mat-label>User Name</mat-label>
-          <input matInput placeholder="User Name"  >
+          <input matInput  class="dbFormFields"  placeholder="User Name"  >
         </mat-form-field>
       
-        <mat-form-field style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+        <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput placeholder="password" >
+          <input matInput class="dbFormFields" placeholder="password" >
         </mat-form-field>
         <br>
-      <a *ngIf = "hibernetEnabled.checked == true">
+      <a *ngIf = "hibernetEnabled.checked == true" >
         <span style=" margin-left: 20px ;font-size: 12px;">Show SQL</span> 
         <mat-radio-group aria-label="Select an option">
           <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="true" >True</mat-radio-button>
@@ -59,15 +59,24 @@
 
     <mat-grid-tile [colspan]="2" [rowspan]="1" [style.background]="'#F5F5F5'">
     <mat-card class="iconTitleCard">
-    <h5 style="color: rgb(0,120,215);"> Select Database</h5>
+    <h5 class="headings"> Select Database</h5>
     </mat-card>
-    <mat-card class="iconsCard">
-        <img  class = "icon" (click)="getDB('mySql')" src="../../assets/images/microsoft-sql-server (1).png" tabindex="0">
-        <img  class = "icon" (click)="getDB('msSql')" src="../../assets/images/Microsoft-SQL-Server_0.png" tabindex="0">
-        <img  class = "icon" (click)="getDB('oracle')" src="../../assets/images/microsoft-sql-server (2).png" tabindex="0">
+    <mat-card class="iconsCard" >
+      <label>
+        <input type="radio" name="test" value="small" [checked] = false [@EnterLeave]="'flyIn'"> 
+        <img  class = "icon" (click)="getDB('mySql')" src="../../assets/images/microsoft-sql-server (1).png" >
+      </label>
+      <label>
+        <input type="radio" name="test" value="small" [checked] = false  [@EnterLeave]="'flyIn'">
+        <img  class = "icon" (click)="getDB('msSql')" src="../../assets/images/Microsoft-SQL-Server_0.png" >
+      </label>
+      <label>
+        <input type="radio" name="test" value="small" [checked] = false>
+        <img class = "icon" (click)="getDB('oracle')" src="../../assets/images/microsoft-sql-server (2).png" >
+      </label>
     </mat-card>
     <mat-card class="hibernetCard">
-      <h5 style="color: rgb(0,120,215);"> Select Hibernate</h5>
+      <h5 class="headings"> Select Hibernate</h5>
     </mat-card>
 
     <mat-card class="hibernetRadioCard">
