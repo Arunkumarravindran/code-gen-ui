@@ -5,10 +5,14 @@
     top: 9%;
     background-color: rgb(245, 245, 245);
     width: 76%;
-    height: auto;
+    height: 502px;
 
 }
-
+.headings{
+    font-size: 13px;
+    margin-top: -2px;
+    color: rgb(83,164,228)
+}
 
 .iconsCard{
     position: absolute;
@@ -16,6 +20,8 @@
     top: 12%;
     height: auto;  
     border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 .iconTitleCard{
     left: 2%;
@@ -24,6 +30,8 @@
     width: 86%;
     height: 2%;
     border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 .hibernetCard{
     position: absolute;
@@ -32,7 +40,8 @@
     height: 79px;
     border-radius: 0px;
     height: 2%;
-
+    transition: none !important;
+    box-shadow: none !important;
 }
 
 .hibernetRadioCard{
@@ -41,7 +50,9 @@
     width: 86%;
     height: 79px;
     border-radius: 0px;
-    height: 7%
+    height: 7%;
+    transition: none !important;
+    box-shadow: none !important;
 }
 .dotNetImg
 { 
@@ -67,6 +78,8 @@
     background-color: rgb(255, 255, 255);
     width: 94%;
     height: 392px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 .dbtitleCard{
     position: absolute;
@@ -76,27 +89,59 @@
     height: 2%;
     border-radius: 0px;
     background-color: rgb(255,255,255);
+    transition: none !important;
+    box-shadow: none !important;
 }
 
-::ng-deep .mat-form-field-infix {
+/* ::ng-deep .mat-form-field-infix {
     display: block;
     position: relative;
     flex: auto;
     min-width: 0;
     font-size: 14px;
-    width: 260px !important;
+    width: 235px !important;
+    height: 25px;
+} */
+
+.dbFormFields {
+    display: block;
+    position: relative;
+    flex: auto;
+    min-width: 0;
+    font-size: 14px;
+    width: 240px !important;
     height: 25px;
 }
+/* HIDE RADIO */
+[type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* IMAGE STYLES */
+  [type=radio] + img {
+    cursor: pointer;
+  }
+  
+  /* CHECKED STYLES */
+  [type=radio]:checked + img {
+    display: inline-block;
+    box-shadow: 0 0 0 2px #88b8ff;
+    border-radius: 10px;
+    background-color:  rgb(246,251,252);
+  }
 
 .icon {
     float: left;
-    min-height: 89px;
+    min-height: 75px;
     max-width: 20px;
-    min-width: 89px;
+    min-width: 75px;
     display: inline;
     border: 2px #eee solid;
     border-radius: 10px;
-    margin-left: 6px;
+    margin-left: 17px;
     cursor: pointer;
 }
 
@@ -109,13 +154,41 @@
 .icon:nth-child(3n+1) {
     clear:left;
 }
-img :focus{
-    background-color: crimson;
-}
-*[tabindex]:focus {
-    background-color:  rgb(246,251,252);
-    border-radius: 10px;
-}
 
+:host ::ng-deep .mat-radio-button.mat-primary .mat-radio-inner-circle, .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
+    background-color:white;
+}
+:host ::ng-deep .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
+    border-color:rgb(0,120,215);
+    border-width: 5px;
+    height: 18px;
+    width: 18px;
+}
+:host ::ng-deep .mat-radio-inner-circle {
+    height: 18px;
+    width: 18px;
+}
+:host ::ng-deep .mat-radio-outer-circle {
+    box-sizing: border-box;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: border-color ease 280ms;
+    width: 18px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+:host ::ng-deep .mat-radio-button .mat-radio-ripple {
+    height: 20px;
+    /*double of your required circle radius*/
+    width: 20px;
+    /*double of your required circle radius*/
+    left: calc(50% - 10px);
+    /*'10px'-same as your required circle radius*/
+    top: calc(50% - 10px);
+    /*'10px'-same as your required circle radius*/
+}
 
 

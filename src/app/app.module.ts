@@ -34,6 +34,9 @@ import { JenkinsScreenComponent } from 'src/component/pipeLine/jenkins-Screen/je
 import { PipeLineComponent } from 'src/component/pipeLine/pipeLine.component';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRippleModule} from '@angular/material/core';
+import { PageSliderComponent } from 'src/component/pageSlider/pageSlider.component';
+import { AnimationService } from 'src/assets/animation.service';
+
 @NgModule({
    declarations: [
       AppComponent,
@@ -45,7 +48,8 @@ import {MatRippleModule} from '@angular/material/core';
       DataBaseComponent,
       GoCdScreenComponent,
       JenkinsScreenComponent,
-      PipeLineComponent
+      PipeLineComponent,
+      PageSliderComponent
    ],
    entryComponents: [
       DependencyScreenComponent,
@@ -79,7 +83,7 @@ import {MatRippleModule} from '@angular/material/core';
       MatSnackBarModule,
       MatDividerModule,
    ],
-   providers: [],
+   providers: [AnimationService],
    bootstrap: [
       AppComponent
    ]

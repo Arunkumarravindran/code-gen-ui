@@ -10,6 +10,19 @@
     top: 4%;
     cursor: pointer;
 }
+.previousBtn{
+    position: absolute;
+    left: 2%;
+}
+.nextBtn{
+    position: absolute;
+    right: 2%;
+}
+
+.skipBtn{
+    position: absolute;
+    right: 12%;
+}
 
 .toolBarTxt {
     color: white;
@@ -20,14 +33,12 @@
 }
 
 .footer {
-    position: relative;
-    top: 6px;
+    position: absolute;
+    top: 594px;
     left: -16%;
-    
-    left: 0%;
+    left: 11%;
     background-color: rgb(12, 131, 177);
-     width: 100%;
-
+    width: 1071px;
 }
 
 ::ng-deep .mat-form-field-infix {
@@ -36,7 +47,7 @@
     flex: auto;
     min-width: 0;
     font-size: 14px;
-    width: 235px !important;
+    width: 240px !important;
     height: 20px;
 }
 
@@ -47,88 +58,126 @@
     top: 9%;
     background-color: rgb(245, 245, 245);
     width: 76%;
+    transition: none !important;
+    box-shadow: none !important;
     height: auto;
 }
 
 .removeIcon {
     position: absolute;
     margin-top: -10px;
-    right: 5%;
-    top: 20%;
+    right: 2%;
+    top: 40%;
     color: red;
     cursor: pointer;
 }
-.dependencyPanel{
-    height: 70px;
-    transition:none;
+
+.dependencyPanel {
+    height: 36px;
+    width: 97%;
+    margin-left: -12px;
+    transition: none;
     box-shadow: none !important;
-    overflow:hidden;
-    border-bottom: 1px solid grey;
-    border-top: 1px solid grey;
-    border-left: 1px solid grey;
-    border-right: 1px solid grey;
+    overflow: hidden;
+    border-bottom: 1px solid rgb(204, 198, 198);
+    border-top: 1px solid rgb(204, 198, 198);
+    border-left: 1px solid rgb(204, 198, 198);
+    border-right: 1px solid rgb(204, 198, 198);
     margin-top: 2px;
+    border-radius: 0px;
+}
+
+/* scrollbar */
+
+/* width */
+
+::-webkit-scrollbar {
+    width: 5px !important;
+    height: 8px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+    background: rgb(178, 178, 178);
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }
 
 .dependencyPanel:hover {
-   
-    border-bottom: 2px solid rgb(91,168,229);
-    border-top: 2px solid rgb(91,168,229);
-    border-left: 2px solid rgb(91,168,229);
-    border-right: 2px solid rgb(91,168,229);
-    
-    
-}
- .projectCard {
+    border-bottom: 1px solid rgb(91, 168, 229);
+    border-top: 1px solid rgb(91, 168, 229);
+    border-left: 1px solid rgb(91, 168, 229);
+    border-right: 1px solid rgb(91, 168, 229);
     border-radius: 0px;
-    position:ab;
+}
+
+.projectCard {
+    border-radius: 0px;
+    position: ab;
     left: 0%;
-    top: 13px;
+    top: 15px;
     margin-top: -10px;
     background-color: rgb(255, 255, 255);
     width: 57%;
-    height: 32px;
+    height: 16px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 
 .lanuageCard {
     border-radius: 0px;
     position: relative;
     left: 0%;
-    top: 13px;
+    top: 16px;
     margin-top: 4px;
     background-color: rgb(255, 255, 255);
     width: 57%;
-    height: 32px;
+    height: 16px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 
 .springCard {
     border-radius: 0px;
     position: relative;
     left: 0%;
-    top: 13px;
+    top: 17px;
     margin-top: 4px;
     background-color: rgb(255, 255, 255);
     width: 57%;
-    height: 80px;
+    height: 55px;
     white-space: initial;
-  
-
+    transition: none !important;
+    box-shadow: none !important;
 }
 
 .metaDataCard {
     border-radius: 0px;
-    position:relative;
+    position: relative;
     left: 0%;
-    top: 13px;
+    top: 19px;
     margin-top: 4px;
     background-color: rgb(255, 255, 255);
     width: 57%;
-    height: 245px;
+    height: 237px;
+    transition: none !important;
+    box-shadow: none !important;
 }
 
 .projectTxt {
     position: absolute;
-    top: 29%;
+    top: 44%;
     left: 1%;
     font-size: 11px;
     font-weight: bold;
@@ -143,8 +192,10 @@
     background-color: rgb(255, 255, 255);
     width: 34%;
     white-space: initial;
-    height:3%;
-    }
+    height: 10px;
+    transition: none !important;
+    box-shadow: none !important;
+}
 
 .dependencyBtn {
     position: absolute;
@@ -153,6 +204,7 @@
     background-color: rgb(0, 120, 215);
     color: white;
     font-size: 10px;
+    height: 33px;
 }
 
 .generateBtn {
@@ -205,57 +257,109 @@
 ::ng-deep .mat-checkbox-background svg {
     display: none;
 }
-.projrctMetaDataText{
+
+.projrctMetaDataText {
     position: absolute;
-    top: 0%;
+    top: 2%;
     left: 3%;
     font-size: 11px;
     font-weight: bold;
 }
-.springBootTxt{
+
+.springBootTxt {
     position: absolute;
-    top: 39%;
+    top: 43%;
     left: 1%;
     font-size: 11px;
     font-weight: bold;
 }
-.addedDepencyCard{
+
+.addedDepencyCard {
     border-radius: 0px;
     position: absolute;
     left: 61%;
     margin-top: 4px;
-    top: 11%;
+    top: 57px;
     background-color: rgb(255, 255, 255);
     width: 34%;
     white-space: initial;
-    height:72%;
+    height: 82%;
     overflow-y: auto;
     scrollbar-width: thin;
-
+    transition: none !important;
+    box-shadow: none !important;
 }
-.dependenceTxt{
+
+.dependenceTxt {
     position: absolute;
     top: 12%;
     left: 1%;
     font-size: 14px;
     font-weight: bold;
-    color :rgb(0,120,215);
+    color: rgb(0, 120, 215);
 }
-.metaDataTxt{
+
+.metaDataTxt {
     border-radius: 0px;
     left: 0%;
     font-size: 14px;
     font-weight: bold;
-    color :rgb(0,120,215);
-height: 20px;
-    width:57%
-
-
+    color: rgb(0, 120, 215);
+    height: 10px;
+    width: 57%;
+    transition: none !important;
+    box-shadow: none !important;
 }
-.first{
+
+.first {
     color: white;
     position: absolute;
     left: 14%;
     top: 0%;
     font-size: 20px;
+}
+
+/* :host ::ng-deep .mat-radio-container{
+    height: 10px;
+    width: 10px;
+  }
+  :host ::ng-deep .mat-radio-outer-circle{
+    height: 10px;
+    width: 10px;
+  } */
+
+:host ::ng-deep .mat-radio-button.mat-primary .mat-radio-inner-circle, .mat-radio-button.mat-primary .mat-radio-ripple .mat-ripple-element:not(.mat-radio-persistent-ripple), .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-persistent-ripple, .mat-radio-button.mat-primary:active .mat-radio-persistent-ripple {
+    background-color:white;
+}
+:host ::ng-deep .mat-radio-button.mat-primary.mat-radio-checked .mat-radio-outer-circle {
+    border-color:rgb(0,120,215);
+    border-width: 5px;
+    height: 18px;
+    width: 18px;
+}
+:host ::ng-deep .mat-radio-inner-circle {
+    height: 18px;
+    width: 18px;
+}
+:host ::ng-deep .mat-radio-outer-circle {
+    box-sizing: border-box;
+    height: 18px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    transition: border-color ease 280ms;
+    width: 18px;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+:host ::ng-deep .mat-radio-button .mat-radio-ripple {
+    height: 20px;
+    /*double of your required circle radius*/
+    width: 20px;
+    /*double of your required circle radius*/
+    left: calc(50% - 10px);
+    /*'10px'-same as your required circle radius*/
+    top: calc(50% - 10px);
+    /*'10px'-same as your required circle radius*/
 }

@@ -17,7 +17,7 @@ export class CodegenService {
   client_Url = "http://localhost:8080/metadata/client";
   download_Url = "http://localhost:8080/starter.zip";
   testDownload_Url = "https://6c18f645.ngrok.io/starter.zip"
-  testClient_Url = "https://6c18f645.ngrok.io/metadata/client"
+  testClient_Url = "http://localhost:5000/response"
 
 
   constructor(private http: HttpClient,
