@@ -18,9 +18,10 @@ export class CodegenService {
 
   client_Url = "http://localhost:8080/metadata/client";
   download_Url = "http://localhost:8080/starter.zip";
-  testDownload_Url = "https://73cfab67.ngrok.io/starter.zip"
-  testClient_Url = "https://7fff902b.ngrok.io/metadata/client"
-  dbDetails_Url = "https://7fff902b.ngrok.io/getHibernateValues"
+  testDownload_Url = " https://b90556e5.ngrok.io/starter.zip"
+  testClient_Url = " https://b90556e5.ngrok.io/metadata/client"
+  dbDetails_Url = " https://b90556e5.ngrok.io/getHibernateValues"
+  sendDbDetails_Url = " https://b90556e5.ngrok.io/writeDBValues"
 
 
   constructor(private http: HttpClient,
@@ -80,7 +81,12 @@ export class CodegenService {
     }))
   }
  sendDbDetails(reqBody:DbFormValues){
-   return this.http.post(this.dbDetails_Url,reqBody)
+   console.log("finalStruc==>",reqBody)
+   return this.http.post<DbFormValues>(this.sendDbDetails_Url,reqBody).pipe(map(responseBody => { 
+     console.log("insde service call");
+     
+    return "success";
+  }));
  }
   handleError = (error: HttpErrorResponse) => {
     console.log('server side', error.status)

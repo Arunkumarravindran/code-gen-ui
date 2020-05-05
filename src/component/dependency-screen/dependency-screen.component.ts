@@ -5,11 +5,15 @@ import { Value } from 'src/_model/value';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
 import { Inject, Optional } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-
+import  {bounceAnimation,rubberBandAnimation,headShakeAnimation,
+  fadeInOnEnterAnimation,fadeOutOnLeaveAnimation} from 'angular-animations'
 @Component({
   selector: 'app-dependency-screen',
   templateUrl: './dependency-screen.component.html',
-  styleUrls: ['./dependency-screen.component.css']
+  styleUrls: ['./dependency-screen.component.css'],
+  animations:[
+  fadeInOnEnterAnimation({ anchor: 'enter', duration: 200, delay: 80})
+]
 })
 export class DependencyScreenComponent implements OnInit {
   dependencies: Value[];
