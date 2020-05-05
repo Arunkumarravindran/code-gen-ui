@@ -6,20 +6,20 @@
   align-items: center;
   font-size: 20px;
   cursor: pointer;
-  left: 33%;
-  top: 66%;
+  right:220px;
+  top: 170px;
     
 }
 .contentCard {
-    
-    margin-right:8%;
-    margin-left: 8%;
+    margin-right:0.3% ;
+    margin-left: 0.30%;
     align-items: center;
     bottom:30% ;
     height:125%;
-    border-radius: 0px;
-
-  }
+    border-radius:879px 218px 651px 0px;
+   
+    
+}
 
 
   .headingIcon{
@@ -40,11 +40,11 @@
 { 
   font-size: 20px;
   cursor: pointer;
-  top: 66%;
+  top: 170px;
   position: absolute;
   width: 170px;
   transform: translateY(-50%);
-  left: 53%;
+  left: 40%;
 }
 h3{
     color: rgb(4,94,155);
