@@ -45,10 +45,11 @@
      right: 5px;
      top: 26%" (click)="closeExplore()"> close</mat-icon>
   </div>
+  <mat-card class="filecontentCard">
   <pre highlight-js [lang]="selectedLang">
         {{selectedContent}}
       </pre>
-
+    </mat-card>
   <mat-toolbar class="footer">
 
     <button mat-button class="generateBtn" (click)="downloadAfterCls()">DOWNLOAD ZIP</button>

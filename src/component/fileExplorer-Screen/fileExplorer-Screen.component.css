@@ -39,8 +39,8 @@
 }
 
 .sideNav {
-  width: 280px;
-  height: 494px;
+  width: 286px;
+  height: 662px;
   margin-left: -8px;
   background-color: rgb(255, 255, 255);
   color: black;
@@ -76,12 +76,12 @@
 }
 
 .downloadBtn {
-  position: fixed;
-  width: 62.4%;
-  height: 56px;
-  background-color: rgb(255, 255, 255);
-  top: 75px;
-  left: 444px;
+  position: relative;
+    width: 75.4%;
+    height: 60px;
+    background-color: rgb(255, 255, 255);
+    bottom: 662px;
+    left: 283px;
 }
 
 .generateBtn {
@@ -121,24 +121,36 @@
   color: black;
   border-color: #e7e7e7;
 }
-
-::ng-deep .hljs {
-  position: absolute;
-  width: 72.3%;
-  top: 12%;
-  left: 26%;
-  display: block;
-  color: rgb(57, 58, 52);
-  background: rgb(255, 255, 255);
-  height: 81%;
-  font-size: 13px;
+.filecontentCard{
+  position: relative;
+    width: 72.6%;
+    bottom: 659px;
+    left: 283px;
+    display: block;
+    /* color: rgb(57, 58, 52); */
+    /* background: rgb(255, 255, 255); */
+    height: 486px;
+    font-size: 13px;
 }
+ ::ng-deep .hljs {
+  position: absolute;
+    width: 97.3%;
+    top: 0%;
+    left: 1%;
+    display: block;
+    color: rgb(57, 58, 52);
+    background: rgb(255, 255, 255);
+    height: 95%;
+    font-size: 13px;
+} 
 
 .selectFiletxt {
-  margin-left: 21px;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 18px;
+  position: absolute;
+    left: 16px;
+    top: 10px;
+    font-weight: bold;
+    font-size: 14px;
+  
 }
 
 ::ng-deep selectFileIcon {

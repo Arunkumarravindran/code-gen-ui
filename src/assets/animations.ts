@@ -1,57 +1,24 @@
 import { trigger, query, transition, style, animate, state, group } from '@angular/animations';
 
-export const slideToRight = [
-  query(':enter, :leave', style({ position: 'fixed', left: 0, right: 0, top: 0, bottom: 0 }), { optional: true }),
-  query(':leave', style({ transform: 'translateX(0%)' }), { optional: true }),
-  query(':enter', style({ transform: 'translateX(-100%)' }), { optional: true }),
-  group([
-    query(':leave', [
-      animate('.3s ease-in-out', style({ transform: 'translateX(100%)' })),
-    ], { optional: true }),
-    query(':enter', [
-      animate('.3s ease-in-out', style({ transform: 'translateX(0%)' })),
-    ], { optional: true })
-  ])
-];
-
-export const slideToLeft = [
-  query(':enter, :leave', style({ position: 'fixed', left: 0, right: 0, top: 0, bottom: 0 }), { optional: true }),
-  query(':leave', style({ transform: 'translateX(0%)' }), { optional: true }),
-  query(':enter', style({ transform: 'translateX(100%)' }), { optional: true }),
-  group([
-    query(':leave', [
-      animate('.3s ease-in-out', style({ transform: 'translateX(-100%)' })),
-    ], { optional: true }),
-    query(':enter', [
-      animate('.3s ease-in-out', style({ transform: 'translateX(0%)' })),
-    ], { optional: true })
-  ])
-];
-
-export const slideToTop = [
-  query(':enter, :leave', style({ position: 'fixed', left: 0, right: 0, top: 0, bottom: 0 }), { optional: true }),
-  query(':leave', style({ transform: 'translateY(0%)' }), { optional: true }),
-  query(':enter', style({ transform: 'translateY(100%)' }), { optional: true }),
-  group([
-    query(':leave', [
-      animate('.3s ease-in-out', style({ transform: 'translateY(-100%)' })),
-    ], { optional: true }),
-    query(':enter', [
-      animate('.3s ease-in-out', style({ transform: 'translateY(0%)' })),
-    ], { optional: true })
-  ])
-];
-
-export const slideToBottom = [
-  query(':enter, :leave', style({ position: 'fixed', left: 0, right: 0, top: 0, bottom: 0 }), { optional: true }),
-  query(':leave', style({ transform: 'translateY(0%)' }), { optional: true }),
-  query(':enter', style({ transform: 'translateY(-100%)' }), { optional: true }),
-  group([
-    query(':leave', [
-      animate('.3s ease-in-out', style({ transform: 'translateY(100%)' })),
-    ], { optional: true }),
-    query(':enter', [
-      animate('.3s ease-in-out', style({ transform: 'translateY(0%)' })),
-    ], { optional: true })
-  ])
-];
+export const flyIn = [
+    trigger("EnterLeave", [
+        state("flyIn", style({ transform: "translateX(0)" })),
+        transition(":enter", [ 
+          style({ transform: "translateX(-100%)" }),
+          animate("0.2s 100ms ease-in")
+        ]),
+        transition(":leave", [
+          animate("0.2s ease-out", style({ transform: "translateX(100%)" }))
+        ])
+      ]),
+    trigger('displayState', [
+      state('inactive', style({
+        transform: 'scaleY(0)'
+      })),
+      state('active',   style({
+        transform: 'scaleY(1)'
+      })),
+      transition('inactive => active', animate('500ms ease-in')),
+      transition('active => inactive', animate('500ms ease-out'))
+    ])
+]

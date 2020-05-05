@@ -7,6 +7,8 @@ import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ErrorService } from './error.service';
+import { DbValues } from 'src/_model/dbValues';
+import { DbFormValues } from 'src/_model/DbFormValues';
 @Injectable({
   providedIn: 'root'
 })
@@ -16,8 +18,9 @@ export class CodegenService {
 
   client_Url = "http://localhost:8080/metadata/client";
   download_Url = "http://localhost:8080/starter.zip";
-  testDownload_Url = "https://6c18f645.ngrok.io/starter.zip"
-  testClient_Url = "http://localhost:5000/response"
+  testDownload_Url = "https://73cfab67.ngrok.io/starter.zip"
+  testClient_Url = "https://7fff902b.ngrok.io/metadata/client"
+  dbDetails_Url = "https://7fff902b.ngrok.io/getHibernateValues"
 
 
   constructor(private http: HttpClient,
@@ -67,6 +70,18 @@ export class CodegenService {
 
   }
 
+  getDbScreenDetails(dbType): Observable<DbValues>{
+    let params = new HttpParams()
+      .set('dbType',dbType)
+    return this.http.get<DbValues>(this.dbDetails_Url,{params}).pipe(map(response => {
+      console.log("inside srvice===>",response);
+      
+      return response;
+    }))
+  }
+ sendDbDetails(reqBody:DbFormValues){
+   return this.http.post(this.dbDetails_Url,reqBody)
+ }
   handleError = (error: HttpErrorResponse) => {
     console.log('server side', error.status)
     this.errorService.open(error.status)

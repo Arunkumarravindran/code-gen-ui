@@ -4,6 +4,8 @@ import {
   slideInRightAnimation,
   slideOutLeftAnimation,
   slideOutRightAnimation,
+  slideInUpOnEnterAnimation,
+  
 } from 'angular-animations';
 @Component({
   selector: 'app-pageSlider',
@@ -14,6 +16,7 @@ import {
     slideInRightAnimation({duration: 1000}),
     slideOutLeftAnimation({duration: 1000}),
     slideOutRightAnimation({duration: 1000}),
+    slideInUpOnEnterAnimation({duration: 1000}),
   ]
 })
 export class PageSliderComponent implements OnInit {
