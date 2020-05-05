@@ -7,29 +7,29 @@
       </mat-card>
       
        <mat-card class="dbDetailsCard">
-       <form>
+       <form [formGroup]="databaseForm">
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Host</mat-label>
-          <input  class="dbFormFields" matInput placeholder="database host" >
+          <input  class="dbFormFields" matInput  formControlName="hostName" >
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Name</mat-label>
-          <input matInput  class="dbFormFields"  placeholder="database name"  >
+          <input matInput  class="dbFormFields"  formControlName="dbName">
         </mat-form-field>
         <br>
         <mat-form-field  style=" margin-left: 20px ;font-size: 16px;" appearance="outline">
           <mat-label>User Name</mat-label>
-          <input matInput  class="dbFormFields"  placeholder="User Name"  >
+          <input matInput  class="dbFormFields"  formControlName="username" >
         </mat-form-field>
       
         <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput class="dbFormFields" placeholder="password" >
+          <input matInput class="dbFormFields"  formControlName="password">
         </mat-form-field>
         <br>
-      <a *ngIf = "hibernetEnabled.checked == true" >
+      <a *ngIf = "hibernetEnabled.checked == true" [@fadeInOnEnter] [@fadeOutOnLeave]>
         <span style=" margin-left: 20px ;font-size: 12px;">Show SQL</span> 
-        <mat-radio-group aria-label="Select an option">
+        <mat-radio-group aria-label="Select an option"  formControlName="showsql">
           <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="true" >True</mat-radio-button>
           <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="false" [checked] =true>FALSE</mat-radio-button>
         </mat-radio-group>
@@ -37,17 +37,17 @@
         <br>
         <mat-form-field style="margin-left: 20px ;width: 45%;">
           <mat-label>Dialect</mat-label>
-          <mat-select >
-            <mat-option *ngFor="let dialect of dialects" [value]="dialect.value">
-              {{dialect.viewValue}}
+          <mat-select  >
+            <mat-option *ngFor="let dialect of dialects" [value]="dialect"  formControlName="dialect">
+              {{dialect}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; width: 45%;">
           <mat-label>Ddl Auto</mat-label>
           <mat-select>
-            <mat-option *ngFor="let ddl of ddlArray" [value]="ddl.value">
-              {{ddl.viewValue}}
+            <mat-option *ngFor="let ddl of ddlArray" [value]="ddl"  formControlName="ddlauto">
+              {{ddl}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -61,18 +61,18 @@
     <mat-card class="iconTitleCard">
     <h5 class="headings"> Select Database</h5>
     </mat-card>
-    <mat-card class="iconsCard" >
+    <mat-card class="iconsCard" [@EnterLeave]="'flyIn'"  >
       <label>
-        <input type="radio" name="test" value="small" [checked] = false [@EnterLeave]="'flyIn'"> 
-        <img  class = "icon" (click)="getDB('mySql')" src="../../assets/images/microsoft-sql-server (1).png" >
+        <input #ch type="radio" name="test" value="small" [checked] = false > 
+        <img  class = "icon" (click)="getDB('mysql')" src="../../assets/images/microsoft-sql-server (1).png" [@headShake]= "dbName == 'mySql' && dbName != 'msSql'">
       </label>
       <label>
-        <input type="radio" name="test" value="small" [checked] = false  [@EnterLeave]="'flyIn'">
-        <img  class = "icon" (click)="getDB('msSql')" src="../../assets/images/Microsoft-SQL-Server_0.png" >
+        <input #ch type="radio" name="test" value="small" [checked] = false>
+        <img  class = "icon" (click)="getDB('mssql')" src="../../assets/images/Microsoft-SQL-Server_0.png" [@headShake]=  "dbName == 'msSql' && dbName != 'mySql'" >
       </label>
       <label>
-        <input type="radio" name="test" value="small" [checked] = false>
-        <img class = "icon" (click)="getDB('oracle')" src="../../assets/images/microsoft-sql-server (2).png" >
+        <input #ch type="radio" name="test" value="small" [checked] = false>
+        <img class = "icon" (click)="getDB('oracle')" src="../../assets/images/microsoft-sql-server (2).png" [@headShake]= "dbName == 'oracle' && dbName != 'msSql'">
       </label>
     </mat-card>
     <mat-card class="hibernetCard">
@@ -85,6 +85,8 @@
           <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="no" [checked] =true>NO</mat-radio-button>
         </mat-radio-group>
     </mat-card>
+
+    <button mat-button (click)="sendDbDetails()">send</button>
     </mat-grid-tile>
   </mat-grid-list>
 

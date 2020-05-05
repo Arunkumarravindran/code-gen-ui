@@ -13,8 +13,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 })
 export class DependencyScreenComponent implements OnInit {
   dependencies: Value[];
+  listDespendency = [];
   addDependencies: DependenciesValue[] = [];
+  addDependencyValues: DependenciesValue[] = [];
   searchValue: string;
+  multiSelectMode = false;
+  selectedRowsChecked = [];
   constructor(private codegenService: CodegenService,
     public dialogRef: MatDialogRef<DependencyScreenComponent>,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -23,19 +27,57 @@ export class DependencyScreenComponent implements OnInit {
 
     let response = localStorage.getItem('responseBody');
     let parsedResponse = JSON.parse(response)
-    this.dependencies = parsedResponse.dependencies.values;
-
-
+     console.log("ffgfg",parsedResponse);
+    
+    let allDependency = parsedResponse.dependencies.values;
+    this.dependencies = allDependency;
+     let depValues : DependenciesValue[]= allDependency.map(value=>{
+       return value.values;
+     })
+     
+    this.addDependencyValues = depValues;
+    // console.log("dffd",this.addDependencyValues);
   }
 
-  addDependency(data) {
-    this.dialogRef.close({ event: 'close', data: data });
+  addDependency(data:DependenciesValue,index :number,event) {
+    console.log("checked ata -->",this.selectedRowsChecked);
+    console.log("ctrl key -->",event.ctrlKey);
+    if(event.ctrlKey){
+      this.multiSelectMode = true;
+      this.listDespendency.push(data);
+      console.log("list of dependency -->",this.listDespendency);this.dependencies.forEach(d => {
+        d.values.filter(subBrand=>{
+         if(subBrand.id == data.id){
+         d.values.splice(index,1)
+         }
+      })  
+    });
+    if(!event.ctrlKey){
+      this.dialogRef.close({ event: 'close', data: this.listDespendency });
+    }
+    
+      
+     // this.dialogRef.close({ event: 'close', data: listDespendency });
+    }else{
+    this.dependencies.forEach(d => {
+      d.values.filter(subBrand=>{
+       if(subBrand.id == data.id){
+       d.values.splice(index,1)
+       }
+    })  
+  });
+  this.dialogRef.close({ event: 'close', data: data });
+    }
+   
 
   }
-
+  
   clearInput() {
     this.searchValue = null;
+   
   }
-
+  addMultiDependency(){
+    this.dialogRef.close({ event: 'close', data: this.listDespendency });
+  }
 
 }

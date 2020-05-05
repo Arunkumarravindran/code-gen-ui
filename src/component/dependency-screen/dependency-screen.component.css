@@ -13,6 +13,27 @@
     color: red;
     cursor: pointer;
 }
+.closeIcon {
+  position: absolute;
+  right: 0%;
+  top: -13px;
+  color: rgb(199, 196, 196);
+  cursor: pointer;
+}
+.multiDepend {
+  display: inline-block;
+  position: absolute;
+  top: 27px;
+  right: -2%;
+  background:rgb(0,120,215);
+  color: #fff;
+  font-size: 13px;
+  padding: 4px 0.6rem 1px;
+  line-height: 18px;
+  margin-left: 0.6rem;
+  text-transform: uppercase;
+  cursor: pointer;
+}
 
 .dependencyPanel {
     height: 36px;

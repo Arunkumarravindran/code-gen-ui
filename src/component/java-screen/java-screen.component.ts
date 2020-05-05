@@ -16,47 +16,16 @@ import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
 import { FileExplorerScreenComponent } from '../fileExplorer-Screen/fileExplorer-Screen.component';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
-} from "@angular/animations";
+import { flyIn } from 'src/assets/animations';
+import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 @Component({
   selector: 'app-java-screen',
   templateUrl: './java-screen.component.html',
   styleUrls: ['./java-screen.component.css'],
   animations:[
-    trigger("EnterLeave", [
-    state("flyIn", style({ transform: "translateX(0)" })),
-    transition(":enter", [
-      style({ transform: "translateX(-100%)" }),
-      animate("0.5s 300ms ease-in")
-    ]),
-    transition(":leave", [
-      animate("0.3s ease-out", style({ transform: "translateX(100%)" }))
-    ])
-  ]),
-trigger("fadeInOut", [
-  state(
-    "void",
-    style({
-      opacity: 0
-    })
-  ),
-  transition("void <=> *", animate(500))
-]),
-trigger('displayState', [
-    state('inactive', style({
-      transform: 'scaleY(0)'
-    })),
-    state('active',   style({
-      transform: 'scaleY(1)'
-    })),
-    transition('inactive => active', animate('500ms ease-in')),
-    transition('active => inactive', animate('500ms ease-out'))
-  ])
+    flyIn,
+    fadeInOnEnterAnimation({ anchor: 'enter', duration: 200, delay: 50}),
+    fadeOutOnLeaveAnimation({ anchor: 'leave', duration: 200, delay: 50})
   ]
 })
 export class JavaScreenComponent implements OnInit {
@@ -189,23 +158,14 @@ export class JavaScreenComponent implements OnInit {
 
     });
     dialogRef.afterClosed().subscribe(result => {
-      let value = this.addDependencies.filter(data => {
-        console.log(data.id == result.data.id)
-        if (data.id.includes(result.data.id)) {
-          this.indexCheck = true;
-        }
-        else {
-          this.indexCheck = false;
-        }
-      });
-
-      if (!this.indexCheck) {
-        this.addDependencies.push(result.data);
-        console.log('The dialog was closed', this.addDependencies);
-
-      }
-
-    });
+   console.log("length",result.data.length);
+    if(result.data.length >= 1 && result.data.length != undefined){
+      this.addDependencies = result.data;
+    }
+else{
+  this.addDependencies.push(result.data);
+}
+     });
 
   }
 

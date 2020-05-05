@@ -12,31 +12,31 @@
     <mat-card class="pipeTitleCard">
     <h5 class="headings"> Select Pipe</h5>
     </mat-card>
-    <mat-card class="pipeIconsCard">
+    <mat-card class="pipeIconsCard" [@EnterLeave]="'flyIn'" >
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getPipe('mySql')" src="../../assets/images/microsoft-sql-server (1).png" >
+        <img  class = "icon" (click)="getPipe('jenkins')" src="../../assets/images/jenkins-ci_512.png" >
       </label>
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getPipe('msSql')" src="../../assets/images/Microsoft-SQL-Server_0.png" >
+        <img  class = "icon" (click)="getPipe('goCd')" src="../../assets/images/gocd_continuous_delivery_thoughtworks_twitter-e8d93d6f.jpg" >
       </label>
-      <label>
+      <!-- <label>
         <input type="radio" name="test" value="small" [checked] = false>
         <img class = "icon" (click)="getPipe('oracle')" src="../../assets/images/microsoft-sql-server (2).png" >
-      </label>
+      </label> -->
     </mat-card>
     <mat-card class="cloudTitleCard">
-      <h5 class="headings"> Select Pipe</h5>
+      <h5 class="headings"> Select Cloud</h5>
       </mat-card>
-    <mat-card class="cloudIconsCard">
+    <mat-card class="cloudIconsCard" [@EnterLeave]="'flyIn'">
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getCloud('mySql')" src="../../assets/images/microsoft-sql-server (1).png" >
+        <img  class = "icon" (click)="getCloud('aws')" src="../../assets/images/aws_logo_smile_1200x630.png" >
       </label>
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getCloud('msSql')" src="../../assets/images/Microsoft-SQL-Server_0.png" >
+        <img  class = "icon" (click)="getCloud('azure')" src="../../assets/images/microsoft-azure-new-logo-2017-e1572843284943.png" >
       </label>
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
