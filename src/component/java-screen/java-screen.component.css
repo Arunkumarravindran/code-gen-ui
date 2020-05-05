@@ -34,12 +34,14 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
 }
 
 .footer {
-    position: absolute;
-    top: 594px;
-    left: -16%;
-    left: 11%;
+    position: fixed;
+    top: 90%;
+    left:11%;
+
+
+    width: 1065px ;
+    
     background-color: rgb(12, 131, 177);
-    width: 1071px;
 }
 
 ::ng-deep .mat-form-field-infix {
@@ -171,7 +173,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
     margin-top: 4px;
     background-color: rgb(255, 255, 255);
     width: 57%;
-    height: 237px;
+    height: 280px;
     transition: none !important;
     box-shadow: none !important;
 }
@@ -284,7 +286,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
     background-color: rgb(255, 255, 255);
     width: 34%;
     white-space: initial;
-    height: 82%;
+    height: 83%;
     overflow-y: auto;
     scrollbar-width: thin;
     transition: none !important;
@@ -364,3 +366,11 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
     top: calc(50% - 10px);
     /*'10px'-same as your required circle radius*/
 }
+.headingIcon{
+    position: absolute;
+    top: 2px;
+    right: 105%;
+    width: 30px;
+
+
+  }
