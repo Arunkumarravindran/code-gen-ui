@@ -13,7 +13,7 @@
     color: red;
     cursor: pointer;
 }
-.closeIcon {
+.multiSelectTxt {
   position: absolute;
   right: 0%;
   top: -13px;

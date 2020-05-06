@@ -38,13 +38,12 @@ export class DataBaseComponent implements OnInit {
       password: new FormControl(''),
       ddlauto: new FormControl(''),
       dialect: new FormControl(''),
-      showsql: new FormControl('')
-
-     
-  })
+      showsql: new FormControl(''),
+      isHibernet: new FormControl('no')
+})
 }
 
-  getDB(dbName:string){
+  getDB(dbName:string,check){
     console.log("dbname===>"+dbName)
     this.codeGen.getDbScreenDetails(dbName).subscribe(response=>{
       console.log("inside dbComponent===>",response);
@@ -56,20 +55,24 @@ this.enableHibernet = "false";
 this.dbName = dbName;
   }
   sendDbDetails(){
-    let dbVo : DbFormValues;
-    dbVo.hostName = this.databaseForm.value.hostName;
-    dbVo.dbType = this.dbName;
-    dbVo.dbName = this.databaseForm.value.dbName;
-    dbVo.username = this.databaseForm.value.username;
-    dbVo.password = this.databaseForm.value.password;
-    dbVo.dialect = this.databaseForm.value.dialect;
-    dbVo.ddlauto = this.databaseForm.value.ddlAuto;
-    dbVo.showsql = this.databaseForm.value.showsql;
-    dbVo.isHibernate = this.enableHibernet;
-    dbVo.id = this.id;
-    let dbFormValueJson = JSON.stringify(dbVo);
+    console.log("SSds",this.databaseForm.value.hostName)
+   
+   let respStruc ={
+     hostName :this.databaseForm.value.hostName,
+     dbType : this.dbName,
+     dbName : this.databaseForm.value.dbName,
+     username : this.databaseForm.value.username,
+     password : this.databaseForm.value.password,
+     dialect : this.databaseForm.value.dialect,
+     ddlauto : this.databaseForm.value.ddlauto,
+     showsql : this.databaseForm.value.showsql,
+     isHibernate : this.databaseForm.value.isHibernet
+   }
+    let dbFormValueJson = JSON.stringify(respStruc)
 sessionStorage.setItem('dbFormValue',dbFormValueJson);
-this.codeGen.sendDbDetails(dbVo);
+this.codeGen.sendDbDetails(respStruc).subscribe(resp=>{
+  console.log(resp)
+})
   }
 
 

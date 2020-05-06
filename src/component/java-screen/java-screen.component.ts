@@ -54,6 +54,7 @@ export class JavaScreenComponent implements OnInit {
 
 
   ngOnInit() {
+    sessionStorage.removeItem('addedDependencies')
     this.codegenService.handleError
     this.getClient();
     this.codeGenForm = new FormGroup({
@@ -155,12 +156,14 @@ export class JavaScreenComponent implements OnInit {
     const dialogRef = this.dialog.open(DependencyScreenComponent, {
       width: '45%',
       height: '600px'
-
     });
     dialogRef.afterClosed().subscribe(result => {
    console.log("length",result.data.length);
     if(result.data.length >= 1 && result.data.length != undefined){
-      this.addDependencies = result.data;
+      result.data.forEach(result=>{
+        this.addDependencies.push(result);
+      })
+     
     }
 else{
   this.addDependencies.push(result.data);
@@ -183,8 +186,18 @@ else{
     })
   }
 
-  removeDepenency(index: number) {
+  removeDepenency(index: number,depend) {
+
+    console.log("rmoved====>",depend);
+    
     this.addDependencies.splice(index, 1);
+    if(this.addDependencies.length <= 0){
+      sessionStorage.removeItem('addedDependencies')
+    }
+    // let addedDependency = JSON.parse(sessionStorage.getItem('addedDependencies'));
+    // addedDependency.push(depend);
+    // sessionStorage.setItem('addedDependencies',JSON.stringify(addedDependency))
+
   }
 
   redirectHome() {
@@ -314,6 +327,7 @@ else{
   }
 
   onNext() {
+    sessionStorage.removeItem('addedDependencies')
     this.prev = this.current++;
   }
   onskip(){

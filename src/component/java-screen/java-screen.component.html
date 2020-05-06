@@ -4,7 +4,9 @@
   <p *ngIf ="current==2"  class="toolBarTxt"> Step  {{current}} - Select Database</p>
   <p *ngIf ="current==3"  class="toolBarTxt"> Step  {{current}} - Select PipeLine</p>
   <p class="first"><img class="headingIcon" src="../../assets/images/ezgif.com-gif-maker (3).jpg" >Custom Code Generator</p>
+
 </mat-toolbar>
+
 
 
    <a *ngIf="current == 1">
@@ -41,7 +43,7 @@
         </mat-radio-group>
 
       </mat-card>
-      <mat-card class="springCard" *ngIf= hideBootVersion [@enter] [@leave]>
+      <mat-card class="springCard">
         <p class="springBootTxt">SPRING BOOT</p>
         <div style="margin-left: 55px;">
         <mat-radio-group formControlName="bootVersion">
@@ -81,7 +83,7 @@
           <input matInput formControlName="packageName" value="{{group}}.{{name}}">
         </mat-form-field>
         <br>
-        <a *ngIf= hideBootVersion>
+        <a >
         <span style="font-size: 12px; margin-top: 10px; font-weight: 400;">Packaging</span>
         <mat-radio-group formControlName="packaging">
           <mat-radio-button #pac color="primary" style="margin-left: 20px; font-size: 11px;line-height: normal;"
@@ -111,7 +113,7 @@
         <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54); text-align: center;">No
           Dependency selected</p>
         <mat-card class="dependencyPanel" *ngFor="let depend of addDependencies ; let i = index" [@EnterLeave]="'flyIn'">
-          <mat-icon class="removeIcon" (click)="removeDepenency(i)">close</mat-icon>
+          <mat-icon class="removeIcon" (click)="removeDepenency(i,depend)">close</mat-icon>
           <mat-card-header>
             <mat-card-title style="font-size: 12px;font-weight: 600;margin-top: -9px;margin-left: -24px;">{{depend.name}}
             </mat-card-title>

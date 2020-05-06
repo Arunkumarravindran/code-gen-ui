@@ -131,6 +131,8 @@
     /* background: rgb(255, 255, 255); */
     height: 486px;
     font-size: 13px;
+    transition: none !important;
+    box-shadow: none !important;
 }
  ::ng-deep .hljs {
   position: absolute;

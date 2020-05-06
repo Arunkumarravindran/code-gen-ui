@@ -1,5 +1,4 @@
 export class DbFormValues {
-     id : string;
      dbType : string;
      hostName : string;
      dbName : string;

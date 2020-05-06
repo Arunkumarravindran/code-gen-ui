@@ -37,16 +37,16 @@
         <br>
         <mat-form-field style="margin-left: 20px ;width: 45%;">
           <mat-label>Dialect</mat-label>
-          <mat-select  >
-            <mat-option *ngFor="let dialect of dialects" [value]="dialect"  formControlName="dialect">
+          <mat-select formControlName="dialect" >
+            <mat-option *ngFor="let dialect of dialects" [value]="dialect">
               {{dialect}}
             </mat-option>
           </mat-select>
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; width: 45%;">
           <mat-label>Ddl Auto</mat-label>
-          <mat-select>
-            <mat-option *ngFor="let ddl of ddlArray" [value]="ddl"  formControlName="ddlauto">
+          <mat-select formControlName="ddlauto">
+            <mat-option *ngFor="let ddl of ddlArray" [value]="ddl"  >
               {{ddl}}
             </mat-option>
           </mat-select>
@@ -64,29 +64,29 @@
     <mat-card class="iconsCard" [@EnterLeave]="'flyIn'"  >
       <label>
         <input #ch type="radio" name="test" value="small" [checked] = false > 
-        <img  class = "icon" (click)="getDB('mysql')" src="../../assets/images/microsoft-sql-server (1).png" [@headShake]= "dbName == 'mySql' && dbName != 'msSql'">
+        <img  class = "icon" (click)="getDB('mysql')" src="../../assets/images/microsoft-sql-server (1).png" [@headShake]= "dbName == 'mysql' && dbName != 'mssql'">
       </label>
       <label>
         <input #ch type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getDB('mssql')" src="../../assets/images/Microsoft-SQL-Server_0.png" [@headShake]=  "dbName == 'msSql' && dbName != 'mySql'" >
+        <img  class = "icon" (click)="getDB('mssql')" src="../../assets/images/Microsoft-SQL-Server_0.png" [@headShake]=  "dbName == 'mssql' && dbName != 'mysql'" >
       </label>
       <label>
         <input #ch type="radio" name="test" value="small" [checked] = false>
-        <img class = "icon" (click)="getDB('oracle')" src="../../assets/images/microsoft-sql-server (2).png" [@headShake]= "dbName == 'oracle' && dbName != 'msSql'">
+        <img class = "icon" (click)="getDB('oracle')" src="../../assets/images/microsoft-sql-server (2).png" [@headShake]= "dbName == 'oracle' && dbName != 'mssql'">
       </label>
     </mat-card>
     <mat-card class="hibernetCard">
       <h5 class="headings"> Select Hibernate</h5>
     </mat-card>
-
+<form [formGroup]="databaseForm">
     <mat-card class="hibernetRadioCard">
-        <mat-radio-group [disabled] = "enableHibernet" aria-label="Select an option">
+        <mat-radio-group [disabled] = "enableHibernet" aria-label="Select an option" formControlName = "isHibernet">
           <mat-radio-button #hibernetEnabled color="primary" style=" font-size: 12px;" value="yes" >YES</mat-radio-button>
-          <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="no" [checked] =true>NO</mat-radio-button>
+          <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="no">NO</mat-radio-button>
         </mat-radio-group>
     </mat-card>
-
-    <button mat-button (click)="sendDbDetails()">send</button>
+  </form>
+    <button style="position: absolute; top: 75%;" mat-button (click)="sendDbDetails()">send</button>
     </mat-grid-tile>
   </mat-grid-list>
 
