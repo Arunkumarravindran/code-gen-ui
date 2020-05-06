@@ -28,19 +28,18 @@ export class DependencyScreenComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-
+if(sessionStorage.getItem('addedDependencies') == null){
     let response = localStorage.getItem('responseBody');
     let parsedResponse = JSON.parse(response)
      console.log("ffgfg",parsedResponse);
-    
     let allDependency = parsedResponse.dependencies.values;
     this.dependencies = allDependency;
-     let depValues : DependenciesValue[]= allDependency.map(value=>{
-       return value.values;
-     })
-     
-    this.addDependencyValues = depValues;
-    // console.log("dffd",this.addDependencyValues);
+    
+}else{
+  let addedDependency = JSON.parse(sessionStorage.getItem('addedDependencies'));
+  this.dependencies = addedDependency;
+}
+
   }
 
   addDependency(data:DependenciesValue,index :number,event) {
@@ -49,27 +48,23 @@ export class DependencyScreenComponent implements OnInit {
     if(event.ctrlKey){
       this.multiSelectMode = true;
       this.listDespendency.push(data);
-      console.log("list of dependency -->",this.listDespendency);this.dependencies.forEach(d => {
-        d.values.filter(subBrand=>{
-         if(subBrand.id == data.id){
-         d.values.splice(index,1)
+      console.log("list of dependency -->",this.listDespendency);
+      this.dependencies.forEach(singleGroup => {
+        singleGroup.values.filter(singleDependency=>{
+         if(singleDependency.id == data.id){
+          singleGroup.values.splice(index,1)
          }
       })  
     });
-    if(!event.ctrlKey){
-      this.dialogRef.close({ event: 'close', data: this.listDespendency });
-    }
-    
-      
-     // this.dialogRef.close({ event: 'close', data: listDespendency });
     }else{
-    this.dependencies.forEach(d => {
-      d.values.filter(subBrand=>{
-       if(subBrand.id == data.id){
-       d.values.splice(index,1)
+    this.dependencies.forEach(singleGroup => {
+      singleGroup.values.filter(singleDependency=>{
+       if(singleDependency.id == data.id){
+        singleGroup.values.splice(index,1)
        }
     })  
   });
+  sessionStorage.setItem('addedDependencies',JSON.stringify(this.dependencies))
   this.dialogRef.close({ event: 'close', data: data });
     }
    
@@ -81,6 +76,7 @@ export class DependencyScreenComponent implements OnInit {
    
   }
   addMultiDependency(){
+    sessionStorage.setItem('addedDependencies',JSON.stringify(this.dependencies))
     this.dialogRef.close({ event: 'close', data: this.listDespendency });
   }
 

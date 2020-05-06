@@ -43,7 +43,7 @@ export class DataBaseComponent implements OnInit {
 })
 }
 
-  getDB(dbName:string){
+  getDB(dbName:string,check){
     console.log("dbname===>"+dbName)
     this.codeGen.getDbScreenDetails(dbName).subscribe(response=>{
       console.log("inside dbComponent===>",response);
