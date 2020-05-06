@@ -187,9 +187,13 @@ else{
   }
 
   removeDepenency(index: number,depend) {
+
     console.log("rmoved====>",depend);
     
     this.addDependencies.splice(index, 1);
+    if(this.addDependencies.length <= 0){
+      sessionStorage.removeItem('addedDependencies')
+    }
     // let addedDependency = JSON.parse(sessionStorage.getItem('addedDependencies'));
     // addedDependency.push(depend);
     // sessionStorage.setItem('addedDependencies',JSON.stringify(addedDependency))
