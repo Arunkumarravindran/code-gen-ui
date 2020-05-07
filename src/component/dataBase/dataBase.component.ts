@@ -58,16 +58,16 @@ export class DataBaseComponent implements OnInit {
       console.log("ddlauto===>"+response.dialects)
       this.id = response.id;
       let tempDialect: string[] = [];
-      Object.keys(response.dialects).forEach(a=>{
-        let data=  a + ":"+ response.dialects[a];
+      Object.keys(response.dialects).forEach(key=>{
+        let data=  key + ":"+ response.dialects[key];
         tempDialect.push(data);
       
         console.log(tempDialect)
       })
       this.dialectToolTip = tempDialect;
       let tempDdl: string[] = [];
-      Object.keys(response.ddlAuto).forEach(a=>{
-        let data=  a + ":"+ response.ddlAuto[a];
+      Object.keys(response.ddlAuto).forEach(key=>{
+        let data=  key + ":"+ response.ddlAuto[key];
         tempDdl.push(data);
       
         console.log(tempDdl)
