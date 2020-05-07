@@ -55,6 +55,8 @@ export class JavaScreenComponent implements OnInit {
 
   ngOnInit() {
     sessionStorage.removeItem('addedDependencies')
+    sessionStorage.removeItem('removeDependencies');
+    sessionStorage.setItem('removed',"false")
     this.codegenService.handleError
     this.getClient();
     this.codeGenForm = new FormGroup({
@@ -186,17 +188,33 @@ else{
     })
   }
 
-  removeDepenency(index: number,depend) {
+  removeDepenency(index: number) {
 
-    console.log("rmoved====>",depend);
-    
-    this.addDependencies.splice(index, 1);
-    if(this.addDependencies.length <= 0){
-      sessionStorage.removeItem('addedDependencies')
+    if(this.addDependencies.length<=0){
+      sessionStorage.removeItem('removeDependencies');
+      sessionStorage.removeItem('addedDependencies');
     }
-    // let addedDependency = JSON.parse(sessionStorage.getItem('addedDependencies'));
-    // addedDependency.push(depend);
-    // sessionStorage.setItem('addedDependencies',JSON.stringify(addedDependency))
+    this.addDependencies.splice(index, 1);
+    console.log("rmoved====>",this.addDependencies);
+    
+    let response = localStorage.getItem('responseBody');
+    let parsedResponse = JSON.parse(response)
+    let allDependency = parsedResponse.dependencies.values;
+    allDependency.forEach(singleGroup => {
+    singleGroup.values.filter(singleDependency=>{
+      this.addDependencies.filter(data=>{
+        if(singleDependency.id == data.id){
+          singleGroup.values.splice(index,1)
+         }
+      })  
+      }) 
+});
+console.log("after removed===>",allDependency)
+sessionStorage.setItem('removed',"true")
+sessionStorage.setItem('removeDependencies',JSON.stringify(allDependency))
+   
+    
+    
 
   }
 
