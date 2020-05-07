@@ -43,7 +43,20 @@
     transition: none !important;
     box-shadow: none !important;
 }
-
+.ddltooltip{
+    position: absolute;
+    right: 77%;
+    top: -9px;
+    width: 0px;
+    color: #757575;
+}
+.dialecttooltip{
+    position: absolute;
+    right: 80%;
+    top: -9px;
+    width: 0px;
+    color: #757575;
+}
 .hibernetRadioCard{
     position: absolute;
     top: 51%;

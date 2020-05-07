@@ -5,6 +5,7 @@ import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animati
 import { CodegenService } from 'src/_service/codegen.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DbFormValues } from 'src/_model/DbFormValues';
+import { TooltipPosition } from '@angular/material';
 
 @Component({
   selector: 'app-dataBase',
@@ -25,8 +26,11 @@ export class DataBaseComponent implements OnInit {
   enableHibernet : string = "true";
   dbName : string;
   dialects :string[] =[];
+  ddlAutoToolTip : string[]= [];
+  dialectToolTip: string[] = [];
   ddlArray :string[] = [];
   id;
+  toolPosition: TooltipPosition = 'below';
   databaseForm: FormGroup;
   constructor(private codeGen: CodegenService) { }
 
@@ -44,12 +48,32 @@ export class DataBaseComponent implements OnInit {
 }
 
   getDB(dbName:string,check){
+    let data;
     console.log("dbname===>"+dbName)
     this.codeGen.getDbScreenDetails(dbName).subscribe(response=>{
       console.log("inside dbComponent===>",response);
-      this.dialects = response.dialects;
-      this.ddlArray = response.ddlAuto;
+      this.dialects = Object.keys(response.dialects);
+      this.ddlArray = Object.keys(response.ddlAuto);
+      console.log("ddlauto===>"+JSON.stringify(response.ddlAuto))
+      console.log("ddlauto===>"+response.dialects)
       this.id = response.id;
+      let tempDialect: string[] = [];
+      Object.keys(response.dialects).forEach(a=>{
+        let data=  a + ":"+ response.dialects[a];
+        tempDialect.push(data);
+      
+        console.log(tempDialect)
+      })
+      this.dialectToolTip = tempDialect;
+      let tempDdl: string[] = [];
+      Object.keys(response.ddlAuto).forEach(a=>{
+        let data=  a + ":"+ response.ddlAuto[a];
+        tempDdl.push(data);
+      
+        console.log(tempDdl)
+      })
+      this.ddlAutoToolTip = tempDdl;
+    
     })
 this.enableHibernet = "false";
 this.dbName = dbName;

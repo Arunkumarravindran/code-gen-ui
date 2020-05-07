@@ -36,7 +36,7 @@
         <br>
         <br>
         <mat-form-field style="margin-left: 20px ;width: 45%;">
-          <mat-label>Dialect</mat-label>
+          <mat-label>Dialect </mat-label><mat-icon class="dialecttooltip" matTooltip = {{dialectToolTip}} [matTooltipPosition]="toolPosition">info</mat-icon>
           <mat-select formControlName="dialect" >
             <mat-option *ngFor="let dialect of dialects" [value]="dialect">
               {{dialect}}
@@ -44,7 +44,7 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; width: 45%;">
-          <mat-label>Ddl Auto</mat-label>
+          <mat-label >Ddl Auto</mat-label><mat-icon class="ddltooltip" matTooltip = {{ddlAutoToolTip}} [matTooltipPosition]="toolPosition">info</mat-icon>
           <mat-select formControlName="ddlauto">
             <mat-option *ngFor="let ddl of ddlArray" [value]="ddl"  >
               {{ddl}}
