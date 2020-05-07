@@ -36,6 +36,7 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRippleModule} from '@angular/material/core';
 import { PageSliderComponent } from 'src/component/pageSlider/pageSlider.component';
 import { AnimationService } from 'src/assets/animation.service';
+import { AddOnScreenComponent } from 'src/component/add-on-screen/add-on-screen.component';
 
 @NgModule({
    declarations: [
@@ -49,7 +50,8 @@ import { AnimationService } from 'src/assets/animation.service';
       GoCdScreenComponent,
       JenkinsScreenComponent,
       PipeLineComponent,
-      PageSliderComponent
+      PageSliderComponent,
+      AddOnScreenComponent
    ],
    entryComponents: [
       DependencyScreenComponent,

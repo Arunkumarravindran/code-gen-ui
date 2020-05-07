@@ -7,6 +7,7 @@ import { FileExplorerScreenComponent } from 'src/component/fileExplorer-Screen/f
 import { DataBaseComponent } from 'src/component/dataBase/dataBase.component';
 import { GoCdScreenComponent } from 'src/component/pipeLine/goCd-Screen/goCd-Screen.component';
 import { PipeLineComponent } from 'src/component/pipeLine/pipeLine.component';
+import { AddOnScreenComponent } from 'src/component/add-on-screen/add-on-screen.component';
 const routes: Routes = [
    {
       path:'javaMain',
@@ -25,8 +26,8 @@ const routes: Routes = [
       component: GoCdScreenComponent
      },
      { 
-      path:'dataBase',
-      component: DataBaseComponent
+      path:'addon',
+      component: AddOnScreenComponent
      },
      { 
       path:'pipeLine',

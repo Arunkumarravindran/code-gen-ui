@@ -34,7 +34,7 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   hideBootVersion = true;
-  finalScreen = 3;
+  finalScreen = 4;
   springIndex = -1;
   current = 1;
   prev = 0;
