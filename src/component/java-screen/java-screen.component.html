@@ -1,8 +1,4 @@
 <mat-toolbar class="toolBar">
-
-  <p *ngIf ="current==1"  class="toolBarTxt"> Step  {{current}} - Select Metadata</p>
-  <p *ngIf ="current==2"  class="toolBarTxt"> Step  {{current}} - Select Database</p>
-  <p *ngIf ="current==3"  class="toolBarTxt"> Step  {{current}} - Select PipeLine</p>
   <p class="first"><img class="headingIcon" src="../../assets/images/ezgif.com-gif-maker (3).jpg" >Custom Code Generator</p>
 
 </mat-toolbar>
@@ -128,12 +124,17 @@
 </app-pageSlider>
 </a>
 <a *ngIf="current == 2" >
-<app-pageSlider [isIn]="current === 2" [left]="isLeftTransition(2)">
+  <app-pageSlider [isIn]="current === 2" [left]="isLeftTransition(2)">
+    <app-add-on-screen></app-add-on-screen>
+  </app-pageSlider>
+  </a>
+<a *ngIf="current == 3" >
+<app-pageSlider [isIn]="current === 3" [left]="isLeftTransition(3)">
   <app-dataBase></app-dataBase>
 </app-pageSlider>
 </a>
-<a *ngIf="current == 3" >
-  <app-pageSlider [isIn]="current === 3" [left]="isLeftTransition(3)">
+<a *ngIf="current == 4" >
+  <app-pageSlider [isIn]="current === 4" [left]="isLeftTransition(4)">
     <app-pipeLine></app-pipeLine>
   </app-pageSlider>
   </a>
@@ -141,11 +142,11 @@
 
 <mat-toolbar class="footer">
 
-  <button mat-button class="generateBtn" (click)="generateProject()">GENERATE</button>
-  <button mat-button class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
+  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()"><img src="https://img.icons8.com/carbon-copy/24/000000/automatic.png"/>GENERATE</button>
+  <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
   <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
   <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>
-  <button *ngIf="current == 2" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
+  <button *ngIf="current == 3" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
 
 </mat-toolbar>
 

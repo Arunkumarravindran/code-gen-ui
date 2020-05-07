@@ -13,7 +13,16 @@
     margin-top: -2px;
     color: rgb(83,164,228)
 }
-
+.addOnCard{
+    position: relative;
+    top: -72px;
+    left: 8px;
+    height: 71px;
+    width: 97%;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
 .iconsCard{
     position: absolute;
     width: 86%;
@@ -91,7 +100,7 @@
     margin-top: 66px;
     background-color: rgb(255, 255, 255);
     width: 94%;
-    height: 392px;
+    height: 314px;
     transition: none !important;
     box-shadow: none !important;
 }
@@ -152,7 +161,6 @@
     min-height: 75px;
     max-width: 20px;
     min-width: 75px;
-    display: inline;
     border: 2px #eee solid;
     border-radius: 10px;
     margin-left: 17px;

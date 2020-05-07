@@ -1,0 +1,74 @@
+<mat-card class="contentCard">
+
+  <mat-grid-list cols="6" rowHeight="480px">
+    <mat-grid-tile [colspan]="3" [rowspan]="1" [style.background]="'#F5F5F5'">
+<mat-card class="sucessCard">
+  <mat-card-title class="successTxt">
+    Your Project is Ready !!!
+  </mat-card-title>
+  <img style="width: 73%;margin-top: 32px;margin-left: 73px;" src="../../assets/images/projectready.jpg">
+</mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="3" [rowspan]="1" [style.background]="'#F5F5F5'">
+      <mat-card class="iconTitleCard">
+        <h5 class="headings"> Select Add On's</h5>
+      </mat-card>
+      <mat-card class="iconsCard">
+        <label class="container">
+          <input #check type="checkbox" value="database" (click)="getAddon($event)">
+          <mat-card style="margin-top: 22px;" class="checkmark" >
+           
+              <mat-card-title style="margin-top: -11px; text-align: center; font-size: 13px;">DataBase</mat-card-title>
+              <mat-card-subtitle style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+                A small, agile dog that copes</mat-card-subtitle>
+          </mat-card>
+        </label>
+        <label class="container">
+          <input #check type="checkbox" value="redis" (click)="getAddon($event)">
+          <mat-card class="checkmark" >
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Redis Session
+            </mat-card-title>
+            <mat-card-subtitle style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes</mat-card-subtitle>
+          </mat-card>
+        </label>
+        <label class="container">
+          <input #check type="checkbox" value="exception"  (click)="getAddon($event)">
+          <mat-card class="checkmark">
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Exception Handling
+            </mat-card-title>
+            <mat-card-subtitle style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes</mat-card-subtitle>
+          </mat-card>
+        </label>
+        <label class="container">
+          <input #check type="checkbox" value="pipeline" (click)="getAddon($event)">
+          <mat-card class="checkmark" >
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Pipelines</mat-card-title>
+            <mat-card-subtitle style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes</mat-card-subtitle>
+          </mat-card>
+        </label>
+        <label class="container">
+          <input #check type="checkbox" value="logback" (click)="getAddon($event)">
+          <mat-card class="checkmark" >
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Logback</mat-card-title>
+            <mat-card-subtitle style="font-size: 11px;" style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes</mat-card-subtitle>
+          </mat-card>
+        </label>
+      </mat-card>
+
+    </mat-grid-tile>
+  </mat-grid-list>
+
+<mat-card class="addOnCard" >
+  <p style="font-size: 14px;font-style: italic;margin-top: 25px; color: rgba(0,0,0,.54); text-align: center;" *ngIf = "selectedAddonList.length == 0" >No Add On's Selected</p>
+<mat-card  class="addontiles"  *ngFor = "let addon of selectedAddonList; let i = index" >
+<p style="margin-top: 20px;font-size: 12px; text-align: center; text-transform: capitalize;">{{addon}}</p>
+</mat-card>
+<button *ngIf = "selectedAddonList.length != 0" mat-button class="proccedBtn">Procced</button>
+</mat-card>
+
+</mat-card>

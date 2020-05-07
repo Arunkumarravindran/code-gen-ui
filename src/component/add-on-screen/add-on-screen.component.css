@@ -1,0 +1,267 @@
+.contentCard {
+    border-radius: 0px;
+    position: absolute;
+    left: 11%;
+    top: 9%;
+    background-color: rgb(245, 245, 245);
+    width: 76%;
+    height: 502px;
+
+}
+.headings{
+    font-size: 13px;
+    margin-top: -2px;
+    color: rgb(83,164,228)
+}
+.sucessCard{
+    position: absolute;
+    width: 93%;
+    left: 0%;
+    top: 0%;
+    height: 76.8%;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.successTxt{
+    margin-top: 60px;
+    text-align: center;
+    font-size: 23px;
+    font-weight: 400;
+    color: rgb(0,120,215);
+}
+.iconsCard{
+    position: absolute;
+    width: 102%;
+    top: 10%;
+    height: auto;  
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.iconTitleCard{
+    left: 0%;
+    position: absolute;
+    top: 0%;
+    width: 94%;
+    height: 2%;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.addOnCard{
+    position: relative;
+    top: -72px;
+    left: 1px;
+    height: 71px;
+    width: 97%;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.addontiles{
+    float: left;
+    border: solid 1px 1px 1px 1px;
+    width: 8%;
+    position: inherit;
+    height: 63px;
+    margin-top: -15px;
+    border: 2px #eee solid;
+    border-radius: 0px;
+    margin-left: 7px;
+    cursor: pointer;
+    border-radius: 0px;
+    transition: none !important;
+    box-shadow: none !important;
+}
+.proccedBtn{
+    position: absolute;
+    right: 2%;
+    top: 34%;
+    background-color: rgb(4,96,157);
+    color: white;
+}
+.addontiles:nth-child(6n+1) {
+    clear: both;
+}
+.icon {
+    float: left;
+   width: 39%;
+   position: inherit;
+   height: 57px;
+   margin-top: 10px;
+    border: 2px #eee solid;
+    border-radius: 10px;
+    margin-left: 17px;
+    cursor: pointer;
+}
+/* HIDE CHECKBOX */
+.dbCheckbox[type=checkbox]{
+    opacity: 0;
+   position: absolute;
+   top: 8%;
+   left: 7%;
+   width: 11px;
+  
+}
+.redishCheckbox[type=checkbox]{
+   position: absolute;
+   top: 8%;
+   left: 276px;
+   width: 11px;
+   opacity: 0;
+   
+}
+.exeptionCheckbox[type=checkbox]{
+    opacity: 0;
+   position: absolute;
+   top: 38%;
+   left: 7%;
+   width: 11px;
+}
+.logBackCheckbox[type=checkbox]{
+    opacity: 0;
+   position: absolute;
+   top: 232px;
+   left: 7%;
+   width: 11px;
+}
+
+.pipelineCheckbox[type=checkbox]{
+    opacity: 0;
+   position: absolute;
+   top: 130px;
+   left: 275px;
+   width: 11px;
+}
+
+  /* IMAGE STYLES */
+  /* [type=checkbox] + mat-card {
+    cursor: pointer;
+    
+  }
+  input[type=checkbox] :checked{
+      border-radius: 50%;
+  }
+  /* CHECKED STYLES */
+  /* [type=checkbox]:checked + mat-card{
+    display: inline-block;
+    box-shadow: 0 0 0 2px #88b8ff;
+    border-radius: 10px;
+    background-color:  rgb(246,251,252);
+  } */ 
+   .dbCheckbox[type=checkbox]:checked {
+    position: absolute;
+    top: 8%;
+    left: 7%;
+    width: 11px;
+    opacity: 1;
+ }
+ .redishCheckbox[type=checkbox]:checked{
+    position: absolute;
+    top: 8%;
+    left: 276px;
+    width: 11px;
+    opacity: 1;
+ }
+ .exeptionCheckbox[type=checkbox]:checked {
+    position: absolute;
+    top: 38%;
+    left: 7%;
+    width: 11px;
+    opacity: 1;
+ }
+ .logBackCheckbox[type=checkbox]:checked {
+    position: absolute;
+    top: 232px;
+    left: 7%;
+    width: 11px;
+    opacity: 1;
+ }
+
+ .pipelineCheckbox[type=checkbox]:checked {
+    position: absolute;
+    top: 130px;
+    left: 275px;
+    width: 11px;
+    opacity: 1;
+ }
+ 
+.icon mat-card{
+    width: 96px;
+    border-radius: 14px;
+} 
+ .icon:nth-child(2n+1) {
+    clear: both;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    float: left;
+    width: 39%;
+    position: inherit;
+    height: 57px;
+    margin-top: 10px;
+    border: 2px #eee solid;
+    border-radius: 10px;
+    margin-left: 8px;
+    cursor: pointer;
+}
+.checkmark:nth-child(2n+1) {
+    clear: both;
+}
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    display: inline-block;
+    box-shadow: 0 0 0 2px #88b8ff;
+    border-radius: 10px;
+    background-color:  rgb(246,251,252);
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+   
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    right: 12px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid #0570fb;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+  }
