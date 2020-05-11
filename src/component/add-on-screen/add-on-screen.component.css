@@ -8,6 +8,31 @@
     height: 502px;
 
 }
+.dbtitleCard{
+    position: absolute;
+    left: -1%;
+    width: 94%;
+    top: 0%;
+    height: 2%;
+    border-radius: 0px;
+    background-color: rgb(255,255,255);
+    transition: none !important;
+    box-shadow: none !important;
+}
+.addIcon{
+    position: absolute;
+    left: 105%;
+    top: -4px;
+    color: #13c513;
+    cursor: pointer;
+}
+.rmIcon{
+    position: absolute;
+    left: 105%;
+    top: -4px;
+    color: red;
+    cursor: pointer;
+}
 .headings{
     font-size: 13px;
     margin-top: -2px;
@@ -23,6 +48,42 @@
     transition: none !important;
     box-shadow: none !important;
 }
+.logBackEnvCard{
+    position: absolute;
+    width: 93%;
+    left: 0%;
+    top: 10%;
+    height: 66.8%;
+    border-radius: 0px;
+    overflow: auto;
+    transition: none !important;
+    box-shadow: none !important;
+}
+  /* width */
+  
+  ::-webkit-scrollbar {
+    width: 4px !important;
+    height: 8px;
+  }
+  
+  /* Track */
+  
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  
+  ::-webkit-scrollbar-thumb {
+    background: rgb(178, 178, 178);
+  }
+  
+  /* Handle on hover */
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
 .successTxt{
     margin-top: 60px;
     text-align: center;
@@ -265,3 +326,5 @@
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
   }
+  
+
