@@ -47,5 +47,9 @@
   </mat-grid-list>
 
   <!-- <mat-card class="dbIconsCard"> -->
-
+    <mat-card class="addOnCard" >
+       <mat-card  class="addontiles"  *ngFor = "let addon of selectedAddonList; let i = index" >
+      <p style="margin-top: 20px;font-size: 12px; text-align: center; text-transform: capitalize;">{{addon}}</p>
+      </mat-card> 
+      </mat-card>
 </mat-card>
