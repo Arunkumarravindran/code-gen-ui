@@ -18,14 +18,15 @@ import { Files } from 'src/_model/files';
 import { FileExplorerScreenComponent } from '../fileExplorer-Screen/fileExplorer-Screen.component';
 import { flyIn } from 'src/assets/animations';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
+import { Value } from 'src/_model/value';
 @Component({
   selector: 'app-java-screen',
   templateUrl: './java-screen.component.html',
   styleUrls: ['./java-screen.component.css'],
-  animations:[
+  animations: [
     flyIn,
-    fadeInOnEnterAnimation({ anchor: 'enter', duration: 200, delay: 50}),
-    fadeOutOnLeaveAnimation({ anchor: 'leave', duration: 200, delay: 50})
+    fadeInOnEnterAnimation({ anchor: 'enter', duration: 200, delay: 50 }),
+    fadeOutOnLeaveAnimation({ anchor: 'leave', duration: 200, delay: 50 })
   ]
 })
 export class JavaScreenComponent implements OnInit {
@@ -40,6 +41,9 @@ export class JavaScreenComponent implements OnInit {
   prev = 0;
   mainScreen = true;
   dbScreen = false;
+  pipeScreen = false;
+  redisScreen = false;
+  exceptionScreen = false;
   indexCheck: boolean;
   languages: LanguageValue[];
   projects: ProjectValue[];
@@ -47,16 +51,19 @@ export class JavaScreenComponent implements OnInit {
   javaVersion: JavaversionValue[];
   springVersion: BootversionValue[];
   addDependencies: DependenciesValue[] = [];
+  dependencies: Value[];
   name: string;
   group: string;
+  v : any[] = [];
   codeGenForm: FormGroup;
+  values = [{ "name": "Developer Tools", "values": [{ "id": "devtools", "name": "Spring Boot DevTools", "description": "Provides fast application restarts, LiveReload, and configurations for enhanced development experience.", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#using-boot-devtools", "templated": true } } }, { "id": "configuration-processor", "name": "Spring Configuration Processor", "description": "Generate metadata for developers to offer contextual help and \"code completion\" when working with custom configuration keys (ex.application.properties/.yml files).", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#configuration-metadata-annotation-processor", "templated": true } } }] }, { "name": "Web", "values": [{ "id": "web", "name": "Spring Web", "description": "Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.", "_links": { "guide": [{ "href": "https://spring.io/guides/gs/rest-service/", "title": "Building a RESTful Web Service" }, { "href": "https://spring.io/guides/gs/serving-web-content/", "title": "Serving Web Content with Spring MVC" }, { "href": "https://spring.io/guides/tutorials/bookmarks/", "title": "Building REST services with Spring" }], "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-developing-web-applications", "templated": true } } }, { "id": "webflux", "name": "Spring Reactive Web", "description": "Build reactive web applications with Spring WebFlux and Netty." }, { "id": "data-rest", "name": "Rest Repositories", "description": "Exposing Spring Data repositories over REST via Spring Data REST.", "_links": { "guide": [{ "href": "https://spring.io/guides/gs/accessing-data-rest/", "title": "Accessing JPA Data with REST" }, { "href": "https://spring.io/guides/gs/accessing-neo4j-data-rest/", "title": "Accessing Neo4j Data with REST" }, { "href": "https://spring.io/guides/gs/accessing-mongodb-data-rest/", "title": "Accessing MongoDB Data with REST" }], "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#howto-use-exposing-spring-data-repositories-rest-endpoint", "templated": true } } }, { "id": "session", "name": "Spring Session", "description": "Provides an API and implementations for managing user session information." }, { "id": "data-rest-hal", "name": "Rest Repositories HAL Browser", "description": "Browsing Spring Data REST repositories in your browser." }, { "id": "hateoas", "name": "Spring HATEOAS", "description": "Eases the creation of RESTful APIs that follow the HATEOAS principle when working with Spring / Spring MVC.", "_links": { "guide": { "href": "https://spring.io/guides/gs/rest-hateoas/", "title": "Building a Hypermedia-Driven RESTful Web Service" }, "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-spring-hateoas", "templated": true } } }, { "id": "web-services", "name": "Spring Web Services", "description": "Facilitates contract-first SOAP development. Allows for the creation of flexible web services using one of the many ways to manipulate XML payloads.", "_links": { "guide": { "href": "https://spring.io/guides/gs/producing-web-service/", "title": "Producing a SOAP web service" }, "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-webservices", "templated": true } } }, { "id": "jersey", "name": "Jersey", "description": "Framework for developing RESTful Web Services in Java that provides support for JAX-RS APIs.", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-jersey", "templated": true } } }, { "id": "vaadin", "name": "Vaadin", "description": "Java framework for building rich client apps based on Web components.", "_links": { "guide": { "href": "https://spring.io/guides/gs/crud-with-vaadin/", "title": "Creating CRUD UI with Vaadin" }, "reference": { "href": "https://vaadin.com/spring" } } }] }
+  ]
   constructor(private codegenService: CodegenService, public dialog: MatDialog, private router: Router) { }
 
 
   ngOnInit() {
+
     sessionStorage.removeItem('addedDependencies')
-    sessionStorage.removeItem('removeDependencies');
-    sessionStorage.setItem('removed',"false")
     this.codegenService.handleError
     this.getClient();
     this.codeGenForm = new FormGroup({
@@ -116,11 +123,27 @@ export class JavaScreenComponent implements OnInit {
 
       fileSaver.saveAs(blob, fileName);
     },
-    (error) => {
-     console.log('Error downloading the file ' +error)
+      (error) => {
+        console.log('Error downloading the file ' + error)
+      })
+  }
+
+  addonSelection(){
+    let addonList = JSON.parse(sessionStorage.getItem('selectedAddon'));
+    addonList.filter(addons=>{
+      console.log(addons)
+      if(addons == 'database'){
+        this.dbScreen = true;
+      }else if(addons == 'redis'){
+        this.redisScreen = true
+      }else if(addons == 'exception'){
+        this.exceptionScreen == true
+      } else if(addons == 'pipeline'){
+        this.pipeScreen = true
+      }
     })
   }
-  
+
   getClient() {
     if (localStorage.getItem('responseBody') == null) {
 
@@ -160,17 +183,17 @@ export class JavaScreenComponent implements OnInit {
       height: '600px'
     });
     dialogRef.afterClosed().subscribe(result => {
-   console.log("length",result.data.length);
-    if(result.data.length >= 1 && result.data.length != undefined){
-      result.data.forEach(result=>{
-        this.addDependencies.push(result);
-      })
-     
-    }
-else{
-  this.addDependencies.push(result.data);
-}
-     });
+      console.log("length", result.data.length);
+      if (result.data.length >= 1 && result.data.length != undefined) {
+        result.data.forEach(result => {
+          this.addDependencies.push(result);
+        })
+
+      }
+      else {
+        this.addDependencies.push(result.data);
+      }
+    });
 
   }
 
@@ -188,44 +211,39 @@ else{
     })
   }
 
-  removeDepenency(index: number) {
-
-    if(this.addDependencies.length<=0){
-      sessionStorage.removeItem('removeDependencies');
+  removeDepenency(index: number, depend) {
+    console.log(" before closed====>", this.addDependencies.length);
+    if (this.addDependencies.length <= 1) {
+      console.log("closed====>");
       sessionStorage.removeItem('addedDependencies');
     }
     this.addDependencies.splice(index, 1);
-    console.log("rmoved====>",this.addDependencies);
-    
-    let response = localStorage.getItem('responseBody');
-    let parsedResponse = JSON.parse(response)
-    let allDependency = parsedResponse.dependencies.values;
-    allDependency.forEach(singleGroup => {
-    singleGroup.values.filter(singleDependency=>{
-      this.addDependencies.filter(data=>{
-        if(singleDependency.id == data.id){
-          singleGroup.values.splice(index,1)
-         }
-      })  
-      }) 
-});
-  
-let rsponse = localStorage.getItem('responseBody');
-let prsedResponse = JSON.parse(rsponse)
-let alDependency = prsedResponse.dependencies.values;
-alDependency.forEach(singleGroup => {
-singleGroup.values.filter(singleDependency=>{
-  this.addDependencies.filter(data=>{
-    if(singleDependency.id == data.id){
-      singleGroup.values.push(index,1)
-     }
-  })  
-  }) 
-});
-console.log("after removed===>",allDependency)
-sessionStorage.setItem('removed',"true")
-  sessionStorage.setItem('removeDependencies',JSON.stringify(allDependency))
-  
+    console.log("rmoved====>", this.addDependencies);
+    console.log("depend", depend);
+    if (this.addDependencies.length >= 1) {
+      let addedDepend: Value[] = JSON.parse(sessionStorage.getItem('addedDependencies'));
+      addedDepend.forEach(singleGroup => {
+        singleGroup.values.push(depend)
+      });
+      sessionStorage.setItem('addedDependencies', JSON.stringify(addedDepend));
+    }
+  //   let addedDepend: Value[] = JSON.parse(sessionStorage.getItem('addedDependencies'));
+  //   addedDepend.forEach(d =>{
+  //     d.values.forEach(a =>{
+  //       this.v.push(a);
+  //     })
+   
+  //  this.v.filter(d=>{
+  //     if(d.id == "jersey"){
+  //     let b =  this.v.findIndex(d => d.id == "jersey")
+  //     console.log("inexxxxx", b);
+  //     }
+  //   }) 
+     
+  //  })
+   
+
+
   }
 
   redirectHome() {
@@ -261,14 +279,8 @@ sessionStorage.setItem('removed',"true")
     })[0]
     return root.substring(0, root.length - 1)
   }
-  next(){
-    this.mainScreen = false;
-    this.dbScreen = true;
-  }
-  previous(){
-    this.mainScreen = true;
-    this.dbScreen = false;
-  }
+ 
+  
   getLanguage(file) {
     const FILE_EXTENSION = {
       js: 'javascript',
@@ -357,19 +369,23 @@ sessionStorage.setItem('removed',"true")
   onNext() {
     sessionStorage.removeItem('addedDependencies')
     this.prev = this.current++;
+    if(this.current == 3){
+      this.addonSelection();
+    }
+    sessionStorage.setItem('currentScreen',this.current.toString())
   }
-  onskip(){
+  onskip() {
     this.prev = this.current++;
   }
   isLeftTransition(idx: number): boolean {
     return this.current === idx ? this.prev > this.current : this.prev < this.current;
   }
-  getCheckedLanguage(language:string){
-console.log("language checked ==>",language);
-if(language == "java"){
-  this.hideBootVersion = true;
-}else{
-  this.hideBootVersion = false;
-}
+  getCheckedLanguage(language: string) {
+    console.log("language checked ==>", language);
+    if (language == "java") {
+      this.hideBootVersion = true;
+    } else {
+      this.hideBootVersion = false;
+    }
   }
 }

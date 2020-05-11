@@ -1,12 +1,29 @@
+
 <mat-card class="contentCard">
 
   <mat-grid-list cols="6" rowHeight="480px">
     <mat-grid-tile [colspan]="3" [rowspan]="1" [style.background]="'#F5F5F5'">
-<mat-card class="sucessCard">
+<mat-card class="sucessCard" *ngIf = "!enableEnvironment">
   <mat-card-title class="successTxt">
     Your Project is Ready !!!
   </mat-card-title>
   <img style="width: 73%;margin-top: 32px;margin-left: 73px;" src="../../assets/images/projectready.jpg">
+</mat-card>
+
+  <mat-card *ngIf = "enableEnvironment"  class="dbtitleCard"> 
+    <h5 class="headings">Add Environments</h5>
+  </mat-card>
+  <mat-card *ngIf = "enableEnvironment" class="logBackEnvCard">
+<form [formGroup]="envForm">
+  <a  *ngFor="let environment of getEnvFormControls(); let i = index">
+<mat-form-field style="width: 85%; margin-left: 20px;" appearance="outline">
+  <mat-label>Environment</mat-label> 
+  <input  matInput  [formControl]="environment"  (keyup) = "environmentValue()">
+  <mat-icon *ngIf = " i == 0 && envValue != null" class="addIcon" (click)="addEnv()">add_circle_outline</mat-icon>
+  <mat-icon *ngIf = " i != 0" class="rmIcon" (click)="removeEnv(i)">remove_circle_outline</mat-icon>
+</mat-form-field>
+</a>
+</form>
 </mat-card>
     </mat-grid-tile>
 
@@ -63,12 +80,20 @@
     </mat-grid-tile>
   </mat-grid-list>
 
+
+<!-- <a *ngIf="current == 3">
+    <app-dataBase></app-dataBase>
+  </a>
+  <a *ngIf="current == 4" >
+      <app-pipeLine></app-pipeLine>
+    </a> -->
+  
 <mat-card class="addOnCard" >
   <p style="font-size: 14px;font-style: italic;margin-top: 25px; color: rgba(0,0,0,.54); text-align: center;" *ngIf = "selectedAddonList.length == 0" >No Add On's Selected</p>
 <mat-card  class="addontiles"  *ngFor = "let addon of selectedAddonList; let i = index" >
 <p style="margin-top: 20px;font-size: 12px; text-align: center; text-transform: capitalize;">{{addon}}</p>
 </mat-card>
-<button *ngIf = "selectedAddonList.length != 0" mat-button class="proccedBtn">Procced</button>
+<button *ngIf = "selectedAddonList.length != 0" mat-button class="proccedBtn" (click)="proceed(selectedAddonList)" >Procced</button>
 </mat-card>
 
 </mat-card>

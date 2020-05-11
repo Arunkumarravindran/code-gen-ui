@@ -142,11 +142,14 @@
 
 <mat-toolbar class="footer">
 
+
   <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()"><img class="generateimg" src="../../assets/images/ezgif.com-gif-maker (7).jpg">GENERATE</button>
   <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()"><img class="exploreimg" src="../../assets/images/ezgif.com-gif-maker (9).jpg">EXPLORE</button>
   <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button><span >&#8592;</span>  
     Prev</button>
   <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button> Next<span class= nextBtmImg>&#8594;</span></button>
+
+  
   <button *ngIf="current == 3" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
 
 </mat-toolbar>
