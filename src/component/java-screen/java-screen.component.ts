@@ -62,7 +62,7 @@ export class JavaScreenComponent implements OnInit {
 
 
   ngOnInit() {
-
+    sessionStorage.removeItem('selectedAddon')
     sessionStorage.removeItem('addedDependencies')
     this.codegenService.handleError
     this.getClient();

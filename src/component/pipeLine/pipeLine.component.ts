@@ -10,9 +10,11 @@ import { flyIn } from 'src/assets/animations';
 export class PipeLineComponent implements OnInit {
 java = true;
 other =false;
+selectedAddonList :string[] = [];
   constructor() { }
 
   ngOnInit() {
+    this.selectedAddonList = JSON.parse(sessionStorage.getItem('selectedAddon'))
   }
 
 
