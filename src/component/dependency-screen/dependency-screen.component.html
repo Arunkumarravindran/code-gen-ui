@@ -6,14 +6,14 @@
 </mat-form-field>
 <span class="dependencyPanel" *ngFor="let dependency of dependencies ">
 <div style="margin-top: 10px;">
-  <div *ngIf="searchValue == null " class="headerTxt">
+  <div *ngIf="searchValue == null || dependency.values.length ==0 " class="headerTxt">
     <p style="margin-top: 2px;
     margin-left: 7px;
     font-size: 13px;
     font-weight: 500;">{{dependency.name}}</p>
   </div>
 
-  <mat-card class="dependencyPanel"
+  <mat-card  class="dependencyPanel"
     *ngFor="let depend of dependency.values | dependencySearch : searchValue let i  = index ;"
     (click)="addDependency(depend,i,$event)" >
 

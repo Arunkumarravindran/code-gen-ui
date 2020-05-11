@@ -28,19 +28,18 @@ export class DependencyScreenComponent implements OnInit {
     @Optional() @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
+  
+    
+    
     if(sessionStorage.getItem('addedDependencies') == null){
     let response = localStorage.getItem('responseBody');
     let parsedResponse = JSON.parse(response)
+    this.addDependencyValues = parsedResponse;
     let allDependency = parsedResponse.dependencies.values;
     this.dependencies = allDependency;
-    
-}else if (sessionStorage.getItem('removeDependencies') != null && sessionStorage.getItem('removed') == "true"){
-    let addedDependency = JSON.parse(sessionStorage.getItem('removeDependencies'));
-    console.log("removed dependency in dep screen",addedDependency);  
-  this.dependencies = addedDependency;
-  }else{
+}
+else{
     let addedDependency = JSON.parse(sessionStorage.getItem('addedDependencies'));
-    console.log("removed dependency null",sessionStorage.getItem('removedDependency')); 
     this.dependencies = addedDependency;
     }
   }

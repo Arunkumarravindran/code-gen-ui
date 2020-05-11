@@ -134,6 +134,32 @@
     transition: none !important;
     box-shadow: none !important;
 }
+/* scrollbar */
+
+/* width */
+
+::-webkit-scrollbar {
+  width: 5px !important;
+  height: 8px;
+}
+
+/* Track */
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+
+::-webkit-scrollbar-thumb {
+  background: rgb(178, 178, 178);
+}
+
+/* Handle on hover */
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
  ::ng-deep .hljs {
   position: absolute;
     width: 97.3%;
@@ -166,29 +192,3 @@
   top: 65px;
 }
 
-/* scrollbar */
-
-/* width */
-
-::-webkit-scrollbar {
-  width: 5px !important;
-  height: 8px;
-}
-
-/* Track */
-
-::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-/* Handle */
-
-::-webkit-scrollbar-thumb {
-  background: rgb(178, 178, 178);
-}
-
-/* Handle on hover */
-
-::-webkit-scrollbar-thumb:hover {
-  background: #555;
-}

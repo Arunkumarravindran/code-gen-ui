@@ -142,7 +142,7 @@
 
 <mat-toolbar class="footer">
 
-  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()"><img src="https://img.icons8.com/carbon-copy/24/000000/automatic.png"/>GENERATE</button>
+  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()">GENERATE</button>
   <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
   <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
   <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>

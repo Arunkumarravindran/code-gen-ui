@@ -29,13 +29,13 @@
         <br>
       <a *ngIf = "hibernetEnabled.checked == true" [@fadeInOnEnter] [@fadeOutOnLeave]>
         <span style=" margin-left: 20px ;font-size: 12px;">Show SQL</span> 
-        <mat-radio-group aria-label="Select an option"  formControlName="showsql">
+        <mat-radio-group aria-label="Select an option"  formControlName="showsql"  >
           <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="true" >True</mat-radio-button>
           <mat-radio-button color="primary" style="margin-left: 30px; font-size: 12px;" value="false" [checked] =true>FALSE</mat-radio-button>
         </mat-radio-group>
         <br>
         <br>
-        <mat-form-field style="margin-left: 20px ;width: 45%;">
+        <mat-form-field style="margin-left: 20px ;width: 45%;" >
           <mat-label>Dialect </mat-label><mat-icon class="dialecttooltip" matTooltip = {{dialectToolTip}} [matTooltipPosition]="toolPosition">info</mat-icon>
           <mat-select formControlName="dialect" >
             <mat-option *ngFor="let dialect of dialects" [value]="dialect">
