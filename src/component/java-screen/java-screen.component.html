@@ -103,7 +103,7 @@
   
       <mat-card class="dependencyCard">
         <p class="dependenceTxt"  style="margin-left:10px; margin-top: 10px;">Dependencies</p>
-        <button mat-raised-button class="dependencyBtn" (click)='openDependency()'>ADD DEPENDENCIES</button>
+        <button mat-raised-button class="dependencyBtn" (click)='openDependency()'><img class="dependencyBtnImg" src="../../assets/images/ezgif.com-gif-maker (10).jpg">ADD DEPENDENCIES</button>
       </mat-card>
         <mat-card class="addedDepencyCard" >
         <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54); text-align: center;">No
@@ -142,10 +142,11 @@
 
 <mat-toolbar class="footer">
 
-  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()"><img src="https://img.icons8.com/carbon-copy/24/000000/automatic.png"/>GENERATE</button>
-  <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
-  <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
-  <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>
+  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()"><img class="generateimg" src="../../assets/images/ezgif.com-gif-maker (7).jpg">GENERATE</button>
+  <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()"><img class="exploreimg" src="../../assets/images/ezgif.com-gif-maker (9).jpg">EXPLORE</button>
+  <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button><span >&#8592;</span>  
+    Prev</button>
+  <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button> Next<span class= nextBtmImg>&#8594;</span></button>
   <button *ngIf="current == 3" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
 
 </mat-toolbar>

@@ -209,13 +209,23 @@ else{
       })  
       }) 
 });
+  
+let rsponse = localStorage.getItem('responseBody');
+let prsedResponse = JSON.parse(rsponse)
+let alDependency = prsedResponse.dependencies.values;
+alDependency.forEach(singleGroup => {
+singleGroup.values.filter(singleDependency=>{
+  this.addDependencies.filter(data=>{
+    if(singleDependency.id == data.id){
+      singleGroup.values.push(index,1)
+     }
+  })  
+  }) 
+});
 console.log("after removed===>",allDependency)
 sessionStorage.setItem('removed',"true")
-sessionStorage.setItem('removeDependencies',JSON.stringify(allDependency))
-   
-    
-    
-
+  sessionStorage.setItem('removeDependencies',JSON.stringify(allDependency))
+  
   }
 
   redirectHome() {
