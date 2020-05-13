@@ -243,6 +243,7 @@ export class JavaScreenComponent implements OnInit {
   //  })
    
 
+
   }
 
   redirectHome() {
