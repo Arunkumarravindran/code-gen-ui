@@ -13,8 +13,9 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
 }
 .previousBtn{
     position: absolute;
-    left: 2%;
-    border-style:solid;
+    left: 12%;
+    top: 93%;
+    border-style: solid;
     color: white;
     border-color: white;
 }

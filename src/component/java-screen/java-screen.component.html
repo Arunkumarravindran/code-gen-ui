@@ -57,26 +57,26 @@
 
         <mat-form-field style=" margin-left: 10px;font-size: 16px;" appearance="outline">
           <mat-label>Group</mat-label>
-          <input matInput [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
+          <input matInput  style="margin-left: -7px;" [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Artifact</mat-label>
-          <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+          <input matInput style="margin-left: -7px;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <br>
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Name</mat-label>
-          <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+          <input matInput style="margin-left: -7px;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Description</mat-label>
-          <input matInput formControlName="description">
+          <input matInput style="margin-left: -7px;" formControlName="description">
         </mat-form-field>
        <br>
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Package Name</mat-label>
-          <input matInput formControlName="packageName" value="{{group}}.{{name}}">
+          <input matInput style="margin-left: -7px;" formControlName="packageName" value="{{group}}.{{name}}">
         </mat-form-field>
         <br>
         <a >
@@ -128,7 +128,7 @@
     <app-add-on-screen></app-add-on-screen>
   </app-pageSlider>
   </a>
-<a *ngIf="current == 3" >
+<!-- <a *ngIf="current == 3" >
 <app-pageSlider [isIn]="current === 3" [left]="isLeftTransition(3)">
   <app-dataBase></app-dataBase>
 </app-pageSlider>
@@ -137,16 +137,11 @@
   <app-pageSlider [isIn]="current === 4" [left]="isLeftTransition(4)">
     <app-pipeLine></app-pipeLine>
   </app-pageSlider>
-  </a>
+  </a> -->
 
 
-<mat-toolbar class="footer">
-
-  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()">GENERATE</button>
-  <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()">EXPLORE</button>
-  <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
-  <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>
-  <button *ngIf="current == 3" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
-
+<mat-toolbar class="footer" *ngIf="current !=2">
+  <button class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>
 </mat-toolbar>
+<button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
 

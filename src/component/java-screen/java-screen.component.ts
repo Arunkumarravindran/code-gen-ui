@@ -35,7 +35,7 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   hideBootVersion = true;
-  finalScreen = 4;
+  finalScreen = 2;
   springIndex = -1;
   current = 1;
   prev = 0;
@@ -248,7 +248,7 @@ export class JavaScreenComponent implements OnInit {
   redirectHome() {
     this.router.navigate(['/homeScreen'])
   }
-  exploreProject() {
+exploreProject() {
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
     this.codeGenForm.value.name = this.name;

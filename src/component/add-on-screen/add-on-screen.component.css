@@ -20,16 +20,16 @@
     box-shadow: none !important;
 }
 .addIcon{
-    position: absolute;
-    left: 105%;
-    top: -4px;
-    color: #13c513;
-    cursor: pointer;
+  position: absolute;
+  left: 228%;
+  top: -27px;
+  color: #13c513;
+  cursor: pointer;
 }
 .rmIcon{
     position: absolute;
-    left: 105%;
-    top: -4px;
+    left: 228%;
+  top: -27px;
     color: red;
     cursor: pointer;
 }
@@ -110,22 +110,73 @@
     transition: none !important;
     box-shadow: none !important;
 }
+.previousBtn{
+  position: absolute;
+  left: 12%;
+  top: 27%;
+  border-style: solid;
+  color: white;
+  border-color: white;
+}
+.nextBtn{
+  position: absolute;
+  right: 2%;
+  border-style:solid;
+  color: white;
+  border-color: white;
+}
+.generateBtn {
+  position: absolute;
+  left: 32%;
+  top: 20%;
+  border-style:solid;
+  color: white;
+  font-size: 13px;
+  border-width: 2px;
+}
+
+.exploreBtn {
+  position: absolute;
+  left: 52%;
+  top: 20%;
+  border-style:solid;
+  color: white;
+  font-size: 13px;
+  border-width: 2px;
+}
+
 .addOnCard{
-    position: relative;
-    top: -72px;
-    left: 1px;
-    height: 71px;
-    width: 97%;
-    border-radius: 0px;
-    transition: none !important;
-    box-shadow: none !important;
+  position: relative;
+  top: 386px;
+  left: 167px;
+  height: 71px;
+  width: 1006px;
+  border-radius: 0px;
+  transition: none !important;
+  box-shadow: none !important;
+}
+.footer {
+  position: fixed;
+  top: 90.2%;
+ right:10.5%;
+ width:78.5%;
+background-color: rgb(12, 131, 177);
+}
+
+.addOnCard + a{
+ float: left;
+ position: inherit;
+ background-color: green;
+}
+.addOnCard + a:nth-child(6n+1) {
+  clear: both;
 }
 .addontiles{
     float: left;
     border: solid 1px 1px 1px 1px;
-    width: 8%;
+    width: 12%;
     position: inherit;
-    height: 63px;
+    height: 98px;
     margin-top: -15px;
     border: 2px #eee solid;
     border-radius: 0px;
