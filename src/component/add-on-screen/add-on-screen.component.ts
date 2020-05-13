@@ -16,6 +16,9 @@ export class AddOnScreenComponent implements OnInit {
     private formBuilder: FormBuilder ) {}
   
   ngOnInit() {
+if(sessionStorage.getItem('selectedAddon') != null){
+    this.selectedAddonList = JSON.parse(sessionStorage.getItem('selectedAddon'))
+}
     this.envValue = null;
     this.enableEnvironment = false;
     this.envForm = this.formBuilder.group({
@@ -45,6 +48,8 @@ export class AddOnScreenComponent implements OnInit {
     return (<FormArray> this.envForm.get('environment')).controls
   }
   getAddon($event){
+
+    
 
     console.log("event",$event.target.value);
     if($event.target.checked == true){

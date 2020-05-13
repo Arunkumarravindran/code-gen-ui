@@ -28,6 +28,7 @@ export class DataBaseComponent implements OnInit {
   dialects :string[] =[];
   ddlAutoToolTip : string[]= [];
   dialectToolTip: string[] = [];
+  selectedAddonList: string[] = [];
   ddlArray :string[] = [];
   id;
   toolPosition: TooltipPosition = 'below';
@@ -35,6 +36,7 @@ export class DataBaseComponent implements OnInit {
   constructor(private codeGen: CodegenService) { }
 
   ngOnInit() {
+    this.selectedAddonList = JSON.parse(sessionStorage.getItem('selectedAddon'))
     this.databaseForm = new FormGroup({
       hostName: new FormControl(''),
       username: new FormControl(''),
