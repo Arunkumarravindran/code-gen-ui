@@ -238,7 +238,7 @@ export class AddOnScreenComponent implements OnInit {
     })
     json = {
       applicationName: "string",
-      map
+      envTypeList : map
     }
     this.codeGen.sendLogbackDetails(json).subscribe(respose => {
       console.log(respose)
