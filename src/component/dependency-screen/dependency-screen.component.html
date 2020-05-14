@@ -1,5 +1,5 @@
 <mat-form-field class="searchBar" appearance="outline">
-  <input #ser matInput placeholder="Web, Security, JPA, Actuator, Dev Tools.." [(ngModel)]="searchValue">
+  <input #ser matInput style="margin-left: -7px;" placeholder="Web, Security, JPA, Actuator, Dev Tools.." [(ngModel)]="searchValue">
   <mat-icon *ngIf="searchValue != null "class="closeIcon" (click)="clearInput()">close</mat-icon>
   <p *ngIf="searchValue == null" class="multiSelectTxt">Press Ctrl for multiple adds</p>
   <button mat-button *ngIf = "multiSelectMode == true"  class="multiDepend" (click)="addMultiDependency()" [@enter]>Add Selected Dependencies</button>

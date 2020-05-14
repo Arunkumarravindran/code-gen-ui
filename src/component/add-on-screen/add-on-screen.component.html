@@ -1,6 +1,5 @@
-
+<a *ngIf="current == 1 || currentScreen == 'addon'">
 <mat-card class="contentCard">
-
   <mat-grid-list cols="6" rowHeight="480px">
     <mat-grid-tile [colspan]="3" [rowspan]="1" [style.background]="'#F5F5F5'">
 <mat-card class="sucessCard" *ngIf = "!enableEnvironment">
@@ -10,20 +9,58 @@
   <img style="width: 73%;margin-top: 32px;margin-left: 73px;" src="../../assets/images/projectready.jpg">
 </mat-card>
 
-  <mat-card *ngIf = "enableEnvironment"  class="dbtitleCard"> 
+  <mat-card *ngIf = "enableLogback"  class="dbtitleCard"> 
     <h5 class="headings">Add Environments</h5>
   </mat-card>
-  <mat-card *ngIf = "enableEnvironment" class="logBackEnvCard">
-<form [formGroup]="envForm">
+  <mat-card *ngIf = "enableLogback" class="logBackEnvCard">
+<!-- <form [formGroup]="envForm">
+  <a formArrayName="units">
   <a  *ngFor="let environment of getEnvFormControls(); let i = index">
-<mat-form-field style="width: 85%; margin-left: 20px;" appearance="outline">
+<mat-form-field style="width: 45%; margin-left: 20px;" appearance="outline">
   <mat-label>Environment</mat-label> 
-  <input  matInput  [formControl]="environment"  (keyup) = "environmentValue()">
+  <input  matInput style="margin-left: -7px;"  [formControl]="environment"  (keyup) = "environmentValue()" required>
+  <mat-error *ngIf="environment.invalid">you  must enter env</mat-error>
   <mat-icon *ngIf = " i == 0 && envValue != null" class="addIcon" (click)="addEnv()">add_circle_outline</mat-icon>
   <mat-icon *ngIf = " i != 0" class="rmIcon" (click)="removeEnv(i)">remove_circle_outline</mat-icon>
 </mat-form-field>
+<mat-form-field style="width: 45%; margin-left: 20px;" appearance="outline">
+  <mat-label>Context Path</mat-label> 
+  <input  matInput style="margin-left: -7px;">
+</mat-form-field>
+
+  <a *ngFor="let log of logLevel; let i = index" >
+    <mat-checkbox class="example-margin" 
+    (change)="onChange($event)" [value]="log">{{log}}</mat-checkbox>
+  </a> 
 </a>
-</form>
+</a>
+</form> -->
+
+<form [formGroup]="environmentForm">
+	<!-- X -->
+	<div formArrayName="formArray">
+		<div *ngFor="let X of f.formArray['controls']; let ix=index">
+			<div formGroupName="{{ix}}"  style=" margin-top: 11px;">
+        <mat-form-field style="width: 45%; margin-left: 20px;" appearance="outline">
+          <mat-label>Environment</mat-label> 
+          <input  matInput style="margin-left: -7px;"  formControlName="environment"  (keyup) = "environmentValue()" required >
+          <!-- <mat-error *ngIf="environment.invalid">you  must enter env</mat-error> -->
+          <mat-icon *ngIf = "ix == 0 && envValue != null"  class="addIcon" (click)="addEnv()">add_circle_outline</mat-icon>
+          <mat-icon *ngIf = "ix != 0 " class="rmIcon" (click)="removeEnv(ix)">remove_circle_outline</mat-icon>
+        </mat-form-field>
+        <mat-form-field style="width: 45%; margin-left: 20px;" appearance="outline">
+          <mat-label>Context Path</mat-label> 
+          <input  matInput style="margin-left: -7px;" formControlName="context">
+        </mat-form-field>
+        <span style="font-size: 15px; margin-top: 10px; margin-left: 21px; font-weight: 400;">LogLevel</span>
+        <a style="margin-left: 24px;" *ngFor="let log of logLevel; let i = index" >
+          <mat-checkbox class="example-margin" color = "primary"
+         [value]="log" (change) = "onChange($event, ix)">{{log}}</mat-checkbox>
+        </a>
+		</div>
+	</div>
+  </div>
+  </form>
 </mat-card>
     </mat-grid-tile>
 
@@ -33,7 +70,7 @@
       </mat-card>
       <mat-card class="iconsCard">
         <label class="container">
-          <input #check type="checkbox" value="database" (click)="getAddon($event)">
+          <input #check type="checkbox" value="database" (click)="getAddon($event)" [checked] = "enableDataBase == true">
           <mat-card style="margin-top: 22px;" class="checkmark" >
            
               <mat-card-title style="margin-top: -11px; text-align: center; font-size: 13px;">DataBase</mat-card-title>
@@ -42,7 +79,7 @@
           </mat-card>
         </label>
         <label class="container">
-          <input #check type="checkbox" value="redis" (click)="getAddon($event)">
+          <input #check type="checkbox" value="redis" (click)="getAddon($event)" [checked] = enableRedis>
           <mat-card class="checkmark" >
             <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Redis Session
             </mat-card-title>
@@ -51,7 +88,7 @@
           </mat-card>
         </label>
         <label class="container">
-          <input #check type="checkbox" value="exception"  (click)="getAddon($event)">
+          <input #check type="checkbox" value="exception"  (click)="getAddon($event)" [checked] = enableexception>
           <mat-card class="checkmark">
             <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Exception Handling
             </mat-card-title>
@@ -60,7 +97,7 @@
           </mat-card>
         </label>
         <label class="container">
-          <input #check type="checkbox" value="pipeline" (click)="getAddon($event)">
+          <input #check type="checkbox" value="pipeline" (click)="getAddon($event)"[checked] = enablePipe>
           <mat-card class="checkmark" >
             <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Pipelines</mat-card-title>
             <mat-card-subtitle style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -68,7 +105,7 @@
           </mat-card>
         </label>
         <label class="container">
-          <input #check type="checkbox" value="logback" (click)="getAddon($event)">
+          <input #check type="checkbox" value="logback" (click)="getAddon($event)"  [checked] = enableLogback>
           <mat-card class="checkmark" >
             <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Logback</mat-card-title>
             <mat-card-subtitle style="font-size: 11px;" style="font-size: 11px;">The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
@@ -79,21 +116,35 @@
 
     </mat-grid-tile>
   </mat-grid-list>
+</mat-card>
+  </a>
 
-
-<!-- <a *ngIf="current == 3">
+<a *ngIf="currentScreen == 'database'" >
     <app-dataBase></app-dataBase>
   </a>
-  <a *ngIf="current == 4" >
+  <a *ngIf="currentScreen == 'pipeline'" >
       <app-pipeLine></app-pipeLine>
-    </a> -->
+    </a> 
+
+ <mat-card class="addOnCard" >
   
-<mat-card class="addOnCard" >
   <p style="font-size: 14px;font-style: italic;margin-top: 25px; color: rgba(0,0,0,.54); text-align: center;" *ngIf = "selectedAddonList.length == 0" >No Add On's Selected</p>
-<mat-card  class="addontiles"  *ngFor = "let addon of selectedAddonList; let i = index" >
-<p style="margin-top: 20px;font-size: 12px; text-align: center; text-transform: capitalize;">{{addon}}</p>
+<span  class="addontiles"  *ngFor = "let addon of selectedAddonList; let i = index">
+  <mat-card *ngIf ="addon != currentScreen"  style="height: 40px;box-shadow: none !important; ">
+  <p style="margin-top: 14px;font-size: 12px; text-align: center;  text-transform: capitalize;">{{addon}}</p>
 </mat-card>
-<button *ngIf = "selectedAddonList.length != 0" mat-button class="proccedBtn" (click)="proceed(selectedAddonList)" >Procced</button>
+<mat-card *ngIf ="addon == currentScreen" class="selectedTile">
+  <mat-icon style="position: absolute;left: -10px; top: 25px;">play_arrow</mat-icon><p style="margin-top: 14px;font-size: 12px; text-align: center;  text-transform: capitalize;">{{addon}}</p>
+</mat-card>
+</span>
+<button *ngIf = "selectedAddonList.length != 0 && current == 1" mat-button class="proccedBtn" (click)="proceed(selectedAddonList)" >Procced</button>
 </mat-card>
 
-</mat-card>
+
+<mat-toolbar class="footer">
+  <button mat-button  *ngIf="current == finalScreen || current == 1" class="generateBtn" (click)="generateProject()">  <img style="margin-left: -8px;" src="../../assets/images/ezgif.com-gif-maker (7).jpg">GENERATE</button>
+  <button mat-button  *ngIf="current == finalScreen || current == 1" class="exploreBtn" (click)="exploreProject()"><img style="margin-left: -8px" src="../../assets/images/ezgif.com-gif-maker (9).jpg">EXPLORE</button>
+  <button *ngIf="current != 1 " class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
+  <button *ngIf = "!(current == 1 || current == finalScreen)" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next<span class= nextBtmImg>&#8594;</span></button>
+
+</mat-toolbar>

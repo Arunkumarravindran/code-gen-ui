@@ -57,26 +57,26 @@
 
         <mat-form-field style=" margin-left: 10px;font-size: 16px;" appearance="outline">
           <mat-label>Group</mat-label>
-          <input matInput [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
+          <input matInput  style="margin-left: -7px;" [(ngModel)]="group" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Artifact</mat-label>
-          <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+          <input matInput style="margin-left: -7px;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         <br>
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Name</mat-label>
-          <input matInput [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
+          <input matInput style="margin-left: -7px;" [(ngModel)]="name" [ngModelOptions]="{standalone: true}">
         </mat-form-field>
         
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Description</mat-label>
-          <input matInput formControlName="description">
+          <input matInput style="margin-left: -7px;" formControlName="description">
         </mat-form-field>
        <br>
         <mat-form-field style="margin-left: 10px; font-size: 16px;" appearance="outline">
           <mat-label>Package Name</mat-label>
-          <input matInput formControlName="packageName" value="{{group}}.{{name}}">
+          <input matInput style="margin-left: -7px;" formControlName="packageName" value="{{group}}.{{name}}">
         </mat-form-field>
         <br>
         <a >
@@ -103,7 +103,7 @@
   
       <mat-card class="dependencyCard">
         <p class="dependenceTxt"  style="margin-left:10px; margin-top: 10px;">Dependencies</p>
-        <button mat-raised-button class="dependencyBtn" (click)='openDependency()'><img class="dependencyBtnImg" src="../../assets/images/ezgif.com-gif-maker (10).jpg">ADD DEPENDENCIES</button>
+        <button mat-raised-button class="dependencyBtn" (click)='openDependency()'>ADD DEPENDENCIES</button>
       </mat-card>
         <mat-card class="addedDepencyCard" >
         <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54); text-align: center;">No
@@ -127,30 +127,11 @@
   <app-pageSlider [isIn]="current === 2" [left]="isLeftTransition(2)">
     <app-add-on-screen></app-add-on-screen>
   </app-pageSlider>
-  </a>
-<a *ngIf="current == 3" >
-<app-pageSlider [isIn]="current === 3" [left]="isLeftTransition(3)">
-  <app-dataBase></app-dataBase>
-</app-pageSlider>
 </a>
-<a *ngIf="current == 4" >
-  <app-pageSlider [isIn]="current === 4" [left]="isLeftTransition(4)">
-    <app-pipeLine></app-pipeLine>
-  </app-pageSlider>
-  </a>
 
 
-<mat-toolbar class="footer">
-
-
-  <button mat-button  *ngIf="current != 1" class="generateBtn" (click)="generateProject()"><img class="generateimg" src="../../assets/images/ezgif.com-gif-maker (7).jpg">GENERATE</button>
-  <button mat-button  *ngIf="current != 1" class="exploreBtn" (click)="exploreProject()"><img class="exploreimg" src="../../assets/images/ezgif.com-gif-maker (9).jpg">EXPLORE</button>
-  <button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button><span >&#8592;</span>  
-    Prev</button>
-  <button *ngIf = "current != finalScreen" class= "nextBtn" (click)="onNext(current)" mat-stroked-button> Next<span class= nextBtmImg>&#8594;</span></button>
-
-  
-  <button *ngIf="current == 3" class= "skipBtn" (click)="onskip()" mat-stroked-button>Skip</button>
-
+<mat-toolbar class="footer" *ngIf="current !=2">
+  <button class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next<span class= nextBtmImg>&#8594;</span></button>
 </mat-toolbar>
+<button *ngIf="(current == 2 && currentScreen == 'addon') || (currentScreen == 'addon')"  class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
 

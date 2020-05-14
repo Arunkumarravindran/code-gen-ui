@@ -35,13 +35,14 @@ export class JavaScreenComponent implements OnInit {
   packIndex = -1;
   javaIndex = -1;
   hideBootVersion = true;
-  finalScreen = 4;
+  finalScreen = 2;
   springIndex = -1;
   current = 1;
   prev = 0;
   mainScreen = true;
   dbScreen = false;
   pipeScreen = false;
+  currentScreen;
   redisScreen = false;
   exceptionScreen = false;
   indexCheck: boolean;
@@ -249,7 +250,7 @@ export class JavaScreenComponent implements OnInit {
   redirectHome() {
     this.router.navigate(['/homeScreen'])
   }
-  exploreProject() {
+exploreProject() {
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
     this.codeGenForm.value.name = this.name;
@@ -363,19 +364,28 @@ export class JavaScreenComponent implements OnInit {
   }
 
   onPrev() {
+    if(this.current == 2){
+      this.currentScreen = ''
+    }
     this.prev = this.current--;
   }
 
   onNext() {
     sessionStorage.removeItem('addedDependencies')
     this.prev = this.current++;
-    if(this.current == 3){
-      this.addonSelection();
+    if(this.current == 2){
+      this.currentScreen = 'addon'
     }
     sessionStorage.setItem('currentScreen',this.current.toString())
   }
   onskip() {
     this.prev = this.current++;
+  }
+  addOnScreen(){
+    this.currentScreen = 'addon'
+  }
+  otherScreen(){
+    this.currentScreen = ''
   }
   isLeftTransition(idx: number): boolean {
     return this.current === idx ? this.prev > this.current : this.prev < this.current;

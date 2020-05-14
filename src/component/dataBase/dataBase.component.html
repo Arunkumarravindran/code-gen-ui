@@ -10,21 +10,21 @@
        <form [formGroup]="databaseForm">
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Host</mat-label>
-          <input  class="dbFormFields" matInput  formControlName="hostName" >
+          <input  class="dbFormFields" matInput style="margin-left: -7px;"  formControlName="hostName" >
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Name</mat-label>
-          <input matInput  class="dbFormFields"  formControlName="dbName">
+          <input matInput style="margin-left: -7px;"  class="dbFormFields"  formControlName="dbName">
         </mat-form-field>
         <br>
         <mat-form-field  style=" margin-left: 20px ;font-size: 16px;" appearance="outline">
           <mat-label>User Name</mat-label>
-          <input matInput  class="dbFormFields"  formControlName="username" >
+          <input matInput style="margin-left: -7px;"  class="dbFormFields"  formControlName="username" >
         </mat-form-field>
       
         <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
           <mat-label>Password</mat-label>
-          <input matInput class="dbFormFields"  formControlName="password">
+          <input matInput style="margin-left: -7px;" class="dbFormFields"  formControlName="password">
         </mat-form-field>
         <br>
       <a *ngIf = "hibernetEnabled.checked == true" [@fadeInOnEnter] [@fadeOutOnLeave]>
@@ -61,7 +61,7 @@
     <mat-card class="iconTitleCard">
     <h5 class="headings"> Select Database</h5>
     </mat-card>
-    <mat-card class="iconsCard" [@EnterLeave]="'flyIn'"  >
+    <mat-card class="iconsCard"  >
       <label>
         <input #ch type="radio" name="test" value="small" [checked] = false > 
         <img  class = "icon" (click)="getDB('mysql')" src="../../assets/images/microsoft-sql-server (1).png" [@headShake]= "dbName == 'mysql' && dbName != 'mssql'">
@@ -90,11 +90,11 @@
     </mat-grid-tile>
   </mat-grid-list>
 
-  <mat-card class="addOnCard" >
+  <!-- <mat-card class="addOnCard" >
   <mat-card  class="addontiles"  *ngFor = "let addon of selectedAddonList; let i = index" >
   <p style="margin-top: 20px;font-size: 12px; text-align: center; text-transform: capitalize;">{{addon}}</p>
-  </mat-card>
-  </mat-card>
+  </mat-card> 
+  </mat-card> -->
   
 
 </mat-card>
