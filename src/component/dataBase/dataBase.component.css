@@ -114,18 +114,18 @@
 .dbDetailsCard {
     border-radius: 0px;
     position: absolute;
-    left: 1%;
+    left: 0%;
     top: -2%;
     margin-top: 66px;
     background-color: rgb(255, 255, 255);
     width: 94%;
-    height: 314px;
+    height: 341px;
     transition: none !important;
     box-shadow: none !important;
 }
 .dbtitleCard{
     position: absolute;
-    left: 1%;
+    left: 0%;
     width: 94%;
     top: 1%;
     height: 2%;

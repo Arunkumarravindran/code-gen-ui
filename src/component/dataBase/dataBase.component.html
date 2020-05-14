@@ -61,7 +61,7 @@
     <mat-card class="iconTitleCard">
     <h5 class="headings"> Select Database</h5>
     </mat-card>
-    <mat-card class="iconsCard" [@EnterLeave]="'flyIn'"  >
+    <mat-card class="iconsCard"  >
       <label>
         <input #ch type="radio" name="test" value="small" [checked] = false > 
         <img  class = "icon" (click)="getDB('mysql')" src="../../assets/images/microsoft-sql-server (1).png" [@headShake]= "dbName == 'mysql' && dbName != 'mssql'">

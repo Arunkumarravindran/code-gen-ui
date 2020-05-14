@@ -42,6 +42,7 @@ export class JavaScreenComponent implements OnInit {
   mainScreen = true;
   dbScreen = false;
   pipeScreen = false;
+  currentScreen;
   redisScreen = false;
   exceptionScreen = false;
   indexCheck: boolean;
@@ -363,19 +364,28 @@ exploreProject() {
   }
 
   onPrev() {
+    if(this.current == 2){
+      this.currentScreen = ''
+    }
     this.prev = this.current--;
   }
 
   onNext() {
     sessionStorage.removeItem('addedDependencies')
     this.prev = this.current++;
-    if(this.current == 3){
-      this.addonSelection();
+    if(this.current == 2){
+      this.currentScreen = 'addon'
     }
     sessionStorage.setItem('currentScreen',this.current.toString())
   }
   onskip() {
     this.prev = this.current++;
+  }
+  addOnScreen(){
+    this.currentScreen = 'addon'
+  }
+  otherScreen(){
+    this.currentScreen = ''
   }
   isLeftTransition(idx: number): boolean {
     return this.current === idx ? this.prev > this.current : this.prev < this.current;

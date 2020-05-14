@@ -12,7 +12,7 @@
     <mat-card class="pipeTitleCard">
     <h5 class="headings"> Select Pipe</h5>
     </mat-card>
-    <mat-card class="pipeIconsCard" [@EnterLeave]="'flyIn'" >
+    <mat-card class="pipeIconsCard">
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
         <img  class = "icon" (click)="getPipe('jenkins')" src="../../assets/images/jenkins-ci_512.png" >
@@ -29,7 +29,7 @@
     <mat-card class="cloudTitleCard">
       <h5 class="headings"> Select Cloud</h5>
       </mat-card>
-    <mat-card class="cloudIconsCard" [@EnterLeave]="'flyIn'">
+    <mat-card class="cloudIconsCard" >
       <label>
         <input type="radio" name="test" value="small" [checked] = false>
         <img  class = "icon" (click)="getCloud('aws')" src="../../assets/images/aws_logo_smile_1200x630.png" >

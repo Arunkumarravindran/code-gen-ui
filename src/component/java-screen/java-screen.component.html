@@ -103,7 +103,7 @@
   
       <mat-card class="dependencyCard">
         <p class="dependenceTxt"  style="margin-left:10px; margin-top: 10px;">Dependencies</p>
-        <button mat-raised-button class="dependencyBtn" (click)='openDependency()'><img class="dependencyBtnImg" src="../../assets/images/ezgif.com-gif-maker (10).jpg">ADD DEPENDENCIES</button>
+        <button mat-raised-button class="dependencyBtn" (click)='openDependency()'>ADD DEPENDENCIES</button>
       </mat-card>
         <mat-card class="addedDepencyCard" >
         <p *ngIf="addDependencies.length == 0" style="font-size: 12px;font-style: italic;color: rgba(0,0,0,.54); text-align: center;">No
@@ -127,21 +127,11 @@
   <app-pageSlider [isIn]="current === 2" [left]="isLeftTransition(2)">
     <app-add-on-screen></app-add-on-screen>
   </app-pageSlider>
-  </a>
-<!-- <a *ngIf="current == 3" >
-<app-pageSlider [isIn]="current === 3" [left]="isLeftTransition(3)">
-  <app-dataBase></app-dataBase>
-</app-pageSlider>
 </a>
-<a *ngIf="current == 4" >
-  <app-pageSlider [isIn]="current === 4" [left]="isLeftTransition(4)">
-    <app-pipeLine></app-pipeLine>
-  </app-pageSlider>
-  </a> -->
 
 
 <mat-toolbar class="footer" *ngIf="current !=2">
-  <button class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next</button>
+  <button class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next<span class= nextBtmImg>&#8594;</span></button>
 </mat-toolbar>
-<button *ngIf="current != 1" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
+<button *ngIf="(current == 2 && currentScreen == 'addon') || (currentScreen == 'addon')"  class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
 

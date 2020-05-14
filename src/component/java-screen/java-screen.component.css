@@ -13,15 +13,17 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
 }
 .previousBtn{
     position: absolute;
-    left: 12%;
-    top: 93%;
+    left: 168px;
+    top: 92.5%;
     border-style: solid;
     color: white;
     border-color: white;
+    font-size: 12px; 
 }
 .nextBtn{
     position: absolute;
     right: 2%;
+    font-size: 12px; 
     border-style:solid;
     color: white;
     border-color: white;
@@ -215,7 +217,7 @@ background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(19,31,80,1) 0%, rgba(
     color: white;
     font-size: 10px;
     height: 33px;
-    padding :1px 5px 1px 30px;
+    /* padding :1px 5px 1px 30px; */
 }
 
 .generateBtn {
