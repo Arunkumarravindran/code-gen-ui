@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 import { ErrorService } from './error.service';
 import { DbValues } from 'src/_model/dbValues';
 import { DbFormValues } from 'src/_model/DbFormValues';
+import { EnvLogFormValues } from 'src/_model/envLogFormValues';
+import { EnvConf } from 'src/_model/envConf';
 @Injectable({
   providedIn: 'root'
 })
@@ -18,10 +20,11 @@ export class CodegenService {
 
   client_Url = "http://localhost:8080/metadata/client";
   download_Url = "http://localhost:8080/starter.zip";
-  testDownload_Url = " https://b90556e5.ngrok.io/starter.zip"
-  testClient_Url = " https://b90556e5.ngrok.io/metadata/client"
-  dbDetails_Url = " https://b90556e5.ngrok.io/getHibernateValues"
-  sendDbDetails_Url = " https://b90556e5.ngrok.io/writeDBValues"
+  testDownload_Url = " https://d11572f3.ngrok.io/starter.zip"
+  testClient_Url = " https://d11572f3.ngrok.io/metadata/client"
+  dbDetails_Url = " https://d11572f3.ngrok.io/getHibernateValues"
+  sendDbDetails_Url = " https://d11572f3.ngrok.io/writeDBValues"
+  logBack_Url = "https://d11572f3.ngrok.io/logback"
 
 
   constructor(private http: HttpClient,
@@ -87,6 +90,14 @@ export class CodegenService {
      
     return "success";
   }));
+ }
+ sendLogbackDetails(reqBody : EnvConf){
+  console.log("logStructure==>",reqBody)
+  return this.http.post<EnvConf>(this.logBack_Url,reqBody).pipe(map(responseBody => { 
+    console.log("insde service call");
+    
+   return "successssssssssssssssssssss";
+ }));
  }
   handleError = (error: HttpErrorResponse) => {
     console.log('server side', error.status)
