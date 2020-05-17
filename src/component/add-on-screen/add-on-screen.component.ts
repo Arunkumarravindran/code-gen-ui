@@ -20,9 +20,11 @@ export class AddOnScreenComponent implements OnInit {
   enableEnvironment: boolean;
   enableexception: boolean;
   enableRedis: boolean;
+  enableSwagger : boolean;
   enablePipe: boolean;
   enableDataBase: boolean;
   enableLogback: boolean;
+  contextValue : string ;
   finalScreen;
   current = 1;
   prev = 0;
@@ -43,13 +45,15 @@ export class AddOnScreenComponent implements OnInit {
       this.enablePipe = checkedList.pipeCheck;
       this.enableexception = checkedList.exceptionCheck;
       this.enableLogback = checkedList.logbackCheck;
+      this.enableSwagger = checkedList.swaggerChecked;
     } else {
       this.envValue = null;
       this.enableDataBase = false;
       this.enableRedis = false;
       this.enablePipe = false;
       this.enableexception = false;
-      this.enableLogback = false
+      this.enableLogback = false;
+      this.enableSwagger = false;
     }
     this.envForm = this.formBuilder.group({
       environment: this.formBuilder.array([
@@ -76,11 +80,12 @@ export class AddOnScreenComponent implements OnInit {
   public initForm(): FormGroup {
     return new FormGroup({
       'environment': new FormControl('', [Validators.required]),
-      'log': this.formBuilder.array([]),
-      'context': new FormControl('')
+      'log': new FormControl(''),
+      'context': new FormControl(this.contextValue)
     });
   }
-  public addEnv(): void {
+  public addEnv(context): void {
+    this.contextValue = context;
     const control = <FormArray>this.f.formArray;
     control.push(this.initForm());
   }
@@ -173,7 +178,8 @@ export class AddOnScreenComponent implements OnInit {
       redisCheck: this.enableRedis,
       exceptionCheck: this.enableexception,
       logbackCheck: this.enableLogback,
-      pipeCheck: this.enablePipe
+      pipeCheck: this.enablePipe,
+      swaggerChecked: this.enableSwagger
 
     }
     sessionStorage.setItem('checkedList', JSON.stringify(checkedList));
