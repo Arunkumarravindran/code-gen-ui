@@ -190,6 +190,7 @@ export class AddOnScreenComponent implements OnInit {
   onPrev() {
     if (this.current == 2) {
       this.currentScreen = 'addon';
+      this.java.addOnScreen();
     }
     if (this.enableDataBase && this.current == 3) {
       this.currentScreen = 'database';
@@ -197,7 +198,6 @@ export class AddOnScreenComponent implements OnInit {
     if (this.enablePipe && this.current == 2 || (!this.enableDataBase && this.current == 3)) {
       this.currentScreen = 'addon';
       this.finalScreen = 3;
-      this.java.addOnScreen();
     }
     this.prev = this.current--;
   }
