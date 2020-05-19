@@ -133,5 +133,5 @@
 <mat-toolbar class="footer" *ngIf="current !=2">
   <button class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next<span class= nextBtmImg>&#8594;</span></button>
 </mat-toolbar>
-<button *ngIf="(current == 2 && currentScreen == 'addon') || (currentScreen == 'addon')"  class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
+<button *ngIf="(current == 2 && currentScreen =='addon' )" class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
 
