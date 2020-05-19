@@ -14,7 +14,7 @@ import { EnvConf } from 'src/_model/envConf';
 @Injectable({
   providedIn: 'root'
 })
-export class CodegenService {
+export class CodegenService { 
 
   durationInSeconds = 5;
 
