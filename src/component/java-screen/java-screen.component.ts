@@ -123,15 +123,9 @@ export class JavaScreenComponent implements OnInit {
     this.codeGenForm.value.packageName = this.group + '.' + this.name;
     this.codeGenForm.value.dependencies = Array.prototype.map.call(this.addDependencies, (s: { id: string; }) => s.id).toString();
     console.log(this.codeGenForm.value)
-    this.codegenService.getFileName(this.codeGenForm.value).subscribe(res => {
-      let contentDisposition = res.headers.get('Content-Disposition');
-      const r = /(?:filename=")(.+)(?:")/
-      fileName = r.exec(contentDisposition)[1];
-    })
     this.codegenService.getResponse(this.codeGenForm.value).subscribe(response => {
       let blob: any = new Blob([response], { type: 'application/zip' });
-
-      fileSaver.saveAs(blob, fileName);
+      fileSaver.saveAs(blob,this.codeGenForm.value.name);
     },
       (error) => {
         console.log('Error downloading the file ' + error)

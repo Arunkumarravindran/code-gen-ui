@@ -49,12 +49,6 @@ export class CodegenService {
       { params, responseType: 'arraybuffer' as 'json' }).pipe(catchError(this.handleError))
   }
 
-  getFileName(codeGen): Observable<any> {
-    let params = this.getParams(codeGen);
-    return this.http.get(this.download_Url,
-      { params, responseType: 'arraybuffer' as 'json', observe: 'response' }).pipe(catchError(this.handleError))
-  }
-
   getParams(codeGen): HttpParams {
 
     let params = new HttpParams()
