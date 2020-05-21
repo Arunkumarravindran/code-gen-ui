@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
 import { ResponseDto } from 'src/_model/responseDto';
+import { Dependencies } from 'src/_model/dependencies';
 import { map } from 'rxjs/operators';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -19,12 +20,21 @@ export class CodegenService {
   durationInSeconds = 5;
 
   client_Url = "http://localhost:8080/metadata/client";
+  //testClient_Url = " https://d11572f3.ngrok.io/metadata/client"
+
   download_Url = "http://localhost:8080/starter.zip";
-  testDownload_Url = " https://d11572f3.ngrok.io/starter.zip"
-  testClient_Url = " https://d11572f3.ngrok.io/metadata/client"
-  dbDetails_Url = " https://d11572f3.ngrok.io/getHibernateValues"
-  sendDbDetails_Url = " https://d11572f3.ngrok.io/writeDBValues"
-  logBack_Url = "https://d11572f3.ngrok.io/logback"
+  //testDownload_Url = " https://d11572f3.ngrok.io/starter.zip"
+
+  dbDetails_Url = "http://localhost:8080/getHibernateValues"
+  //testdbDetails_Url = " https://d11572f3.ngrok.io/getHibernateValues"
+
+  sendDbDetails_Url = " http://localhost:8080/writeDBValues"
+  //testsendDbDetails_Url = " https://d11572f3.ngrok.io/writeDBValues"
+
+  logBack_Url = "http://localhost:8080/logback"
+  testlogBack_Url = "https://d11572f3.ngrok.io/logback"
+
+  nexus_dep_url = "http://localhost:8080/nexusSetup"
 
 
   constructor(private http: HttpClient,
@@ -35,13 +45,13 @@ export class CodegenService {
   getResponse(codeGen): Observable<any> {
     let params = this.getParams(codeGen);
     console.log('Params -> ' + params.toString())
-    return this.http.get(this.testDownload_Url,
+    return this.http.get(this.client_Url,
       { params, responseType: 'arraybuffer' as 'json' }).pipe(catchError(this.handleError))
   }
 
   getFileName(codeGen): Observable<any> {
     let params = this.getParams(codeGen);
-    return this.http.get(this.testDownload_Url,
+    return this.http.get(this.download_Url,
       { params, responseType: 'arraybuffer' as 'json', observe: 'response' }).pipe(catchError(this.handleError))
   }
 
@@ -65,40 +75,47 @@ export class CodegenService {
 
   getClient(): Observable<ResponseDto> {
     console.log("Inside Client Call")
-    return this.http.get<ResponseDto>(this.testClient_Url).pipe(map(response => {
+    return this.http.get<ResponseDto>(this.client_Url).pipe(map(response => {
       localStorage.setItem('responseBody', JSON.stringify(response)), (catchError(this.handleError_Client))
-
       return response;
-
     }))
 
   }
 
-  getDbScreenDetails(dbType): Observable<DbValues>{
+  getNexusDependencies(): Observable<Dependencies> {
+    console.log("Inside nexus Call")
+    return this.http.get<Dependencies>(this.nexus_dep_url).pipe(map(response => {
+      localStorage.setItem('nexus_dep', JSON.stringify(response)), (catchError(this.handleError_Client))
+      return response;
+    }))
+
+  }
+
+  getDbScreenDetails(dbType): Observable<DbValues> {
     let params = new HttpParams()
-      .set('dbType',dbType)
-    return this.http.get<DbValues>(this.dbDetails_Url,{params}).pipe(map(response => {
-      console.log("inside srvice===>",response);
-      
+      .set('dbType', dbType)
+    return this.http.get<DbValues>(this.dbDetails_Url, { params }).pipe(map(response => {
+      console.log("inside srvice===>", response);
+
       return response;
     }))
   }
- sendDbDetails(reqBody:DbFormValues){
-   console.log("finalStruc==>",reqBody)
-   return this.http.post<DbFormValues>(this.sendDbDetails_Url,reqBody).pipe(map(responseBody => { 
-     console.log("insde service call");
-     
-    return "success";
-  }));
- }
- sendLogbackDetails(reqBody : EnvConf){
-  console.log("logStructure==>",reqBody)
-  return this.http.post<EnvConf>(this.logBack_Url,reqBody).pipe(map(responseBody => { 
-    console.log("insde service call");
-    
-   return "successssssssssssssssssssss";
- }));
- }
+  sendDbDetails(reqBody: DbFormValues) {
+    console.log("finalStruc==>", reqBody)
+    return this.http.post<DbFormValues>(this.sendDbDetails_Url, reqBody).pipe(map(responseBody => {
+      console.log("insde service call");
+
+      return "success";
+    }));
+  }
+  sendLogbackDetails(reqBody: EnvConf) {
+    console.log("logStructure==>", reqBody)
+    return this.http.post<EnvConf>(this.logBack_Url, reqBody).pipe(map(responseBody => {
+      console.log("insde service call");
+
+      return "successssssssssssssssssssss";
+    }));
+  }
   handleError = (error: HttpErrorResponse) => {
     console.log('server side', error.status)
     this.errorService.open(error.status)

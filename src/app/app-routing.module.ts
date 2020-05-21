@@ -8,7 +8,12 @@ import { DataBaseComponent } from 'src/component/dataBase/dataBase.component';
 import { GoCdScreenComponent } from 'src/component/pipeLine/goCd-Screen/goCd-Screen.component';
 import { PipeLineComponent } from 'src/component/pipeLine/pipeLine.component';
 import { AddOnScreenComponent } from 'src/component/add-on-screen/add-on-screen.component';
+import { RepositoryScreenComponent } from 'src/component/repository-screen/repository-screen.component';
 const routes: Routes = [
+   {
+      path:'repo',
+      component: RepositoryScreenComponent
+   },
    {
       path:'javaMain',
       component: JavaScreenComponent

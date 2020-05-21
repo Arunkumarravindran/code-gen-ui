@@ -14,6 +14,6 @@ export class FirstComponent implements OnInit {
   }
   redirectJava()
   {
-    this.router.navigate(['/javaMain'])
+    this.router.navigate(['/repo'])
   }
 }

@@ -37,6 +37,7 @@ import {MatRippleModule} from '@angular/material/core';
 import { PageSliderComponent } from 'src/component/pageSlider/pageSlider.component';
 import { AnimationService } from 'src/assets/animation.service';
 import { AddOnScreenComponent } from 'src/component/add-on-screen/add-on-screen.component';
+import { RepositoryScreenComponent } from 'src/component/repository-screen/repository-screen.component';
 
 @NgModule({
    declarations: [
@@ -51,7 +52,8 @@ import { AddOnScreenComponent } from 'src/component/add-on-screen/add-on-screen.
       JenkinsScreenComponent,
       PipeLineComponent,
       PageSliderComponent,
-      AddOnScreenComponent
+      AddOnScreenComponent,
+      RepositoryScreenComponent
    ],
    entryComponents: [
       DependencyScreenComponent,

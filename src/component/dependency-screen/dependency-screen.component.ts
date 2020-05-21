@@ -32,11 +32,18 @@ export class DependencyScreenComponent implements OnInit {
     
     
     if(sessionStorage.getItem('addedDependencies') == null){
-    let response = localStorage.getItem('responseBody');
-    let parsedResponse = JSON.parse(response)
-    this.addDependencyValues = parsedResponse;
-    let allDependency = parsedResponse.dependencies.values;
-    this.dependencies = allDependency;
+
+      let allNexusDep = localStorage.getItem('nexus_dep');
+      let allDependency = null;
+      if(allNexusDep != null){
+        allDependency = JSON.parse(allNexusDep).values;
+      }else{
+        let response = localStorage.getItem('responseBody');
+        let parsedResponse = JSON.parse(response)
+        this.addDependencyValues = parsedResponse;
+        allDependency = parsedResponse.dependencies.values;
+      }
+      this.dependencies = allDependency;
 }
 else{
     let addedDependency = JSON.parse(sessionStorage.getItem('addedDependencies'));

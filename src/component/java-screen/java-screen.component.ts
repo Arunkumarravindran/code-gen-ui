@@ -11,7 +11,7 @@ import { BootversionValue } from 'src/_model/bootversionValue';
 import { PackingValue } from 'src/_model/packagingValue';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
 import { ProjectValue } from 'src/_model/projectValue';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
@@ -19,6 +19,7 @@ import { FileExplorerScreenComponent } from '../fileExplorer-Screen/fileExplorer
 import { flyIn } from 'src/assets/animations';
 import { fadeInOnEnterAnimation, fadeOutOnLeaveAnimation } from 'angular-animations';
 import { Value } from 'src/_model/value';
+import { switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-java-screen',
   templateUrl: './java-screen.component.html',
@@ -59,10 +60,18 @@ export class JavaScreenComponent implements OnInit {
   codeGenForm: FormGroup;
   values = [{ "name": "Developer Tools", "values": [{ "id": "devtools", "name": "Spring Boot DevTools", "description": "Provides fast application restarts, LiveReload, and configurations for enhanced development experience.", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#using-boot-devtools", "templated": true } } }, { "id": "configuration-processor", "name": "Spring Configuration Processor", "description": "Generate metadata for developers to offer contextual help and \"code completion\" when working with custom configuration keys (ex.application.properties/.yml files).", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#configuration-metadata-annotation-processor", "templated": true } } }] }, { "name": "Web", "values": [{ "id": "web", "name": "Spring Web", "description": "Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.", "_links": { "guide": [{ "href": "https://spring.io/guides/gs/rest-service/", "title": "Building a RESTful Web Service" }, { "href": "https://spring.io/guides/gs/serving-web-content/", "title": "Serving Web Content with Spring MVC" }, { "href": "https://spring.io/guides/tutorials/bookmarks/", "title": "Building REST services with Spring" }], "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-developing-web-applications", "templated": true } } }, { "id": "webflux", "name": "Spring Reactive Web", "description": "Build reactive web applications with Spring WebFlux and Netty." }, { "id": "data-rest", "name": "Rest Repositories", "description": "Exposing Spring Data repositories over REST via Spring Data REST.", "_links": { "guide": [{ "href": "https://spring.io/guides/gs/accessing-data-rest/", "title": "Accessing JPA Data with REST" }, { "href": "https://spring.io/guides/gs/accessing-neo4j-data-rest/", "title": "Accessing Neo4j Data with REST" }, { "href": "https://spring.io/guides/gs/accessing-mongodb-data-rest/", "title": "Accessing MongoDB Data with REST" }], "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#howto-use-exposing-spring-data-repositories-rest-endpoint", "templated": true } } }, { "id": "session", "name": "Spring Session", "description": "Provides an API and implementations for managing user session information." }, { "id": "data-rest-hal", "name": "Rest Repositories HAL Browser", "description": "Browsing Spring Data REST repositories in your browser." }, { "id": "hateoas", "name": "Spring HATEOAS", "description": "Eases the creation of RESTful APIs that follow the HATEOAS principle when working with Spring / Spring MVC.", "_links": { "guide": { "href": "https://spring.io/guides/gs/rest-hateoas/", "title": "Building a Hypermedia-Driven RESTful Web Service" }, "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-spring-hateoas", "templated": true } } }, { "id": "web-services", "name": "Spring Web Services", "description": "Facilitates contract-first SOAP development. Allows for the creation of flexible web services using one of the many ways to manipulate XML payloads.", "_links": { "guide": { "href": "https://spring.io/guides/gs/producing-web-service/", "title": "Producing a SOAP web service" }, "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-webservices", "templated": true } } }, { "id": "jersey", "name": "Jersey", "description": "Framework for developing RESTful Web Services in Java that provides support for JAX-RS APIs.", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-jersey", "templated": true } } }, { "id": "vaadin", "name": "Vaadin", "description": "Java framework for building rich client apps based on Web components.", "_links": { "guide": { "href": "https://spring.io/guides/gs/crud-with-vaadin/", "title": "Creating CRUD UI with Vaadin" }, "reference": { "href": "https://vaadin.com/spring" } } }] }
   ]
-  constructor(private codegenService: CodegenService, public dialog: MatDialog, private router: Router) { }
+  navigateFrom:String;
+  constructor(private codegenService: CodegenService, public dialog: MatDialog, private router: Router
+    , private activateRouter: ActivatedRoute) { }
 
 
   ngOnInit() {
+    this.navigateFrom = this.activateRouter.snapshot.paramMap.get('id');
+    if(this.navigateFrom == "private"){
+      this.codegenService.getNexusDependencies().subscribe(r=>{});
+    }else{
+      localStorage.removeItem('nexus_dep');
+    }
     sessionStorage.removeItem('selectedAddon')
     sessionStorage.removeItem('addedDependencies')
     this.codegenService.handleError
