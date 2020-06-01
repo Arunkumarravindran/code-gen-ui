@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, AbstractControl, FormControl, Validators } from '@angular/forms';
 import { JavaScreenComponent } from '../java-screen/java-screen.component';
 import { EnvConf } from 'src/_model/envConf';
@@ -6,6 +6,7 @@ import { stringify } from 'querystring';
 import { LogLevels } from 'src/_model/logLevels';
 import { CodegenService } from 'src/_service/codegen.service';
 import { Value } from '../../_model/addOns/typeValue';
+import { DataBaseComponent } from '../dataBase/dataBase.component';
 
 @Component({
   selector: 'app-add-on-screen',
@@ -13,6 +14,7 @@ import { Value } from '../../_model/addOns/typeValue';
   styleUrls: ['./add-on-screen.component.css']
 })
 export class AddOnScreenComponent implements OnInit {
+  @ViewChild(DataBaseComponent,{static: false}) dbComponent:DataBaseComponent;
   addONList:Value[];
   selectedAddonList: string[] = [];
   selectedAddon: string;
@@ -33,6 +35,7 @@ export class AddOnScreenComponent implements OnInit {
   currentScreen;
   logLevel: string[] = [];
   selectedLog: string[] = [];
+  
   constructor(private formBuilder: FormBuilder, private java: JavaScreenComponent, private codeGen: CodegenService) { }
 
   ngOnInit() {
@@ -231,10 +234,14 @@ export class AddOnScreenComponent implements OnInit {
   generateProject() {
     console.log("formvalue", this.environmentForm.value)
     this.formEnv()
+    if(this.currentScreen == 'database')
+      this.dbComponent.sendDbDetails();
     this.java.generateProject();
   }
   exploreProject() {
     this.formEnv();
+    if(this.currentScreen == 'database')
+      this.dbComponent.sendDbDetails();
     this.java.exploreProject();
   }
   formEnv() {
@@ -247,7 +254,8 @@ export class AddOnScreenComponent implements OnInit {
         contextPath: values.context,
         logLevel: values.log
       }
-      map.set(values.environment, envTypeList)
+      //map.set(values.environment, envTypeList)
+      map[values.environment] = envTypeList;
       
       array.push(json)
     })
@@ -256,7 +264,8 @@ export class AddOnScreenComponent implements OnInit {
       port: 8080,
       envTypeList : map
     }
-    sessionStorage.setItem('envDetails',json)
+    let stringifyJson = JSON.stringify(json)
+    sessionStorage.setItem('envDetails',stringifyJson)
 
   }
 
