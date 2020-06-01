@@ -5,6 +5,7 @@ import { EnvConf } from 'src/_model/envConf';
 import { stringify } from 'querystring';
 import { LogLevels } from 'src/_model/logLevels';
 import { CodegenService } from 'src/_service/codegen.service';
+import { Value } from '../../_model/addOns/typeValue';
 
 @Component({
   selector: 'app-add-on-screen',
@@ -12,6 +13,7 @@ import { CodegenService } from 'src/_service/codegen.service';
   styleUrls: ['./add-on-screen.component.css']
 })
 export class AddOnScreenComponent implements OnInit {
+  addONList:Value[];
   selectedAddonList: string[] = [];
   selectedAddon: string;
   envForm: FormGroup;
@@ -34,6 +36,7 @@ export class AddOnScreenComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private java: JavaScreenComponent, private codeGen: CodegenService) { }
 
   ngOnInit() {
+    this.loadAddONs();
     this.validate()
     if (sessionStorage.getItem('selectedAddon') != null) {
       this.selectedAddonList = JSON.parse(sessionStorage.getItem('selectedAddon'))
@@ -64,6 +67,11 @@ export class AddOnScreenComponent implements OnInit {
       this.logLevel = ["info", "debug", "error", "warning"];
     });
 
+  }
+
+  public loadAddONs(){
+    if(this.addONList == null)
+    this.addONList = JSON.parse(localStorage.getItem('customAddOns'));
   }
 
   public validate(): void {
@@ -222,10 +230,11 @@ export class AddOnScreenComponent implements OnInit {
   }
   generateProject() {
     console.log("formvalue", this.environmentForm.value)
+    this.formEnv()
     this.java.generateProject();
   }
   exploreProject() {
-    this.formEnv()
+    this.formEnv();
     this.java.exploreProject();
   }
   formEnv() {
@@ -244,11 +253,10 @@ export class AddOnScreenComponent implements OnInit {
     })
     json = {
       applicationName: "string",
+      port: 8080,
       envTypeList : map
     }
-    this.codeGen.sendLogbackDetails(json).subscribe(respose => {
-      console.log(respose)
-    })
+    sessionStorage.setItem('envDetails',json)
 
   }
 

@@ -11,7 +11,7 @@ import { BootversionValue } from 'src/_model/bootversionValue';
 import { PackingValue } from 'src/_model/packagingValue';
 import { DependenciesValue } from 'src/_model/dependenciesValue';
 import { ProjectValue } from 'src/_model/projectValue';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import * as JSZip from 'jszip';
 import * as load from 'lodash';
 import { Files } from 'src/_model/files';
@@ -56,20 +56,23 @@ export class JavaScreenComponent implements OnInit {
   dependencies: Value[];
   name: string;
   group: string;
-  v : any[] = [];
+  v: any[] = [];
   codeGenForm: FormGroup;
   values = [{ "name": "Developer Tools", "values": [{ "id": "devtools", "name": "Spring Boot DevTools", "description": "Provides fast application restarts, LiveReload, and configurations for enhanced development experience.", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#using-boot-devtools", "templated": true } } }, { "id": "configuration-processor", "name": "Spring Configuration Processor", "description": "Generate metadata for developers to offer contextual help and \"code completion\" when working with custom configuration keys (ex.application.properties/.yml files).", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#configuration-metadata-annotation-processor", "templated": true } } }] }, { "name": "Web", "values": [{ "id": "web", "name": "Spring Web", "description": "Build web, including RESTful, applications using Spring MVC. Uses Apache Tomcat as the default embedded container.", "_links": { "guide": [{ "href": "https://spring.io/guides/gs/rest-service/", "title": "Building a RESTful Web Service" }, { "href": "https://spring.io/guides/gs/serving-web-content/", "title": "Serving Web Content with Spring MVC" }, { "href": "https://spring.io/guides/tutorials/bookmarks/", "title": "Building REST services with Spring" }], "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-developing-web-applications", "templated": true } } }, { "id": "webflux", "name": "Spring Reactive Web", "description": "Build reactive web applications with Spring WebFlux and Netty." }, { "id": "data-rest", "name": "Rest Repositories", "description": "Exposing Spring Data repositories over REST via Spring Data REST.", "_links": { "guide": [{ "href": "https://spring.io/guides/gs/accessing-data-rest/", "title": "Accessing JPA Data with REST" }, { "href": "https://spring.io/guides/gs/accessing-neo4j-data-rest/", "title": "Accessing Neo4j Data with REST" }, { "href": "https://spring.io/guides/gs/accessing-mongodb-data-rest/", "title": "Accessing MongoDB Data with REST" }], "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#howto-use-exposing-spring-data-repositories-rest-endpoint", "templated": true } } }, { "id": "session", "name": "Spring Session", "description": "Provides an API and implementations for managing user session information." }, { "id": "data-rest-hal", "name": "Rest Repositories HAL Browser", "description": "Browsing Spring Data REST repositories in your browser." }, { "id": "hateoas", "name": "Spring HATEOAS", "description": "Eases the creation of RESTful APIs that follow the HATEOAS principle when working with Spring / Spring MVC.", "_links": { "guide": { "href": "https://spring.io/guides/gs/rest-hateoas/", "title": "Building a Hypermedia-Driven RESTful Web Service" }, "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-spring-hateoas", "templated": true } } }, { "id": "web-services", "name": "Spring Web Services", "description": "Facilitates contract-first SOAP development. Allows for the creation of flexible web services using one of the many ways to manipulate XML payloads.", "_links": { "guide": { "href": "https://spring.io/guides/gs/producing-web-service/", "title": "Producing a SOAP web service" }, "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-webservices", "templated": true } } }, { "id": "jersey", "name": "Jersey", "description": "Framework for developing RESTful Web Services in Java that provides support for JAX-RS APIs.", "_links": { "reference": { "href": "https://docs.spring.io/spring-boot/docs/{bootVersion}/reference/htmlsingle/#boot-features-jersey", "templated": true } } }, { "id": "vaadin", "name": "Vaadin", "description": "Java framework for building rich client apps based on Web components.", "_links": { "guide": { "href": "https://spring.io/guides/gs/crud-with-vaadin/", "title": "Creating CRUD UI with Vaadin" }, "reference": { "href": "https://vaadin.com/spring" } } }] }
   ]
-  navigateFrom:String;
+  navigateFrom: String;
   constructor(private codegenService: CodegenService, public dialog: MatDialog, private router: Router
     , private activateRouter: ActivatedRoute) { }
 
 
   ngOnInit() {
     this.navigateFrom = this.activateRouter.snapshot.paramMap.get('id');
-    if(this.navigateFrom == "private"){
-      this.codegenService.getNexusDependencies().subscribe(r=>{});
-    }else{
+    this.getCustomClient();
+    if (this.navigateFrom == "private") {
+      let customResp = localStorage.getItem('customResponseBody');
+      let response = JSON.parse(customResp);
+      localStorage.setItem('nexus_dep', JSON.stringify(response.nexus));
+    } else {
       localStorage.removeItem('nexus_dep');
     }
     sessionStorage.removeItem('selectedAddon')
@@ -125,24 +128,24 @@ export class JavaScreenComponent implements OnInit {
     console.log(this.codeGenForm.value)
     this.codegenService.getResponse(this.codeGenForm.value).subscribe(response => {
       let blob: any = new Blob([response], { type: 'application/zip' });
-      fileSaver.saveAs(blob,this.codeGenForm.value.name);
+      fileSaver.saveAs(blob, this.codeGenForm.value.name);
     },
       (error) => {
         console.log('Error downloading the file ' + error)
       })
   }
 
-  addonSelection(){
+  addonSelection() {
     let addonList = JSON.parse(sessionStorage.getItem('selectedAddon'));
-    addonList.filter(addons=>{
+    addonList.filter(addons => {
       console.log(addons)
-      if(addons == 'database'){
+      if (addons == 'database') {
         this.dbScreen = true;
-      }else if(addons == 'redis'){
+      } else if (addons == 'redis') {
         this.redisScreen = true
-      }else if(addons == 'exception'){
+      } else if (addons == 'exception') {
         this.exceptionScreen == true
-      } else if(addons == 'pipeline'){
+      } else if (addons == 'pipeline') {
         this.pipeScreen = true
       }
     })
@@ -178,6 +181,13 @@ export class JavaScreenComponent implements OnInit {
       this.group = response.groupId.default;
     }
 
+  }
+
+  getCustomClient() {
+    if (localStorage.getItem("customResponseBody") == null) {
+      this.codegenService.getCustomClient().subscribe(response =>{
+      });
+    } 
   }
 
 
@@ -231,21 +241,21 @@ export class JavaScreenComponent implements OnInit {
       });
       sessionStorage.setItem('addedDependencies', JSON.stringify(addedDepend));
     }
-  //   let addedDepend: Value[] = JSON.parse(sessionStorage.getItem('addedDependencies'));
-  //   addedDepend.forEach(d =>{
-  //     d.values.forEach(a =>{
-  //       this.v.push(a);
-  //     })
-   
-  //  this.v.filter(d=>{
-  //     if(d.id == "jersey"){
-  //     let b =  this.v.findIndex(d => d.id == "jersey")
-  //     console.log("inexxxxx", b);
-  //     }
-  //   }) 
-     
-  //  })
-   
+    //   let addedDepend: Value[] = JSON.parse(sessionStorage.getItem('addedDependencies'));
+    //   addedDepend.forEach(d =>{
+    //     d.values.forEach(a =>{
+    //       this.v.push(a);
+    //     })
+
+    //  this.v.filter(d=>{
+    //     if(d.id == "jersey"){
+    //     let b =  this.v.findIndex(d => d.id == "jersey")
+    //     console.log("inexxxxx", b);
+    //     }
+    //   }) 
+
+    //  })
+
 
 
   }
@@ -253,7 +263,7 @@ export class JavaScreenComponent implements OnInit {
   redirectHome() {
     this.router.navigate(['/homeScreen'])
   }
-exploreProject() {
+  exploreProject() {
     this.codeGenForm.value.group = this.group;
     this.codeGenForm.value.artifact = this.name;
     this.codeGenForm.value.name = this.name;
@@ -283,8 +293,8 @@ exploreProject() {
     })[0]
     return root.substring(0, root.length - 1)
   }
- 
-  
+
+
   getLanguage(file) {
     const FILE_EXTENSION = {
       js: 'javascript',
@@ -367,7 +377,7 @@ exploreProject() {
   }
 
   onPrev() {
-    if(this.current == 2){
+    if (this.current == 2) {
       this.currentScreen = ''
     }
     this.prev = this.current--;
@@ -376,18 +386,18 @@ exploreProject() {
   onNext() {
     sessionStorage.removeItem('addedDependencies')
     this.prev = this.current++;
-    if(this.current == 2){
+    if (this.current == 2) {
       this.currentScreen = 'addon'
     }
-    sessionStorage.setItem('currentScreen',this.current.toString())
+    sessionStorage.setItem('currentScreen', this.current.toString())
   }
   onskip() {
     this.prev = this.current++;
   }
-  addOnScreen(){
+  addOnScreen() {
     this.currentScreen = 'addon'
   }
-  otherScreen(){
+  otherScreen() {
     this.currentScreen = ''
   }
   isLeftTransition(idx: number): boolean {

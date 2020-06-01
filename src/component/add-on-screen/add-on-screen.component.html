@@ -75,45 +75,45 @@
         <label class="container">
           <input #check type="checkbox" value="logback" (click)="getAddon($event)"  [checked] = enableLogback>
           <mat-card style="margin-top: 22px;" class="checkmark" >
-            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Environment Configuration</mat-card-title>
-            <mat-card-subtitle style="font-size: 11px;" style="font-size: 11px;"> Used to generate and configure environment specific applicaiton yaml and logback files on the project resource.</mat-card-subtitle>
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">{{addONList[0].name}}</mat-card-title>
+            <mat-card-subtitle style="font-size: 11px;" style="font-size: 11px;"> {{addONList[0].description}}</mat-card-subtitle>
           </mat-card>
         </label>
         <label class="container">
           <input #check type="checkbox" value="swagger" (click)="getAddon($event)" [checked] = "enableSwagger">
           <mat-card  class="checkmark" >
-              <mat-card-title style="margin-top: -11px; text-align: center; font-size: 13px;">Swagger</mat-card-title>
-              <mat-card-subtitle style="font-size: 11px;">An open-source software framework backed by a large ecosystem of tools that helps developers design, build, document, and consume RESTful web services.</mat-card-subtitle>
+              <mat-card-title style="margin-top: -11px; text-align: center; font-size: 13px;">{{addONList[1].name}}</mat-card-title>
+              <mat-card-subtitle style="font-size: 11px;">{{addONList[1].description}}</mat-card-subtitle>
           </mat-card>
         </label>
         <label class="container">
           <input #check type="checkbox" value="redis" (click)="getAddon($event)" [checked] = enableRedis>
           <mat-card class="checkmark" >
-            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Redis Session
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">{{addONList[2].name}}
             </mat-card-title>
-            <mat-card-subtitle style="font-size: 11px;">An in-memory data structure project implementing a distributed, in-memory key-value database with optional durability.</mat-card-subtitle>
+            <mat-card-subtitle style="font-size: 11px;">{{addONList[2].description}}</mat-card-subtitle>
           </mat-card>
         </label>
         <label class="container">
           <input #check type="checkbox" value="database" (click)="getAddon($event)" [checked] = "enableDataBase == true">
           <mat-card  class="checkmark" >
-              <mat-card-title style="margin-top: -11px; text-align: center; font-size: 13px;">DataBase</mat-card-title>
-              <mat-card-subtitle style="font-size: 11px;">Able to configure various database management system.</mat-card-subtitle>
+              <mat-card-title style="margin-top: -11px; text-align: center; font-size: 13px;">{{addONList[3].name}}</mat-card-title>
+              <mat-card-subtitle style="font-size: 11px;">{{addONList[3].description}}</mat-card-subtitle>
           </mat-card>
         </label>
-        <label class="container">
+        <!-- <label class="container">
           <input #check type="checkbox" value="exception"  (click)="getAddon($event)" [checked] = enableexception>
           <mat-card class="checkmark">
             <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Exception Handling
             </mat-card-title>
             <mat-card-subtitle style="font-size: 11px;">One of the powerful mechanism to handle the runtime errors so that normal flow of the application can be maintained.</mat-card-subtitle>
           </mat-card>
-        </label>
+        </label> -->
         <label class="container">
           <input #check type="checkbox" value="pipeline" (click)="getAddon($event)"[checked] = enablePipe>
           <mat-card class="checkmark" >
-            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">Pipelines</mat-card-title>
-            <mat-card-subtitle style="font-size: 11px;">An open-source container-orchestration system for automating application</mat-card-subtitle>
+            <mat-card-title style="margin-top: -11px; text-align : center; font-size: 13px;">{{addONList[4].name}}</mat-card-title>
+            <mat-card-subtitle style="font-size: 11px;">{{addONList[4].description}}</mat-card-subtitle>
           </mat-card>
         </label>
       </mat-card>

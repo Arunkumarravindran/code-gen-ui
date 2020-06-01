@@ -232,4 +232,32 @@
     /*'10px'-same as your required circle radius*/
 }
 
+.footer {
+    position: fixed;
+    top: 90.2%;
+   right:10.5%;
+   width:78.5%;
+  background-color: rgb(12, 131, 177);
+  }
+
+  .generateBtn {
+    position: absolute;
+    left: 32%;
+    top: 20%;
+    border-style:solid;
+    color: white;
+    font-size: 10px;
+    border-width: 2px;
+  }
+  
+  .exploreBtn {
+    position: absolute;
+    left: 52%;
+    top: 20%;
+    border-style:solid;
+    color: white;
+    font-size: 10px;
+    border-width: 2px;
+  }
+
 

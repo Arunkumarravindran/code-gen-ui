@@ -6,6 +6,7 @@ import { CodegenService } from 'src/_service/codegen.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DbFormValues } from 'src/_model/DbFormValues';
 import { TooltipPosition } from '@angular/material';
+import { DbDetails } from '../../_model/db/DbDetails';
 
 @Component({
   selector: 'app-dataBase',
@@ -23,6 +24,7 @@ import { TooltipPosition } from '@angular/material';
 })
 export class DataBaseComponent implements OnInit {
 
+  dbDetails: DbDetails;
   enableHibernet : string = "true";
   dbName : string;
   dialects :string[] =[];
@@ -36,6 +38,7 @@ export class DataBaseComponent implements OnInit {
   constructor(private codeGen: CodegenService) { }
 
   ngOnInit() {
+    this.loadDbDetails();
     this.selectedAddonList = JSON.parse(sessionStorage.getItem('selectedAddon'))
     this.databaseForm = new FormGroup({
       hostName: new FormControl(''),
@@ -49,36 +52,50 @@ export class DataBaseComponent implements OnInit {
 })
 }
 
-  getDB(dbName:string,check){
+  getDB(dbName: string) {
     let data;
-    console.log("dbname===>"+dbName)
-    this.codeGen.getDbScreenDetails(dbName).subscribe(response=>{
-      console.log("inside dbComponent===>",response);
-      this.dialects = Object.keys(response.dialects);
-      this.ddlArray = Object.keys(response.ddlAuto);
-      console.log("ddlauto===>"+JSON.stringify(response.ddlAuto))
-      console.log("ddlauto===>"+response.dialects)
-      this.id = response.id;
+    console.log("dbname===>" + dbName)
+    let dialect;
+    let dllAuto;
+    if(dbName == "mysql"){
+      dialect = this.dbDetails.dbDetailList[0].dialects;
+    }else if(dbName == "mssql"){
+      dialect = this.dbDetails.dbDetailList[1].dialects;
+    }else if(dbName == "oracle"){
+      dialect = this.dbDetails.dbDetailList[2].dialects;
+    }
+    dllAuto = this.dbDetails.dllAuto;
+      this.dialects = Object.keys(dialect);
+      this.ddlArray = Object.keys(dllAuto);
+      console.log("ddlauto===>" + JSON.stringify(dllAuto))
+      console.log("ddlauto===>" + dialect)
+      this.id = this.dbDetails.dbId;
       let tempDialect: string[] = [];
-      Object.keys(response.dialects).forEach(key=>{
-        let data=  key + ":"+ response.dialects[key];
+      Object.keys(dialect).forEach(key => {
+        let data = key + ":" + dialect[key];
         tempDialect.push(data);
-      
+
         console.log(tempDialect)
       })
       this.dialectToolTip = tempDialect;
       let tempDdl: string[] = [];
-      Object.keys(response.ddlAuto).forEach(key=>{
-        let data=  key + ":"+ response.ddlAuto[key];
+      Object.keys(dllAuto).forEach(key => {
+        let data = key + ":" + dllAuto[key];
         tempDdl.push(data);
-      
+
         console.log(tempDdl)
       })
       this.ddlAutoToolTip = tempDdl;
+
+    this.enableHibernet = "false";
+    this.dbName = dbName;
+  }
+  public loadDbDetails(){
+    if(this.dbDetails == null){
+      let db = JSON.parse(localStorage.getItem('customDbDetails'));
+      this.dbDetails = db.body;
+    }
     
-    })
-this.enableHibernet = "false";
-this.dbName = dbName;
   }
   sendDbDetails(){
     console.log("SSds",this.databaseForm.value.hostName)
@@ -95,10 +112,8 @@ this.dbName = dbName;
      isHibernate : this.databaseForm.value.isHibernet
    }
     let dbFormValueJson = JSON.stringify(respStruc)
-sessionStorage.setItem('dbFormValue',dbFormValueJson);
-this.codeGen.sendDbDetails(respStruc).subscribe(resp=>{
-  console.log(resp)
-})
+    sessionStorage.setItem('dbFormValue',dbFormValueJson);
+
   }
 
 
