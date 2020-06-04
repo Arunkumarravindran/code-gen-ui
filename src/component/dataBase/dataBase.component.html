@@ -6,7 +6,7 @@
         <h5 class="headings"> Database Details</h5>
       </mat-card>
       
-       <mat-card class="dbDetailsCard">
+       <mat-card *ngIf="dbName != undefined" class="dbDetailsCard"> 
        <form [formGroup]="databaseForm">
         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
           <mat-label>Database Host</mat-label>
@@ -36,7 +36,7 @@
         <br>
         <br>
         <mat-form-field style="margin-left: 20px ;width: 45%;" >
-          <mat-label>Dialect </mat-label><mat-icon class="dialecttooltip" matTooltip = {{dialectToolTip}} [matTooltipPosition]="toolPosition">info</mat-icon>
+          <mat-label>Dialect </mat-label>
           <mat-select formControlName="dialect" >
             <mat-option *ngFor="let dialect of dialects" [value]="dialect">
               {{dialect}}
@@ -44,9 +44,9 @@
           </mat-select>
         </mat-form-field>
         <mat-form-field style="margin-left: 20px; width: 45%;">
-          <mat-label >Ddl Auto</mat-label><mat-icon class="ddltooltip" matTooltip = {{ddlAutoToolTip}} [matTooltipPosition]="toolPosition">info</mat-icon>
+          <mat-label >Ddl Auto</mat-label>
           <mat-select formControlName="ddlauto">
-            <mat-option *ngFor="let ddl of ddlArray" [value]="ddl"  >
+            <mat-option *ngFor="let ddl of ddlArray" [value]="ddl">
               {{ddl}}
             </mat-option>
           </mat-select>
@@ -86,7 +86,7 @@
         </mat-radio-group>
     </mat-card>
   </form>
-    <button style="position: absolute; top: 75%;" mat-button (click)="sendDbDetails()">send</button>
+    <!-- <button style="position: absolute; top: 75%;" mat-button (click)="sendDbDetails()">send</button> -->
     </mat-grid-tile>
   </mat-grid-list>
 

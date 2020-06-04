@@ -7,6 +7,8 @@ import { LogLevels } from 'src/_model/logLevels';
 import { CodegenService } from 'src/_service/codegen.service';
 import { Value } from '../../_model/addOns/typeValue';
 import { DataBaseComponent } from '../dataBase/dataBase.component';
+import { PipeLineComponent } from '../pipeLine/pipeLine.component';
+import { ErrorService } from 'src/_service/error.service';
 
 @Component({
   selector: 'app-add-on-screen',
@@ -15,6 +17,7 @@ import { DataBaseComponent } from '../dataBase/dataBase.component';
 })
 export class AddOnScreenComponent implements OnInit {
   @ViewChild(DataBaseComponent,{static: false}) dbComponent:DataBaseComponent;
+  @ViewChild(PipeLineComponent,{static: false}) pipeComponent:PipeLineComponent;
   addONList:Value[];
   selectedAddonList: string[] = [];
   selectedAddon: string;
@@ -33,12 +36,15 @@ export class AddOnScreenComponent implements OnInit {
   current = 1;
   prev = 0;
   currentScreen;
+  isNextButtonAvailable:boolean = false;
   logLevel: string[] = [];
   selectedLog: string[] = [];
   
-  constructor(private formBuilder: FormBuilder, private java: JavaScreenComponent, private codeGen: CodegenService) { }
+  constructor(private formBuilder: FormBuilder, private java: JavaScreenComponent,private errorService:ErrorService, private codeGen: CodegenService) { }
 
   ngOnInit() {
+    this.removeChildComponentSessionData();
+    this.currentScreen = 'addon';
     this.loadAddONs();
     this.validate()
     if (sessionStorage.getItem('selectedAddon') != null) {
@@ -143,14 +149,15 @@ export class AddOnScreenComponent implements OnInit {
         case 'redis':
           this.enableRedis = true;
           break;
-        case 'exception':
-          this.enableexception = true;
+        case 'swagger':
+          this.enableSwagger = true;
+          sessionStorage.setItem("swaggerItem","swagger-id");
           break;
         case 'logback':
           this.enableLogback = true;
           break;
       }
-      if ($event.target.value == 'database' || $event.target.value == 'pipeline' || $event.target.value == 'redis') {
+      if ($event.target.value == 'database' || $event.target.value == 'pipeline') {
         this.selectedAddonList.push($event.target.value);
       }
     } else if ($event.target.checked == false) {
@@ -167,8 +174,9 @@ export class AddOnScreenComponent implements OnInit {
         case 'redis':
           this.enableRedis = false;
           break;
-        case 'exception':
-          this.enableexception = false;
+        case 'swagger':
+          this.enableSwagger = false;
+          sessionStorage.removeItem("swaggerItem");
           break;
         case 'logback':
           this.enableLogback = false;
@@ -219,12 +227,15 @@ export class AddOnScreenComponent implements OnInit {
       this.currentScreen = 'database';
       if (!this.enablePipe) {
         this.finalScreen = 2;
-      }
+        this.isNextButtonAvailable = false;
+      }else
+      this.isNextButtonAvailable = true;
 
     }
     if (this.enablePipe && this.current == 2 || (!this.enableDataBase && this.current == 1)) {
       this.currentScreen = 'pipeline';
       this.finalScreen = 3;
+      this.isNextButtonAvailable = false;
     }
     this.prev = this.current++;
     console.log("current screen", this.currentScreen, "currentpage", this.current);
@@ -232,16 +243,47 @@ export class AddOnScreenComponent implements OnInit {
 
   }
   generateProject() {
-    console.log("formvalue", this.environmentForm.value)
     this.formEnv()
-    if(this.currentScreen == 'database')
-      this.dbComponent.sendDbDetails();
+    if (this.enableDataBase && this.dbComponent == undefined && this.enablePipe && this.pipeComponent == undefined) {
+      this.errorService.open("Please provide input for Selected addONs");
+      return
+    } else if (this.enableDataBase && this.dbComponent == undefined) {
+      this.errorService.open("Please provide input for Database");
+      return
+    } else if (this.enablePipe && this.pipeComponent == undefined) {
+      this.errorService.open("Please provide input for Pipeline");
+      return
+    }
+    if (this.dbComponent)
+      if (!this.dbComponent.sendDbDetails()) {
+        return
+      }
+    if (this.pipeComponent)
+      if (!this.pipeComponent.storePipleline()) {
+        return
+      }
     this.java.generateProject();
   }
   exploreProject() {
     this.formEnv();
-    if(this.currentScreen == 'database')
-      this.dbComponent.sendDbDetails();
+    if (this.enableDataBase && this.dbComponent == undefined && this.enablePipe && this.pipeComponent == undefined) {
+      this.errorService.open("Please provide input for Selected addONs");
+      return
+    } else if (this.enableDataBase && this.dbComponent == undefined) {
+      this.errorService.open("Please provide input for Database");
+      return
+    } else if (this.enablePipe && this.pipeComponent == undefined) {
+      this.errorService.open("Please provide input for Pipeline");
+      return
+    }
+    if (this.dbComponent)
+      if (!this.dbComponent.sendDbDetails()) {
+        return
+      }
+    if (this.pipeComponent)
+      if (!this.pipeComponent.storePipleline()) {
+        return
+      }
     this.java.exploreProject();
   }
   formEnv() {
@@ -267,6 +309,13 @@ export class AddOnScreenComponent implements OnInit {
     let stringifyJson = JSON.stringify(json)
     sessionStorage.setItem('envDetails',stringifyJson)
 
+  }
+
+  private removeChildComponentSessionData(){
+    sessionStorage.removeItem("dbFormValue");
+    sessionStorage.removeItem("pipelineKubernetesFormGroupValue");
+    sessionStorage.removeItem("pipelineJenkinsFormGroupValue");
+    sessionStorage.removeItem("envDetails");
   }
 
 }

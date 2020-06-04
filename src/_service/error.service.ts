@@ -9,10 +9,10 @@ export class ErrorService {
   constructor(public snackBar: MatSnackBar,
     private zone: NgZone) { }
 
-  public open(statusCode, action = '', duration = 4000) {
+  public open(statusCode, action = '', duration = 3000) {
     if (statusCode) {
       this.zone.run(() => {
-        this.snackBar.open(this.statusMessage, action, {
+        this.snackBar.open(statusCode, action, {
           duration, verticalPosition: 'top',
           panelClass: ['snackbar']
         })

@@ -7,6 +7,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 import { DbFormValues } from 'src/_model/DbFormValues';
 import { TooltipPosition } from '@angular/material';
 import { DbDetails } from '../../_model/db/DbDetails';
+import { ErrorService } from 'src/_service/error.service';
 
 @Component({
   selector: 'app-dataBase',
@@ -35,9 +36,10 @@ export class DataBaseComponent implements OnInit {
   id;
   toolPosition: TooltipPosition = 'below';
   databaseForm: FormGroup;
-  constructor(private codeGen: CodegenService) { }
+  constructor(private codeGen: CodegenService,private errorService:ErrorService) { }
 
   ngOnInit() {
+    this.removeChildComponentSessionData();
     this.loadDbDetails();
     this.selectedAddonList = JSON.parse(sessionStorage.getItem('selectedAddon'))
     this.databaseForm = new FormGroup({
@@ -97,9 +99,15 @@ export class DataBaseComponent implements OnInit {
     }
     
   }
-  sendDbDetails(){
-    console.log("SSds",this.databaseForm.value.hostName)
-   
+  sendDbDetails():boolean{
+
+    if (!(this.databaseForm.value.hostName && this.databaseForm.value.dbName &&
+      this.databaseForm.value.username && this.databaseForm.value.password)) {
+      this.errorService.open("Please provide all the input for Database");
+      return false;
+    }
+    // && this.databaseForm.value.dialect
+    //&& this.databaseForm.value.ddlauto && this.databaseForm.value.showsql && this.databaseForm.value.isHibernet
    let respStruc ={
      hostName :this.databaseForm.value.hostName,
      dbType : this.dbName,
@@ -113,7 +121,14 @@ export class DataBaseComponent implements OnInit {
    }
     let dbFormValueJson = JSON.stringify(respStruc)
     sessionStorage.setItem('dbFormValue',dbFormValueJson);
+    return true;
 
+  }
+
+  private removeChildComponentSessionData(){
+    sessionStorage.removeItem("dbFormValue");
+    sessionStorage.removeItem("pipelineKubernetesFormGroupValue");
+    sessionStorage.removeItem("pipelineJenkinsFormGroupValue");
   }
 
 

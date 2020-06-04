@@ -146,9 +146,9 @@
 
 
 <mat-toolbar class="footer">
-  <button mat-button  *ngIf="current == finalScreen || current == 1" class="generateBtn" (click)="generateProject()">  <img style="margin-left: -8px;" src="../../assets/images/ezgif.com-gif-maker (7).jpg">GENERATE</button>
-  <button mat-button  *ngIf="current == finalScreen || current == 1" class="exploreBtn" (click)="exploreProject()"><img style="margin-left: -8px" src="../../assets/images/ezgif.com-gif-maker (9).jpg">EXPLORE</button>
+  <button mat-button  *ngIf="currentScreen == 'addon' || currentScreen == 'database' || currentScreen == 'pipeline'" class="generateBtn" (click)="generateProject()">  <img style="margin-left: -8px;" src="../../assets/images/ezgif.com-gif-maker (7).jpg">GENERATE</button>
+  <button mat-button  *ngIf="currentScreen == 'addon' || currentScreen == 'database' || currentScreen == 'pipeline'" class="exploreBtn" (click)="exploreProject()"><img style="margin-left: -8px" src="../../assets/images/ezgif.com-gif-maker (9).jpg">EXPLORE</button>
   <button *ngIf="current != 1 " class= "previousBtn" (click)="onPrev(current)" mat-stroked-button>Prev</button>
-  <button *ngIf = "!(current == 1 || current == finalScreen)" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next<span class= nextBtmImg>&#8594;</span></button>
+  <button *ngIf = "isNextButtonAvailable" class= "nextBtn" (click)="onNext(current)" mat-stroked-button>Next<span class= nextBtmImg>&#8594;</span></button>
 
 </mat-toolbar>

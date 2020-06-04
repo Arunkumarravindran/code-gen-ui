@@ -5,6 +5,71 @@
       <mat-card class="pipeTitleCard"> 
         <h5 class="headings"> PipeLine Details</h5>
       </mat-card>
+      <mat-card *ngIf="currentScreen == 'jenkins'" class="dbDetailsCard">
+        <form [formGroup]="JenkinsForm">
+         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+           <mat-label>API Name</mat-label>
+           <input  class="jenkinsFormFields" matInput style="margin-left: -7px;"  formControlName="apiName" >
+         </mat-form-field>
+         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+           <mat-label>OCIR Password</mat-label>
+           <input matInput style="margin-left: -7px;"  class="jenkinsFormFields"  formControlName="ocirPassword">
+         </mat-form-field>
+         <br>
+         <mat-form-field  style=" margin-left: 20px ;font-size: 16px;" appearance="outline">
+           <mat-label>OCIR User Name</mat-label>
+           <input matInput style="margin-left: -7px;"  class="jenkinsFormFields"  formControlName="ocirUsername" >
+         </mat-form-field>
+       
+         <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+           <mat-label>OCIR Repository</mat-label>
+           <input matInput style="margin-left: -7px;" class="jenkinsFormFields"  formControlName="ocirRepository">
+         </mat-form-field>
+
+         <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+          <mat-label>OCIR Registry</mat-label>
+          <input matInput style="margin-left: -7px;" class="jenkinsFormFields"  formControlName="ocirRegistry">
+        </mat-form-field>
+
+        <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+          <mat-label>Build Tag</mat-label>
+          <input matInput style="margin-left: -7px;" class="jenkinsFormFields"  formControlName="buildTag">
+        </mat-form-field>
+         
+       </form>
+       </mat-card>
+       <mat-card *ngIf="currentScreen == 'kubernetes'" class="dbDetailsCard">
+        <form [formGroup]="kubernetesForm">
+         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+           <mat-label>Name</mat-label>
+           <input  class="jenkinsFormFields" matInput style="margin-left: -7px;"  formControlName="name" >
+         </mat-form-field>
+         <mat-form-field style="margin-left: 20px; font-size: 16px;" appearance="outline">
+           <mat-label>Namespace</mat-label>
+           <input matInput style="margin-left: -7px;"  class="jenkinsFormFields"  formControlName="namespace">
+         </mat-form-field>
+         <br>
+         <mat-form-field  style=" margin-left: 20px ;font-size: 16px;" appearance="outline">
+           <mat-label>No Of Replicas</mat-label>
+           <input matInput style="margin-left: -7px;"  class="jenkinsFormFields"  formControlName="noOfReplicas" >
+         </mat-form-field>
+       
+         <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+           <mat-label>Image Url</mat-label>
+           <input matInput style="margin-left: -7px;" class="jenkinsFormFields"  formControlName="imageUrl">
+         </mat-form-field>
+
+         <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+          <mat-label>Port</mat-label>
+          <input matInput style="margin-left: -7px;" class="jenkinsFormFields"  formControlName="port">
+        </mat-form-field>
+
+        <mat-form-field    style="margin-left: 20px;  font-size: 16px;" appearance="outline">
+          <mat-label>TargetPort</mat-label>
+          <input matInput style="margin-left: -7px;" class="jenkinsFormFields"  formControlName="targetPort">
+        </mat-form-field>
+       </form>
+       </mat-card>
 
     </mat-grid-tile>
 
@@ -14,12 +79,13 @@
     </mat-card>
     <mat-card class="pipeIconsCard">
       <label>
-        <input type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getPipe('jenkins')" src="../../assets/images/jenkins-ci_512.png" >
+        <input type="radio" name="radio" value="jenkins" [checked]=true (click)="getPipe($event)">
+        <img class="icon" value="jenkins" src="../../assets/images/jenkins-ci_512.png">
       </label>
       <label>
-        <input type="radio" name="test" value="small" [checked] = false>
-        <img  class = "icon" (click)="getPipe('goCd')" src="../../assets/images/gocd_continuous_delivery_thoughtworks_twitter-e8d93d6f.jpg" >
+        <input type="radio" name="radio" value="kubernetes" [checked]=false (click)="getPipe($event)">
+        <img class="icon" value="kubernetes"
+          src="../../assets/images/gocd_continuous_delivery_thoughtworks_twitter-e8d93d6f.jpg">
       </label>
       <!-- <label>
         <input type="radio" name="test" value="small" [checked] = false>
